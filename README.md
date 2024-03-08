@@ -28,7 +28,7 @@ gradle clean
 gradle build
 
 run generation
-gradle converter:run --args="C:/Users/anton/Documents/IntellijProjects/GradleProject/app/src/test/java/ C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancario"
+gradle converter:run --args="C:/Users/anton/Documents/IntellijProjects/GradleProject/app/src/test/java/ C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancarioTest"
 
 build benchmarks (In the Target Project Root):
 gradle jmhJar

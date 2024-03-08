@@ -7,12 +7,12 @@ New Gradle Project using Kotling language
 Make 2 subproject:
 GradleProject
 |--app (build.gradle.kts must have the right dependencies for junit 4.13.2)
-|--src/main/java/(containing packages of classes)
-|--src/test/java/(containing packages of test classes)
+|----src/main/java/(containing packages of classes)
+|----src/test/java/(containing packages of test classes)
 |--ju2jmh
-|--src/jmh/java/(containing packages of benchmarks)
-|--src/main/java/
-|--src/test/java/
+|----src/jmh/java/(containing packages of benchmarks)
+|----src/main/java/
+|----src/test/java/
 
 the ju2jmh/src/jmh/java and ju2jmh/src/jmh/resources folders must be created by hand, then run the build.gradle.kts (using id("me.champeau.jmh") version "0.6.6" as plugin and the needed dependencies)
 packages must have the same name and be organized the same way for each module
@@ -33,7 +33,7 @@ gradle converter:run --args="C:/Users/anton/Documents/IntellijProjects/GradlePro
 build benchmarks (In the Target Project Root):
 gradle jmhJar
 
-list avaible benchmarks:
+list available benchmarks:
 java -jar C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar -l
 
 run benchmarks (first way):

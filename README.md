@@ -1,9 +1,6 @@
 Using: java 17.0.10 e gradle 7.4.2
 
-Build the ju2jmh tool (In the Tool Root):
-gradle build
-
-New Gradle Project using Kotling language
+New Gradle Project using Kotlin language
 Make 2 subproject:
 GradleProject
 |--app (build.gradle.kts must have the right dependencies for junit 4.13.2)
@@ -27,8 +24,13 @@ re-build GradleProject (In the Target Project Root):
 gradle clean
 gradle build
 
+Build the ju2jmh tool (In the Tool Root):
+gradle build
+
 run generation
 gradle converter:run --args="C:/Users/anton/Documents/IntellijProjects/GradleProject/app/src/test/java/ C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancarioTest"
+or
+gradle converter:run --args="C:/Users/anton/Documents/IntellijProjects/GradleProject/app/src/test/java/ C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/src/jmh/java/ --class-names-file=C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/test-classes.txt"
 
 build benchmarks (In the Target Project Root):
 gradle jmhJar
@@ -39,5 +41,8 @@ java -jar C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/build/l
 run benchmarks (first way):
 use the jmh task in the gradle menu under ju2jmh opening GradleProject with IntelliJ
 
-run the benchmarks (second way):
-java -jar C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar -f 1 -wi 0 -i 1 -r 100ms -foe true
+run the benchmarks (second way + json results file gen):
+java -jar C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar -f 1 -wi 0 -i 1 -r 100ms -foe true -rf json
+
+rename the results json file (find a generic way!!)
+mv jmh-result.json jmh-result_prev.json

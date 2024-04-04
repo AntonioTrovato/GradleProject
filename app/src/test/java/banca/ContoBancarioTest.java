@@ -54,4 +54,11 @@ public class ContoBancarioTest {
         conto.setSaldo(200);
         assertEquals(200, conto.getSaldo());
     }
+
+    @Test
+    public void testSetSaldo2() {
+        ContoBancario conto = new ContoBancario("123", 100);
+        conto.setSaldo2(200);
+        assertEquals(200, conto.getSaldo());
+    }
 }

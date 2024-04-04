@@ -55,6 +55,13 @@ public class ContoBancarioTest {
         assertEquals(200, conto.getSaldo());
     }
 
+    @Test
+    public void testSetSaldo2() {
+        ContoBancario conto = new ContoBancario("123", 100);
+        conto.setSaldo2(200);
+        assertEquals(200, conto.getSaldo());
+    }
+
     @org.openjdk.jmh.annotations.State(org.openjdk.jmh.annotations.Scope.Thread)
     public static class _Benchmark extends se.chalmers.ju2jmh.api.JU2JmhBenchmark {
 
@@ -98,6 +105,12 @@ public class ContoBancarioTest {
         public void benchmark_testSetSaldo() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testSetSaldo, this.description("testSetSaldo"));
+        }
+
+        @org.openjdk.jmh.annotations.Benchmark
+        public void benchmark_testSetSaldo2() throws java.lang.Throwable {
+            this.createImplementation();
+            this.runBenchmark(this.implementation()::testSetSaldo2, this.description("testSetSaldo2"));
         }
 
         private ContoBancarioTest implementation;

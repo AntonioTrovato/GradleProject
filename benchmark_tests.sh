@@ -9,9 +9,10 @@ echo "$commit_list"
 for commit_hash in $commit_list; do
     echo "Elaborazione del commit: $commit_hash"
     # Verifica se il commit ha un genitore
-    if [ "$(git rev-parse --quiet --verify "$commit_hash"^ 2>/dev/null)" ]; then
+    parent_commit=$(git show --no-patch --format="%P" "$commit_hash" | awk '{print $1}')
+    if [ -n "$parent_commit" ]; then
         # Ottieni i nomi dei file aggiunti nel commit corrente
-        added_files=$(git diff --name-status "$commit_hash"^.."$commit_hash" | awk '$1 == "A" {print $2}')
+        added_files=$(git diff --name-status "$parent_commit".."$commit_hash" | awk '$1 == "A" {print $2}')
 
         # Loop sui file aggiunti nel commit corrente
         for file in $added_files; do

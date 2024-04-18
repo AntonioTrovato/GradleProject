@@ -1,6 +1,0 @@
-language: java
-jdk:
-  - openjdk11  # Specifica la versione di JDK da utilizzare
-script:
-  - ./gradlew build  # Esegui la build del progetto Gradle
-  - bash ./benchmark_tests.sh  # Esegui lo script dopo la build

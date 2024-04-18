@@ -15,6 +15,7 @@ second_commit_hash=$(echo "$commit_list" | sed -n '2p' | awk '{print $1}')
 # Ottieni la lista dei file modificati, aggiunti o eliminati nell'ultimo commit
 diff_output=$(git diff --name-status $second_commit_hash HEAD)
 
+echo "diff:"
 echo "$diff_output"
 
 # Scansiona l'output del comando git diff per identificare i metodi modificati, aggiunti ed eliminati
@@ -26,6 +27,8 @@ while IFS= read -r line; do
     if [[ $file == *.java ]]; then
         # Estrai solo il nome del file senza estensione e il percorso
         file_name=$(basename "$file" .java)
+        echo "file name:"
+        echo file_name
         package=$(grep -oP 'package\s+\K\w+(\.\w+)*' "$file")
         # Ignora i file di test
         if [[ $file_name != *Test* && $file_name != *test* ]]; then

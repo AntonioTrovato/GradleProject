@@ -16,7 +16,7 @@ public class UtenteTest {
     @Before
     public void setUp() {
         mockContoBancario = Mockito.mock(ContoBancario.class);
-        utente = new Utente("John", "Doe", "1234567890", mockContoBancario);
+        utente = new Utente("John", "Doe", "1234567890", "via mazzini", mockContoBancario);
     }
 
     @Test

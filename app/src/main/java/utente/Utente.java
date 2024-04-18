@@ -43,6 +43,10 @@ public class Utente {
         this.address = address;
     }
 
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;
     }

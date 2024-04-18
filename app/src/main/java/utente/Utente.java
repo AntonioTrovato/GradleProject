@@ -3,10 +3,10 @@ package utente;
 import banca.ContoBancario;
 
 public class Utente {
-    public Utente(String name, String surname, String telephone, ContoBancario contoBancario) {
+    public Utente(String name, String surname, String address, ContoBancario contoBancario) {
         this.name = name;
         this.surname = surname;
-        this.telephone = telephone;
+        this.address = address;
         this.contoBancario = contoBancario;
     }
 
@@ -18,8 +18,8 @@ public class Utente {
         return surname;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getAddress() {
+        return address;
     }
 
     public ContoBancario getContoBancario() {
@@ -34,8 +34,8 @@ public class Utente {
         this.surname = surname;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setContoBancario(ContoBancario contoBancario) {
@@ -44,6 +44,6 @@ public class Utente {
 
     private String name;
     private String surname;
-    private String telephone;
+    private String address;
     private ContoBancario contoBancario;
 }

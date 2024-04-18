@@ -16,7 +16,7 @@ public class UtenteTest {
     @Before
     public void setUp() {
         mockContoBancario = Mockito.mock(ContoBancario.class);
-        utente = new Utente("John", "Doe", "1234567890", mockContoBancario);
+        utente = new Utente("John", "Doe", "via mazzini", mockContoBancario);
     }
 
     @Test
@@ -29,7 +29,8 @@ public class UtenteTest {
         assertEquals("Doe", utente.getSurname());
     }
 
-    public void testGetTelephone() {assertEquals("1234567890", utente.getSurname());}
+    @Test
+    public void testGetAddress() {assertEquals("via mazzini", utente.getAddress());}
 
     @Test
     public void testGetContoBancario() {
@@ -48,9 +49,10 @@ public class UtenteTest {
         assertEquals("Smith", utente.getSurname());
     }
 
-    public void testSetTelephone() {
-        utente.setTelephone("1234567890");
-        assertEquals("1234567890", utente.getSurname());
+    @Test
+    public void testSetAddress() {
+        utente.setAddress("via mazzini2");
+        assertEquals("via mazzini2", utente.getSurname());
     }
 
     @Test

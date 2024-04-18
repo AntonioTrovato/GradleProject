@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Array per memorizzare i metodi modificati, aggiunti ed eliminati
+# TODO SE IL COMMIT E' IL PRIMO, ALLORA VANNO CONSIDERATI SOLO I METODI AGGIUNTI!!! (if [ -n "$second_commit_hash" ]; then)... else solo gli aggiunti
 declare -a modificati
 declare -a aggiunti
 declare -a eliminati
@@ -13,6 +14,8 @@ second_commit_hash=$(echo "$commit_list" | sed -n '2p' | awk '{print $1}')
 
 # Ottieni la lista dei file modificati, aggiunti o eliminati nell'ultimo commit
 diff_output=$(git diff --name-status $second_commit_hash HEAD)
+
+echo "$diff_output"
 
 # Scansiona l'output del comando git diff per identificare i metodi modificati, aggiunti ed eliminati
 while IFS= read -r line; do

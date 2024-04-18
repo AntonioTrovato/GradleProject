@@ -25,6 +25,9 @@ jobs:
         with:
           gradle-version: '7.4.2'  # Specifica la versione di Gradle da utilizzare
 
+      - name: Set execute permission for gradlew
+        run: chmod +x gradlew
+
       - name: Build Project
         run: ./gradlew build  # Esegui la build del progetto Gradle
 

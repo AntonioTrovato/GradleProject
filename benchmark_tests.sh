@@ -1,3 +1,3 @@
 #!/bin/bash
 
-git show $COMMIT
+git diff HEAD^ HEAD

@@ -11,7 +11,8 @@ GradleProject
 |----src/main/java/
 |----src/test/java/
 
-the ju2jmh/src/jmh/java and ju2jmh/src/jmh/resources folders must be created by hand, then run the build.gradle.kts (using id("me.champeau.jmh") version "0.6.6" as plugin and the needed dependencies)
+the ju2jmh/src/jmh/java and ju2jmh/src/jmh/resources folders must be created by hand, 
+then run the build.gradle.kts (using id("me.champeau.jmh") version "0.6.6" as plugin and the needed dependencies)
 packages must have the same name and be organized the same way for each module
 
 build GradleProject (In the Target Project Root):
@@ -31,6 +32,8 @@ run generation
 gradle converter:run --args="C:/Users/anton/Documents/IntellijProjects/GradleProject/app/src/test/java/ C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancarioTest"
 or
 gradle converter:run --args="C:/Users/anton/Documents/IntellijProjects/GradleProject/app/src/test/java/ C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/src/jmh/java/ --class-names-file=C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/test-classes.txt"
+run generator by jar
+java -jar C:/Users/anton/Documents/IntellijProjects/GradleProject/ju-to-jmh/converter-all.jar C:/Users/anton/Documents/IntellijProjects/GradleProject/app/src/test/java/ C:/Users/anton/Documents/IntellijProjects/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancarioTest
 
 build benchmarks (In the Target Project Root):
 gradle jmhJar
@@ -40,6 +43,9 @@ java -jar C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/build/l
 
 run benchmarks (first way):
 use the jmh task in the gradle menu under ju2jmh opening GradleProject with IntelliJ
+
+run a single benchmark
+java -jar C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar banca.ContoBancarioTest._Benchmark.benchmark_testVersamento
 
 run the benchmarks (second way + json results file gen):
 java -jar C:/Users/anton/Documents/IntellijProjects/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar -f 1 -wi 0 -i 1 -r 100ms -foe true -rf json

@@ -6,7 +6,7 @@ declare -a aggiunti
 declare -a eliminati
 
 # Ottieni la lista dei file modificati, aggiunti o eliminati nell'ultimo commit
-diff_output=$(git diff --name-status HEAD~1 HEAD)
+diff_output=$(git diff --name-status HEAD^ HEAD)
 
 # Scansiona l'output del comando git diff per identificare i metodi modificati, aggiunti ed eliminati
 while IFS= read -r line; do
@@ -23,7 +23,7 @@ while IFS= read -r line; do
             case $status in
                 M)
                     # Estrai i metodi modificati e aggiungili alla lista modificati
-                    methods=$(git diff HEAD~1 HEAD -- "$file" | grep -E '^\+(?!.*import)(?!.*class)(?!.*\{).*\(.*\)' | sed -E 's/\s*[\+]+[\s*]*//' | sed -E '/^\s*$/d')
+                    methods=$(git diff HEAD^ HEAD -- "$file" | grep -E '^\+(?!.*import)(?!.*class)(?!.*\{).*\(.*\)' | sed -E 's/\s*[\+]+[\s*]*//' | sed -E '/^\s*$/d')
                     for method in $methods; do
                         modificati+=("$package.$file_name.$method")
                     done
@@ -37,7 +37,7 @@ while IFS= read -r line; do
                     ;;
                 D)
                     # Estrai i metodi eliminati e aggiungili alla lista eliminati
-                    methods=$(git diff HEAD~ HEAD -- "$file" | grep -E '^\-(?!.*import)(?!.*class)(?!.*\{).*\(.*\)' | sed -E 's/\s*[\-]+[\s*]*//' | sed -E '/^\s*$/d')
+                    methods=$(git diff HEAD^ HEAD -- "$file" | grep -E '^\-(?!.*import)(?!.*class)(?!.*\{).*\(.*\)' | sed -E 's/\s*[\-]+[\s*]*//' | sed -E '/^\s*$/d')
                     for method in $methods; do
                         eliminati+=("$package.$file_name.$method")
                     done

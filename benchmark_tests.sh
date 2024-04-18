@@ -19,7 +19,7 @@ while IFS= read -r line; do
         file_name=$(basename "$file" .java)
         package=$(grep -oP 'package\s+\K\w+(\.\w+)*' "$file")
         # Ignora i file di test
-        if [[ $file_name != *Test* ]]; then
+        if [[ $file_name != *Test* && $file_name != *test* ]]; then
             case $status in
                 M)
                     # Estrai i metodi modificati e aggiungili alla lista modificati

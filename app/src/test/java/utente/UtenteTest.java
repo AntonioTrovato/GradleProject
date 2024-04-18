@@ -11,11 +11,10 @@ import static org.junit.Assert.assertNotNull;
 public class UtenteTest {
 
     private Utente utente;
-    private ContoBancario mockContoBancario;
 
     @Before
     public void setUp() {
-        mockContoBancario = Mockito.mock(ContoBancario.class);
+        ContoBancario mockContoBancario = Mockito.mock(ContoBancario.class);
         utente = new Utente("John", "Doe", "123", "via mazzini", mockContoBancario);
     }
 

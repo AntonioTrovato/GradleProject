@@ -46,7 +46,7 @@ public class Utente {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    public void num2() {System.out.println("2");}
+    public void num3() {System.out.println("2");}
 
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;

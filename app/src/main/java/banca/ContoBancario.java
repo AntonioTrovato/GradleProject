@@ -1,8 +1,8 @@
 package banca;
 
 public class ContoBancario {
-    public ContoBancario(String id, int saldo_iniziale) {
-        this.id = id;
+    public ContoBancario(String idz, int saldo_iniziale) {
+        this.id = idz;
         this.saldo = saldo_iniziale;
     }
 

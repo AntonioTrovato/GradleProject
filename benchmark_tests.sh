@@ -2,9 +2,12 @@
 
 # Ottieni la lista dei commit
 commit_list=$(git log --oneline | awk '{print $1}')
+echo "Lista dei commit:"
+echo "$commit_list"
 
 # Loop attraverso ogni commit
 for commit_hash in $commit_list; do
+    echo "Elaborazione del commit: $commit_hash"
     # Verifica se il commit ha un genitore
     if [ "$(git rev-parse --quiet --verify "$commit_hash"^ 2>/dev/null)" ]; then
         # Ottieni i nomi dei file aggiunti nel commit corrente

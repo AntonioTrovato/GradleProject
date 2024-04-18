@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ottieni la lista dei commit
-commit_list=$(git log --oneline | awk '{print $1}')
+commit_list=$(git rev-list --reverse HEAD)
 echo "Lista dei commit:"
 echo "$commit_list"
 

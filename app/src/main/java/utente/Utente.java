@@ -50,6 +50,8 @@ public class Utente {
 
     public void num4() {System.out.println("3");}
 
+    public void num5() {System.out.println("4");}
+
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;
     }

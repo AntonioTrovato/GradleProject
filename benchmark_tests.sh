@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Esegui il log di tutti i commit
-git log --oneline | while read -r commit_hash _; do
+# Ottieni la lista dei commit
+commit_list=$(git log --oneline | awk '{print $1}')
+
+# Loop attraverso ogni commit
+for commit_hash in $commit_list; do
     # Verifica se il commit ha un genitore
     if [ "$(git rev-parse --quiet --verify "$commit_hash"^ 2>/dev/null)" ]; then
         # Ottieni i nomi dei file aggiunti nel commit corrente

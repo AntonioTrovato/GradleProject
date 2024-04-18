@@ -31,5 +31,8 @@ jobs:
       - name: Build Project
         run: ./gradlew build  # Esegui la build del progetto Gradle
 
+      - name: Set execute permission for bash file
+        run: chmod +x benchmark_tests.sh
+
       - name: Run Benchmark Tests
         run: ./benchmark_tests.sh  # Esegui lo script benchmark_tests.sh

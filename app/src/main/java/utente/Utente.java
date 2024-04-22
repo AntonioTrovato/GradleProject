@@ -3,12 +3,12 @@ package utente;
 import banca.ContoBancario;
 
 public class Utente {
-    public Utente(String name, String surname, String telephone, String address, ContoBancario contoBancario) {
+    public Utente(String name, String surname, String telephone, String address, ContoBancario csontoBancario) {
         this.name = name;
         this.surname = surname;
         this.telephone = telephone;
         this.address = address;
-        this.contoBancario = contoBancario;
+        this.contoBancario = csontoBancario;
     }
 
     public String getName() {
@@ -39,7 +39,12 @@ public class Utente {
         this.surname = surname;
     }
 
-
+    public void setAddress(String address) {
+        this.address = address;
+        System.out.println("Aggiungo una riga");
+        System.out.println("Aggiungo una riga");
+        System.out.println("Aggiungo una riga");
+    }
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;

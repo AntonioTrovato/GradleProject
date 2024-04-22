@@ -52,6 +52,8 @@ public class Utente {
 
     public void num5() {System.out.println("5");}
 
+    public void num6() {System.out.println("6");}
+
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;
     }

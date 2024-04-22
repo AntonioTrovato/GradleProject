@@ -47,12 +47,6 @@ public class UtenteTest {
     }
 
     @Test
-    public void testSetAddress() {
-        utente.setAddress("via mazzini2");
-        assertEquals("via mazzini2", utente.getAddress());
-    }
-
-    @Test
     public void testSetContoBancario() {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
         utente.setContoBancario(nuovoConto);

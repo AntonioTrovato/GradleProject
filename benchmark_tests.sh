@@ -4,7 +4,7 @@
 commit_corrente=$(git rev-parse HEAD)
 
 # Leggi l'hash del commit precedente
-commit_precedente=$(git rev-parse HEAD^)
+commit_precedente=$(git log --format="%H" -n 2 | tail -n 1)
 
 # Stampare gli hash dei due commit
 echo "Hash del commit corrente: $commit_corrente"

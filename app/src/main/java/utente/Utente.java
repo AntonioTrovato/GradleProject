@@ -39,12 +39,7 @@ public class Utente {
         this.surname = surname;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-        System.out.println("Aggiungo una riga");
-        System.out.println("Aggiungo una riga");
-        System.out.println("Aggiungo una riga");
-    }
+
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;

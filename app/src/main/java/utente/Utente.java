@@ -41,6 +41,9 @@ public class Utente {
 
     public void setAddress(String address) {
         this.address = address;
+        System.out.println("Aggiungo una riga");
+        System.out.println("Aggiungo una riga");
+        System.out.println("Aggiungo una riga");
     }
 
     public void setTelephone(String telephone) {

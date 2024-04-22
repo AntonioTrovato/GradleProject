@@ -50,9 +50,9 @@ public class Utente {
 
     public void num4() {System.out.println("3");}
 
-    public void num5() {System.out.println("5");}
+    public void num5() {System.out.println("ciao");}
 
-    public void num6() {System.out.println("6");}
+    public void hey() {System.out.println("prova");}
 
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;

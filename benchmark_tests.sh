@@ -1,9 +1,12 @@
 #!/bin/bash
 
-# Leggi gli hash dei due commit più recenti utilizzando git log
-commit_corrente=$(git log --format="%H" -n 1)
-commit_precedente=$(git log --format="%H" -n 2 | tail -n 1)
+# Leggi l'hash del commit corrente
+commit_corrente=$(git rev-parse HEAD)
 
+# Leggi l'hash del commit precedente
+commit_precedente=$(git rev-parse HEAD^)
+
+# Stampare gli hash dei due commit
 echo "Hash del commit corrente: $commit_corrente"
 echo "Hash del commit precedente: $commit_precedente"
 

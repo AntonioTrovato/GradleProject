@@ -1,3 +1,3 @@
 #!/bin/bash
 
-git diff HEAD^1
+git diff HEAD^ HEAD

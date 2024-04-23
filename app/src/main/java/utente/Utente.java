@@ -3,15 +3,15 @@ package utente;
 import banca.ContoBancario;
 
 public class Utente {
-    public Utente(String name, String surname, String telephone, String address, ContoBancario csontoBancario) {
+    public Utente(String name, String surname, String telephone, String address, ContoBancario contoBancario) {
         this.name = name;
         this.surname = surname;
         this.telephone = telephone;
         this.address = address;
-        this.contoBancario = csontoBancario;
+        this.contoBancario = contoBancario;
     }
 
-    public String getName() {
+    public String getNome() {
         return name;
     }
 
@@ -39,13 +39,6 @@ public class Utente {
         this.surname = surname;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-        System.out.println("Aggiungo una riga");
-        System.out.println("Aggiungo una riga");
-        System.out.println("Aggiungo una riga");
-    }
-
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
@@ -53,9 +46,16 @@ public class Utente {
 
     public void num4() {System.out.println("3");}
 
-    public void hey() {System.out.println("prova2");}
+    public void hey() {System.out.println("heey");}
 
-    public void num6() {System.out.println("6");}
+    public void num5() {System.out.println("5");}
+
+    public void prova() {
+        System.out.println("prova");
+        System.out.println("prova");
+        System.out.println("prova");
+        System.out.println("prova");
+    }
 
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;

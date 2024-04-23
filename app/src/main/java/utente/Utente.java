@@ -48,9 +48,9 @@ public class Utente {
 
     public void hey() {System.out.println("heey");}
 
-    public void num5() {System.out.println("5");}
+    public void num5(int num) {System.out.println("5");}
 
-    public void prova() {
+    public void prova(String ciao) {
         System.out.println("prova");
         System.out.println("prova");
         System.out.println("prova");

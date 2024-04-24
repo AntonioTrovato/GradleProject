@@ -9,7 +9,8 @@ git_diff=$(git diff $commit_precedente $commit_corrente)
 
 echo "$git_diff"
 
-awk -v RS='diff --git ' 'NR>1{print "diff --git "$0}' <<< "$git_diff" | while IFS= read -r block; do
+# Utilizza awk per separare la stringa in blocchi
+awk '/^diff --git/ && block {print block; block="";}{block = block $0 "\n"} END {print block}' <<< "$git_diff" | while IFS= read -r block; do
     echo "ecco:"
     echo "$block"
     echo "-------------------------"

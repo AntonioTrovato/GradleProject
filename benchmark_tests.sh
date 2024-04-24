@@ -36,24 +36,29 @@ if [ -n "$block" ]; then
     commit_blocks+=("$block")
 fi
 
+# Initialize an empty array to store deleted methods
+deleted_methods=()
+
 # Print the commit_blocks
 for commit_block in "${commit_blocks[@]}"; do
-  echo "======================================\n"
-  echo "Commit block:"
-  echo "$commit_block"
-  echo ""
   # Extract the first line of the string
   first_line=$(echo "$commit_block" | head -n 1)
 
   # Check if the first line matches the pattern "diff --git path_1 path_2"
   if [[ $first_line =~ ^diff\ --git\ .*\main/java\/(.*)\/([^\/]+)\.java\ .*$ ]]; then
-      packages="${BASH_REMATCH[1]}"
-      file_name="${BASH_REMATCH[2]}"
+    packages="${BASH_REMATCH[1]}"
+    file_name="${BASH_REMATCH[2]}"
 
-      # Replace slashes with dots and remove .java extension
-      class_name="${packages//\//.}.${file_name%.java}"
-      echo "Class name \n"
-      echo "$class_name"
-      echo "\n"
+    # Replace slashes with dots and remove .java extension
+    class_name="${packages//\//.}.${file_name%.java}"
+
+    # For each line of the actual block (diff for a class)
+    while IFS= read -r line; do
+      if [[ $line =~ ^-\ (public|protected|private|static|final|abstract|synchronized)\ ([^ ]+)\ ([^ ]+)\(.*$ ]]; then
+          method_name="${BASH_REMATCH[3]}"
+          echo "$class_name.$method_name"
+          deleted_methods+=("$class_name.$method_name")
+      fi
+    done <<< "$commit_block"
   fi
 done

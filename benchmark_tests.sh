@@ -13,7 +13,8 @@ echo "$git_diff"
 blocks=$(echo "$git_diff" | sed -n '/^diff --git/,/^diff --git/{p}')
 
 # Stampa tutti i blocchi trovati
-echo "$blocks" | while IFS= read -r block; do
+# shellcheck disable=SC2066
+for block in "$blocks"; do
     echo "ecco:"
     echo "$block"
     echo "-------------------------"

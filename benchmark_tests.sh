@@ -10,7 +10,7 @@ git_diff=$(git diff $commit_precedente $commit_corrente)
 echo "$git_diff"
 
 # Utilizza awk per separare la stringa in blocchi
-echo "$input_string" | grep -E '^diff --git ' | while IFS= read -r block; do
+echo "$git_diff" | grep -E '^diff --git ' | while IFS= read -r block; do
     echo "ecco:"
     echo "$block"
     echo "-------------------------"

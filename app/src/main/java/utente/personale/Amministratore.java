@@ -29,6 +29,7 @@ public class Amministratore {
 
     public void setDepartment(String department) {
         this.department = department;
+        System.out.println("ciao");
     }
 
     private String name;

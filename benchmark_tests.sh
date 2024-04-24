@@ -9,8 +9,19 @@ git_diff=$(git diff $commit_precedente $commit_corrente)
 
 echo "$git_diff"
 
-awk '/^diff --git/ {if (block) print block; block="\necco:\n"} {block = block $0 "\n"} END {print block}' <<< "$input_string" | while IFS= read -r block; do
-    echo "ecco:"
-    echo "$block"
-    echo "-------------------------"
+echo "=================================================================================="
+
+# Initialize an array to hold the substrings
+declare -a substrings
+
+# Using awk to split the string into substrings based on "hi"
+while read -r substring; do
+    substrings+=("$substring")
+done < <(awk 'BEGIN {RS="diff --git"; ORS=""} {print $0}' <<< "$git_diff")
+
+# Print each substring
+for ((i=0; i<${#substrings[@]}; i++)); do
+    echo "Substring $((i+1)):"
+    echo "${substrings[i]}"
+    echo
 done

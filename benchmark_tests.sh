@@ -36,6 +36,7 @@ blocks+=("${git_diff[@]:start_index}")
 
 # Stampa tutti i blocchi trovati
 for block in "${blocks[@]}"; do
+    echo "ecco:"
     echo "$block"
     echo "-------------------------"
 done

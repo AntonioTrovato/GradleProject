@@ -29,6 +29,7 @@ public class Tecnico {
 
     public void setProfession(String profession) {
         this.profession = profession;
+        System.out.println("ciao");
     }
 
     private String name;

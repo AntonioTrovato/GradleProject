@@ -11,7 +11,7 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 

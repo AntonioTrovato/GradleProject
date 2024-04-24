@@ -38,6 +38,22 @@ fi
 
 # Print the commit_blocks
 for commit_block in "${commit_blocks[@]}"; do
-    echo "Commit block:"
-    echo "$commit_block"
+  echo "======================================\n"
+  echo "Commit block:"
+  echo "$commit_block"
+  echo ""
+  # Extract the first line of the string
+  first_line=$(echo "$commit_block" | head -n 1)
+
+  # Check if the first line matches the pattern "diff --git path_1 path_2"
+  if [[ $first_line =~ ^diff\ --git\ .*\/java\/(.*)\/([^\/]+)\.java\ .*$ ]]; then
+      packages="${BASH_REMATCH[1]}"
+      file_name="${BASH_REMATCH[2]}"
+
+      # Replace slashes with dots and remove .java extension
+      class_name="${packages//\//.}.${file_name%.java}"
+      echo "Class name \n"
+      echo "$class_name"
+      echo "\n"
+  fi
 done

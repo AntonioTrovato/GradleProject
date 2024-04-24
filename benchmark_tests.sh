@@ -9,12 +9,7 @@ git_diff=$(git diff $commit_precedente $commit_corrente)
 
 echo "$git_diff"
 
-# Separare la stringa in righe usando il carattere di nuova linea come delimitatore
-blocks=$(echo "$git_diff" | sed -n '/^diff --git/,/^diff --git/{p}')
-
-# Stampa tutti i blocchi trovati
-# shellcheck disable=SC2066
-for block in "$blocks"; do
+awk -v RS='diff --git ' 'NR>1{print "diff --git "$0}' <<< "$git_diff" | while IFS= read -r block; do
     echo "ecco:"
     echo "$block"
     echo "-------------------------"

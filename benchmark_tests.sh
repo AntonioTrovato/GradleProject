@@ -11,17 +11,33 @@ echo "$git_diff"
 
 echo "=================================================================================="
 
-# Initialize an array to hold the substrings
-declare -a substrings
+# Initialize an empty commit_blocks list
+declare -a commit_blocks
 
-# Using awk to split the string into substrings based on "hi"
-while read -r substring; do
-    substrings+=("$substring")
-done < <(awk 'BEGIN {RS="diff --git"; ORS=""} {print $0}' <<< "$git_diff")
+# Initialize an empty block
+block=""
 
-# Print each substring
-for ((i=0; i<${#substrings[@]}; i++)); do
-    echo "Substring $((i+1)):"
-    echo "${substrings[i]}"
-    echo
+# Read the diff string line by line
+while IFS= read -r line; do
+    # Check if the line starts with "diff --git"
+    if [[ $line == "diff --git"* ]]; then
+        # If yes, add the current block to commit_blocks and reset the block
+        if [ -n "$block" ]; then
+            commit_blocks+=("$block")
+            block=""
+        fi
+    fi
+    # Add the current line to the block
+    block+="$line"$'\n'
+done <<< "$git_diff"
+
+# Add the last block to commit_blocks
+if [ -n "$block" ]; then
+    commit_blocks+=("$block")
+fi
+
+# Print the commit_blocks
+for commit_block in "${commit_blocks[@]}"; do
+    echo "Commit block:"
+    echo "$commit_block"
 done

@@ -46,7 +46,7 @@ for commit_block in "${commit_blocks[@]}"; do
   first_line=$(echo "$commit_block" | head -n 1)
 
   # Check if the first line matches the pattern "diff --git path_1 path_2"
-  if [[ $first_line =~ ^diff\ --git\ .*\/java\/(.*)\/([^\/]+)\.java\ .*$ ]]; then
+  if [[ $first_line =~ ^diff\ --git\ .*\main/java\/(.*)\/([^\/]+)\.java\ .*$ ]]; then
       packages="${BASH_REMATCH[1]}"
       file_name="${BASH_REMATCH[2]}"
 

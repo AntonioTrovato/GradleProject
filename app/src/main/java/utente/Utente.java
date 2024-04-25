@@ -49,12 +49,6 @@ public class Utente {
 
     public void num5(int num) {System.out.println("5");}
 
-    public void ciao() {
-        System.out.println("ciao");
-        System.out.println("ciao");
-        System.out.println("ciao");
-    }
-
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;
     }

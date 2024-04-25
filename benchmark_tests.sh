@@ -44,7 +44,7 @@ added_methods=()
 for commit_block in "${commit_blocks[@]}"; do
   # Extract the first line of the string
   first_line=$(echo "$commit_block" | head -n 1)
-  commit_block_copy=commit_block
+  commit_block_copy="$commit_block"
 
   # Check if the first line matches the pattern "diff --git path_1 path_2"
   if [[ $first_line =~ ^diff\ --git\ .*\main/java\/(.*)\/([^\/]+)\.java\ .*$ ]]; then
@@ -64,7 +64,7 @@ for commit_block in "${commit_blocks[@]}"; do
     done <<< "$commit_block"
 
     echo "ciaooooooooooooooooooooooooooooooooooooooo"
-    echo "$commit_block"
+    echo "$commit_block_copy"
 
     # For each line of the actual block (diff for a class), ending with added methods
     while IFS= read -r line; do
@@ -78,7 +78,7 @@ for commit_block in "${commit_blocks[@]}"; do
           fi
           added_methods_methods+=("$class_name.$method_name")
       fi
-    done <<< "$commit_block"
+    done <<< "$commit_block_copy"
   fi
 
 done

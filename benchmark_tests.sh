@@ -36,8 +36,9 @@ if [ -n "$block" ]; then
     commit_blocks+=("$block")
 fi
 
-# Initialize an empty array to store deleted methods
+# Initialize empty arrays to store deleted and added methods
 deleted_methods=()
+added_methods=()
 
 # Print the commit_blocks
 for commit_block in "${commit_blocks[@]}"; do
@@ -52,13 +53,26 @@ for commit_block in "${commit_blocks[@]}"; do
     # Replace slashes with dots and remove .java extension
     class_name="${packages//\//.}.${file_name%.java}"
 
-    # For each line of the actual block (diff for a class)
+    # For each line of the actual block (diff for a class), beginning with deleted methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
       if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
           method_name=${BASH_REMATCH[2]}
-          echo "$method_name"
           deleted_methods+=("$class_name.$method_name")
+      fi
+    done <<< "$commit_block"
+
+    # For each line of the actual block (diff for a class), ending with added methods
+    while IFS= read -r line; do
+      string=$(echo "$line" | head -n 1)
+      if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
+          method_name=${BASH_REMATCH[2]}
+          #if the method is already in deleted methods, it means it has just been modified
+          if [[ " ${deleted_methods[*]} " =~  $class_name.$method_name  ]]; then
+            # Rimuovi la stringa dalla lista
+            deleted_methods=( "${deleted_methods[@]/$class_name.$method_name}" )
+          fi
+          added_methods_methods+=("$class_name.$method_name")
       fi
     done <<< "$commit_block"
   fi
@@ -66,5 +80,11 @@ for commit_block in "${commit_blocks[@]}"; do
 done
 
 for deleted_method in "${deleted_methods[@]}"; do
-    echo "$deleted_method"
+  echo "deleted: "
+  echo "$deleted_method"
+done
+
+for added_method in "${added_methods[@]}"; do
+  echo "added: "
+  echo "$added_method"
 done

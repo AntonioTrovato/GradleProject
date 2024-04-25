@@ -60,7 +60,7 @@ for commit_block in "${commit_blocks[@]}"; do
       echo "${#string}"
       if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\( ]]; then
           echo "ciao"
-          method_name=${BASH_REMATCH[1]}
+          method_name=${BASH_REMATCH[0]}
           echo "$method_name"
           #method_name="${BASH_REMATCH[3]}"
           #echo "$class_name.$method_name"

@@ -27,10 +27,6 @@ public class Amministratore {
         this.surname = surname;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     private String name;
     private String surname;
     private String department;

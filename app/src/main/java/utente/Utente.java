@@ -40,7 +40,6 @@ public class Utente {
     }
 
     public void setTelephone(String telephone) {
-        this.telephone = telephone;
     }
     public void num3() {System.out.println("2");}
 
@@ -49,12 +48,6 @@ public class Utente {
     public void hey() {System.out.println("heey");}
 
     public void num5(int num) {System.out.println("5");}
-
-    public void ciao() {
-        System.out.println("ciao");
-        System.out.println("ciao");
-        System.out.println("ciao");
-    }
 
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;

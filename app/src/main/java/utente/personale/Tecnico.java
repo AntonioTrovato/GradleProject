@@ -23,13 +23,12 @@ public class Tecnico {
         System.out.println(this.profession);
     }
 
-    public void ciao() {
-        System.out.println("Ciao");
-        System.out.println("Ciao");
+    public void ciao4() {
+        System.out.println("Ciao2");
     }
 
-    public void ciao2() {
-        System.out.println("Ciao2");
+    public void ciao3() {
+        System.out.println("Ciao3");
     }
 
     private String name;

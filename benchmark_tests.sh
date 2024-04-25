@@ -56,7 +56,7 @@ for commit_block in "${commit_blocks[@]}"; do
     while IFS= read -r line; do
       echo "LINE:"
       echo $line
-      if [[ $line =~ ^-\s*(public|private|protected)?\s*(static)?\s*[a-zA-Z_][a-zA-Z0-9_]*\s+[a-zA-Z0-9_]+\s*\(.*\n$ ]]; then
+      if [[ $line == "- public void setProfession(String profession) {" ]]; then
           echo "ciao"
           #method_name="${BASH_REMATCH[3]}"
           #echo "$class_name.$method_name"

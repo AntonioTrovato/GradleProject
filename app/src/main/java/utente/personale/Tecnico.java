@@ -27,6 +27,10 @@ public class Tecnico {
         this.surname = surname;
     }
 
+    public static void setProfession(String profession) {
+        System.out.println("Profession: " + profession);
+    }
+
     private String name;
     private String surname;
     private String profession;

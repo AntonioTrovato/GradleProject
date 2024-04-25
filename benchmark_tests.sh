@@ -58,8 +58,10 @@ for commit_block in "${commit_blocks[@]}"; do
       echo "LINE:"
       echo "$string"
       echo "${#string}"
-      if [[ $string =~ public ]]; then
+      if [[ $string =~ \-.*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
           echo "ciao"
+          method_name=${BASH_REMATCH[1]}
+          echo "$method_name"
           #method_name="${BASH_REMATCH[3]}"
           #echo "$class_name.$method_name"
           #deleted_methods+=("$class_name.$method_name")

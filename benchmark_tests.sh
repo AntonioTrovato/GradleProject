@@ -56,6 +56,7 @@ for commit_block in "${commit_blocks[@]}"; do
     while IFS= read -r line; do
       echo "LINE:"
       echo $line
+      echo "${#line}"
       if [[ $line == "- public void setProfession(String profession) {" ]]; then
           echo "ciao"
           #method_name="${BASH_REMATCH[3]}"

@@ -55,18 +55,16 @@ for commit_block in "${commit_blocks[@]}"; do
     # For each line of the actual block (diff for a class)
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
-      echo "LINE:"
-      echo "$string"
-      echo "${#string}"
       if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
-          echo "ciao"
           method_name=${BASH_REMATCH[2]}
           echo "$method_name"
-          #method_name="${BASH_REMATCH[3]}"
-          #echo "$class_name.$method_name"
-          #deleted_methods+=("$class_name.$method_name")
+          deleted_methods+=("$class_name.$method_name")
       fi
     done <<< "$commit_block"
   fi
-  echo "block end"
+
+done
+
+for deleted_method in "${deleted_methods[@]}"; do
+    echo "$deleted_method"
 done

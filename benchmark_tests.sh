@@ -54,9 +54,10 @@ for commit_block in "${commit_blocks[@]}"; do
 
     # For each line of the actual block (diff for a class)
     while IFS= read -r line; do
+      string=$(echo "$line" | head -n 1)
       echo "LINE:"
-      echo $line
-      echo "${#line}"
+      echo "$string"
+      echo "${#string}"
       if [[ $line == "- public void setProfession(String profession) {" ]]; then
           echo "ciao"
           #method_name="${BASH_REMATCH[3]}"

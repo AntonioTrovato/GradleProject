@@ -28,6 +28,10 @@ public class Tecnico {
         System.out.println("Ciao");
     }
 
+    public void ciao2() {
+        System.out.println("Ciao2");
+    }
+
     private String name;
     private String surname;
     private String profession;

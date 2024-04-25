@@ -70,13 +70,14 @@ for commit_block in "${commit_blocks[@]}"; do
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
       if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
-          method_name=${BASH_REMATCH[2]}
-          #if the method is already in deleted methods, it means it has just been modified
-          if [[ " ${deleted_methods[*]} " =~  $class_name.$method_name  ]]; then
-            # Rimuovi la stringa dalla lista
-            deleted_methods=( "${deleted_methods[@]/$class_name.$method_name}" )
-          fi
-          added_methods_methods+=("$class_name.$method_name")
+        echo "sono qui"
+        method_name=${BASH_REMATCH[2]}
+        #if the method is already in deleted methods, it means it has just been modified
+        if [[ " ${deleted_methods[*]} " =~  $class_name.$method_name  ]]; then
+          # Rimuovi la stringa dalla lista
+          deleted_methods=( "${deleted_methods[@]/$class_name.$method_name}" )
+        fi
+        added_methods_methods+=("$class_name.$method_name")
       fi
     done <<< "$commit_block_copy"
   fi

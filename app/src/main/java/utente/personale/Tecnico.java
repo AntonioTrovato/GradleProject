@@ -27,10 +27,6 @@ public class Tecnico {
         this.surname = surname;
     }
 
-    public void setProfession(String profession) {
-        this.profession = profession;
-    }
-
     private String name;
     private String surname;
     private String profession;

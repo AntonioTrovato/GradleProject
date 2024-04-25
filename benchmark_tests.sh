@@ -56,7 +56,7 @@ for commit_block in "${commit_blocks[@]}"; do
     while IFS= read -r line; do
       echo "LINE:"
       echo $line
-      if [[ $line =~ ^-\s*public\s*.* ]]; then
+      if [[ $line =~ ^-\ public\ .* ]]; then
           echo "ciao"
           #method_name="${BASH_REMATCH[3]}"
           #echo "$class_name.$method_name"

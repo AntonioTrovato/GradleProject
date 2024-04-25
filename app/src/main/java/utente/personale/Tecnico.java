@@ -7,20 +7,39 @@ public class Tecnico {
         this.profession = profession;
     }
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public String getProfession(String ciao) {
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getProfession() {
         return profession;
     }
 
-    public void setSurname(String surname, String profession) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 
     public void setProfession(String profession) {
-        System.out.println("ciao");
+        this.profession = profession;
+    }
+
+    public void printProfession() {
+        System.out.println(this.profession);
+    }
+
+    public
+    static
+    void
+    ciao
+            (String profession) {
         System.out.println(profession);
     }
 

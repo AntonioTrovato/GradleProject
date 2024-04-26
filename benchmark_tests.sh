@@ -231,7 +231,7 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
     benchmark_class_file_name="${BASH_REMATCH[2]}Test.java"
 
     source_file="./ju2jmh/src/jmh/java/${benchmark_class_path}${benchmark_class_file_name}"
-    destination_file="./ju2jmh/src/jmh/java/${benchmark_class_path}/older/${benchmark_class_file_name}"
+    destination_file="./ju2jmh/src/jmh/java/${benchmark_class_path}older/${benchmark_class_file_name}"
     destination_dir="./ju2jmh/src/jmh/java/${benchmark_class_path}/older/"
 
     echo "source file:"

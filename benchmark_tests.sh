@@ -1,11 +1,22 @@
 #!/bin/bash
 
 # Run the JAR file and capture the output
-output=$(java -jar ./ju2jmh-jmh.jar -l)
+ju2jmh_listing_output=$(java -jar ./ju2jmh-jmh.jar -l)
 
-echo "$output" | while IFS= read -r line; do
-  echo "ciao"
-  echo "$line"
+# make the list of existing benchmarks
+existing_benchmarks=()
+
+echo "$ju2jmh_listing_output" | while IFS= read -r line; do
+  # skip the first line
+  if [[ $line != "Benchmarks:" ]]; then
+    existing_benchmarks+=("$line")
+  fi
+done
+
+# Print each element of the list
+for existing_benchmark in "${existing_benchmarks[@]}"; do
+  echo "benchmark:"
+  echo "$existing_benchmark"
 done
 
 # Leggi gli hash dei due commit più recenti utilizzando git log

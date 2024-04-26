@@ -12,7 +12,7 @@ while IFS= read -r line; do
     existing_benchmarks+=("$benchmark")
     echo "$benchmark"
   fi
-done <<< "$commit_block"
+done <<< "$ju2jmh_listing_output"
 
 # Print each element of the list
 for existing_benchmark in "${existing_benchmarks[@]}"; do

@@ -11,9 +11,15 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    public void ciao() {}
+    public String getName() {
+        return name;
+    }
 
-    public String getTelephone(String ciao) {
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getTelephone() {
         return telephone;
     }
 

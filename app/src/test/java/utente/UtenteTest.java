@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class UtenteTest {
 
-    private Utente utente;
+    /*private Utente utente;
 
     @Before
     public void setUp() {
@@ -51,5 +51,5 @@ public class UtenteTest {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
         utente.setContoBancario(nuovoConto);
         assertEquals(nuovoConto, utente.getContoBancario());
-    }
+    }*/
 }

@@ -6,7 +6,7 @@
 mkdir -p "./new_dir"
 
 # Check if the folder was created successfully
-if [ -d "$root_dir/ciao" ]; then
+if [ -d "./ciao" ]; then
     echo "Folder 'ciao' created successfully."
 else
     echo "Failed to create folder 'ciao'."

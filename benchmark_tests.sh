@@ -1,7 +1,12 @@
 #!/bin/bash
 
-output=$(java -jar GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar -l)
+# Get the absolute path to the JAR file
+jar_path="$(pwd)/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar"
 
+# Run the JAR file and capture the output
+output=$(java -jar "$jar_path" -l)
+
+# Print the captured output
 echo "$output"
 
 # Leggi gli hash dei due commit più recenti utilizzando git log

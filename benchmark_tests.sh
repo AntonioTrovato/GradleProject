@@ -1,13 +1,9 @@
 #!/bin/bash
 
-# Define the root directory
-root_dir="$GITHUB_WORKSPACE"
 
-# Print the root directory for debugging
-echo "Root directory: $root_dir"
 
 # Create a new folder named "ciao" in the root directory
-mkdir -p "$root_dir/new_dir"
+mkdir -p "./new_dir"
 
 # Check if the folder was created successfully
 if [ -d "$root_dir/ciao" ]; then

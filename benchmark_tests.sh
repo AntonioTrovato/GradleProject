@@ -3,15 +3,18 @@
 # Run the JAR file and capture the output
 output=$(java -jar ./ju2jmh-jmh.jar -l)
 
-# Extract the list of benchmarks using awk
-existing_benchmarks=$(echo "$output" | awk '/^Benchmarks:/ { for(i=2; i<=NF; i++) print $i }')
-
-# Convert the list of benchmarks into an array using readarray
-readarray -t existing_benchmarks_array <<< "$existing_benchmarks"
+# Extract the list of benchmarks
+IFS=$'\n' read -r -a lines <<< "$output"
+benchmarks=()
+for line in "${lines[@]}"; do
+    if [[ $line == Benchmarks:* ]]; then
+        benchmarks+=( "${line#Benchmarks: }" )
+    fi
+done
 
 # Print each benchmark
-for existing_benchmark in "${existing_benchmarks_array[@]}"; do
-    echo "$existing_benchmark"
+for benchmark in "${benchmarks[@]}"; do
+    echo "$benchmark"
 done
 
 # Leggi gli hash dei due commit più recenti utilizzando git log

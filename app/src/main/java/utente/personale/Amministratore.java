@@ -11,7 +11,15 @@ public class Amministratore {
         return name;
     }
 
-    public void setName(String name, String surname, String department) {
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -21,11 +29,6 @@ public class Amministratore {
 
     public void setDepartment(String department) {
         this.department = department;
-        System.out.println(department);
-    }
-
-    public void ciao() {
-        System.out.println("Ciao");
     }
 
     private String name;

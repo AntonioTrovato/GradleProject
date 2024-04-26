@@ -1,13 +1,7 @@
 #!/bin/bash
 
-# Get the absolute path to the JAR file
-jar_path="$(pwd)/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar"
-
-# Run the JAR file and capture the output
-output=$(java -jar "$jar_path" -l)
-
-# Print the captured output
-echo "$output"
+find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
+find . -type f
 
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)

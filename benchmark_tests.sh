@@ -3,18 +3,9 @@
 # Run the JAR file and capture the output
 output=$(java -jar ./ju2jmh-jmh.jar -l)
 
-# Extract the list of benchmarks
-IFS=$'\n' read -r -a lines <<< "$output"
-benchmarks=()
-for line in "${lines[@]}"; do
-    if [[ $line == Benchmarks:* ]]; then
-        benchmarks+=( "${line#Benchmarks: }" )
-    fi
-done
-
-# Print each benchmark
-for benchmark in "${benchmarks[@]}"; do
-    echo "$benchmark"
+echo "$output" | while IFS= read -r line; do
+  echo "ciao"
+  echo "$line"
 done
 
 # Leggi gli hash dei due commit più recenti utilizzando git log

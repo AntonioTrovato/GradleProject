@@ -19,7 +19,7 @@ public class Utente {
         return surname;
     }
 
-    public String getTelephone(String cio) {
+    public String getTelephone() {
         return telephone;
     }
 

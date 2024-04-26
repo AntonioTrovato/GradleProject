@@ -243,6 +243,7 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
     if [ -f "$source_file" ]; then
       # Create the destination directory if it doesn't exist
       mkdir -p "$destination_dir"
+      chmod 755 "$destination_dir"
 
       # Move the file to the destination directory, overwriting any existing file
       mv -f "$source_file" "$destination_file"

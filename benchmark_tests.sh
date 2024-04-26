@@ -62,11 +62,11 @@ for commit_block in "${commit_blocks[@]}"; do
     # For each line of the actual block (diff for a class), beginning with deleted methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
-      if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\( ]]; then
+      if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]+([a-zA-Z_][a-zA-Z0-9_]*)[[:space:]]*\( ]]; then
         echo "Line:"
         echo "$string"
         echo "method name:"
-        method_name=${BASH_REMATCH[2]}
+        method_name=${BASH_REMATCH[1]}
         echo "$method_name"
         deleted_methods+=("$class_name.$method_name")
       fi
@@ -79,10 +79,10 @@ for commit_block in "${commit_blocks[@]}"; do
     # For each line of the actual block (diff for a class), ending with added methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
-      if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\( ]]; then
+      if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]+([a-zA-Z_][a-zA-Z0-9_]*)[[:space:]]*\( ]]; then
         echo "Line:"
         echo "$string"
-        method_name=${BASH_REMATCH[2]}
+        method_name=${BASH_REMATCH[1]}
         echo "method name:"
         echo "$method_name"
         #if the method is already in deleted methods, it means it has just been modified

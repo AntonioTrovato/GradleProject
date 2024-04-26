@@ -62,7 +62,7 @@ for commit_block in "${commit_blocks[@]}"; do
     # For each line of the actual block (diff for a class), beginning with deleted methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
-      if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
+      if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\( ]]; then
         echo "Line:"
         echo "$string"
         echo "method name:"
@@ -79,7 +79,7 @@ for commit_block in "${commit_blocks[@]}"; do
     # For each line of the actual block (diff for a class), ending with added methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
-      if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
+      if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\( ]]; then
         echo "Line:"
         echo "$string"
         method_name=${BASH_REMATCH[2]}

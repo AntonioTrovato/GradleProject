@@ -11,25 +11,25 @@ public class Tecnico {
         return name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
     public String getProfession() {
         return profession;
     }
 
-    public String setName(String name, String surname) {
+    public void setName(String name) {
         this.name = name;
-        return name + " " + surname;
     }
 
-    public void setProfessione(String profession) {
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setProfession(String profession) {
         this.profession = profession;
     }
-
-    public String added_method_1 (String string) {
-        System.out.println(string);
-        return "added_method_1";
-    }
-
-    public String added_method_2 (String string) {return string;}
 
     private String name;
     private String surname;

@@ -27,11 +27,13 @@ public class Tecnico {
         this.surname = surname;
     }
 
-    public static void added_method_1 () {}
-
-    public void added_method_2 () {
-        System.out.println("added_method_2");
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
+
+    public  static  void   added_method_3 () {}
+
+    public       void   added_method_4 () {}
 
     private String name;
     private String surname;

@@ -1,14 +1,7 @@
 #!/bin/bash
 
 # Create a new folder named "ciao" in the root directory
-mv file.txt file2.txt
-
-# Check if the folder was created successfully
-if [ -d "./ciao" ]; then
-    echo "Folder 'ciao' created successfully."
-else
-    echo "Failed to create folder 'ciao'."
-fi
+mv "file.txt" "file2.txt"
 
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)

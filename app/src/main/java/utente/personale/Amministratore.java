@@ -28,12 +28,13 @@ public class Amministratore {
         this.surname = surname;
     }
 
-    public void setDepartment(String department) {
+    public String setDepartment(String department) {
         System.out.println();
         this.department = department;
+        return department;
     }
 
-    public    <T extends Tecnico>  int ciao     (int p) {return p;}
+    public static void added_method () {}
 
     private String name;
     private String surname;

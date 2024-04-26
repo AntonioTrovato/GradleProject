@@ -20,25 +20,17 @@ public class Tecnico {
         return profession;
     }
 
-    public String setName(String name, String surname, String profession) {
-        this.name = name;
-        System.out.println(profession);
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public void setProfessione(String profession) {
         this.profession = profession;
     }
 
     public static         void metodo_strano() {}
 
-    public  static   <T>  int   altro_metodo(T prame) {
+    public  static   <T>  int   altro_metodo(T prame, T prame2) {
         return 3;
     }
+
+    public static void added_method () {}
 
     private String name;
     private String surname;

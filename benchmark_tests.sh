@@ -56,38 +56,38 @@ for commit_block in "${commit_blocks[@]}"; do
     # Replace slashes with dots and remove .java extension
     class_name="${packages//\//.}.${file_name%.java}"
 
-    echo "COMMIT BLOCK:"
-    echo "$commit_block"
+    #echo "COMMIT BLOCK:"
+    #echo "$commit_block"
 
     # For each line of the actual block (diff for a class), beginning with deleted methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
       if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]*\ ([a-zA-Z_][a-zA-Z0-9_]*)[[:space:]]*\( ]]; then
-        echo "Line:"
-        echo "$string"
-        echo "method name:"
+        #echo "Line:"
+        #echo "$string"
         method_name=${BASH_REMATCH[2]}
-        echo "$method_name"
+        #echo "method name:"
+        #echo "$method_name"
         deleted_methods+=("$class_name.$method_name")
       fi
     done <<< "$commit_block"
 
-    echo "======================================================================0"
-    echo "COMMIT BLOCK COPY:"
-    echo "$commit_block_copy"
+    #echo "======================================================================0"
+    #echo "COMMIT BLOCK COPY:"
+    #echo "$commit_block_copy"
 
     # For each line of the actual block (diff for a class), ending with added methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
       if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]*\ ([a-zA-Z_][a-zA-Z0-9_]*)[[:space:]]*\( ]]; then
-        echo "Line:"
-        echo "$string"
+        #echo "Line:"
+        #echo "$string"
         method_name=${BASH_REMATCH[2]}
-        echo "method name:"
-        echo "$method_name"
+        #echo "method name:"
+        #echo "$method_name"
         #if the method is already in deleted methods, it means it has just been modified
         if [[ " ${deleted_methods[*]} " =~  $class_name.$method_name  ]]; then
-          echo "this method is already in deleted list"
+          #echo "this method is already in deleted list"
           # Rimuovi la stringa dalla lista
           deleted_methods=( "${deleted_methods[@]/$class_name.$method_name}" )
         fi
@@ -95,17 +95,35 @@ for commit_block in "${commit_blocks[@]}"; do
       fi
     done <<< "$commit_block_copy"
 
-    echo "=============================================================="
+    #echo "=============================================================="
   fi
 
 done
 
+# Function to transform method names
+transform_method() {
+  local method=$1
+  local packages=$(echo $method | cut -d'.' -f1-$(( $(echo $method | tr -cd '.' | wc -c) - 1 )))
+  local method_name=$(echo $method | rev | cut -d'.' -f1 | rev)
+  local class=$(echo $method | rev | cut -d'.' -f2 | rev)
+
+  # Capitalize the method name
+  local capitalized_method_name="$(echo "$method_name" | sed 's/^\(.\)/\U\1/')"
+
+  # Add class name and prefix
+  local transformed_method="$packages.$class"Test"._Benchmark.benchmark_test$capitalized_method_name"
+
+  echo $transformed_method
+}
+
 for deleted_method in "${deleted_methods[@]}"; do
+  transformed_method=$(transform_method "$deleted_method")
   echo "deleted: "
-  echo "$deleted_method"
+  echo "$deleted_method -> $transformed_method"
 done
 
 for added_method in "${added_methods[@]}"; do
+  transformed_method=$(transform_method "$added_method")
   echo "added: "
-  echo "$added_method"
+  echo "$added_method -> $transformed_method"
 done

@@ -2,7 +2,18 @@
 
 output=$(java -jar ./ju2jmh-jmh.jar -l)
 
-echo "$output"
+#echo "$output"
+
+# Extract the list of benchmarks using grep and sed
+existing_benchmarks=$(echo "$output" | grep -oP 'Benchmarks:\.\K\S*' | sed 's/;$//')
+
+# Convert the list of benchmarks into an array using awk
+readarray -t existing_benchmarks_array <<< "$(echo "$existing_benchmarks" | awk '{for(i=1;i<=NF;i++) print $i}')"
+
+# Print each benchmark
+for existing_benchmark in "${existing_benchmarks_array[@]}"; do
+    echo "$existing_benchmark"
+done
 
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)
@@ -103,6 +114,8 @@ for commit_block in "${commit_blocks[@]}"; do
   fi
 
 done
+
+
 
 # Function to transform method names
 transform_method() {

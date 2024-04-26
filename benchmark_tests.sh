@@ -229,10 +229,10 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
     benchmark_class_path="${BASH_REMATCH[1]}"
     benchmark_class_path="${benchmark_class_path//./\/}"
     benchmark_class_file_name="${BASH_REMATCH[2]}Test.java"
+    benchmark_class_file_new_name="${benchmark_class_file_name/Test.java/TestPrev.java}"
 
     source_file="./ju2jmh/src/jmh/java/${benchmark_class_path}${benchmark_class_file_name}"
-    destination_file="./ju2jmh/src/jmh/java/${benchmark_class_path}older/${benchmark_class_file_name}"
-    destination_dir="./ju2jmh/src/jmh/java/${benchmark_class_path}/older/"
+    destination_file="./ju2jmh/src/jmh/java/${benchmark_class_path}${benchmark_class_file_new_name}"
 
     echo "source file:"
     echo "$source_file"
@@ -241,14 +241,8 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
 
     # Check if the source file exists
     if [ -f "$source_file" ]; then
-      # Create the destination directory if it doesn't exist
-      mkdir -p "$destination_dir"
-      chmod 755 "$destination_dir"
-
-      # Move the file to the destination directory, overwriting any existing file
-      mv -f "$source_file" "$destination_file"
-
-      echo "File moved successfully."
+      mv "$source_file" "$destination_file"
+      echo "File renamed successfully."
     else
       echo "File does not exist: $source_file"
     fi

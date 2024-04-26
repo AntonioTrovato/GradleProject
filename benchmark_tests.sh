@@ -115,10 +115,10 @@ while IFS= read -r line; do
 done <<< "$ju2jmh_listing_output"
 
 # Print each element of the list
-for existing_benchmark in "${existing_benchmarks[@]}"; do
-  echo "benchmark:"
-  echo "$existing_benchmark"
-done
+#for existing_benchmark in "${existing_benchmarks[@]}"; do
+#  echo "benchmark:"
+#  echo "$existing_benchmark"
+#done
 
 # Function to transform method names
 transform_method() {
@@ -141,15 +141,15 @@ pattern="^([a-z.]*)([A-Z][a-zA-Z]*)Test\b(.*)"
 
 for deleted_method in "${deleted_methods[@]}"; do
   transformed_method=$(transform_method "$deleted_method")
-  echo "deleted: "
-  echo "$deleted_method -> $transformed_method"
+  #echo "deleted: "
+  #echo "$deleted_method -> $transformed_method"
   # Iterate through the list of existing benchmarks
   for existing_benchmark in "${existing_benchmarks[@]}"; do
     if [[ "$transformed_method" == "$existing_benchmark" ]]; then
       if [[ $existing_benchmark =~ $pattern ]]; then
         benchmark_class_to_generate="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
-        echo "benchmark_class_to_generate:"
-        echo "$benchmark_class_to_generate"
+        #echo "benchmark_class_to_generate:"
+        #echo "$benchmark_class_to_generate"
         found=false
         for element in "${benchmark_classes_to_generate[@]}"; do
           if [[ "$element" == "$benchmark_class_to_generate" ]]; then
@@ -158,7 +158,8 @@ for deleted_method in "${deleted_methods[@]}"; do
           fi
         done
         if [ "$found" = true ]; then
-          echo "la classe era già in lista"
+          #echo "la classe era già in lista"
+          echo ""
         else
           benchmark_classes_to_generate+=("$benchmark_class_to_generate")
         fi
@@ -169,8 +170,8 @@ done
 
 for added_method in "${added_methods[@]}"; do
   transformed_method=$(transform_method "$added_method")
-  echo "added: "
-  echo "$added_method -> $transformed_method"
+  #echo "added: "
+  #echo "$added_method -> $transformed_method"
   found=false
   for existing_benchmark in "${existing_benchmarks[@]}"; do
     if [[ "$transformed_method" == "$existing_benchmark" ]]; then
@@ -178,12 +179,13 @@ for added_method in "${added_methods[@]}"; do
     fi
   done
   if [ "$found" = true ]; then
-    echo "il benchmark per il metodo aggiunto già esiste"
+    #echo "il benchmark per il metodo aggiunto già esiste"
+    echo ""
   else
     if [[ $transformed_method =~ $pattern ]]; then
       benchmark_class_to_generate="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
-      echo "benchmark_class_to_generate:"
-      echo "$benchmark_class_to_generate"
+      #echo "benchmark_class_to_generate:"
+      #echo "$benchmark_class_to_generate"
       found2=false
       for element in "${benchmark_classes_to_generate[@]}"; do
         if [[ "$element" == "$benchmark_class_to_generate" ]]; then
@@ -192,7 +194,8 @@ for added_method in "${added_methods[@]}"; do
         fi
       done
       if [ "$found2" = true ]; then
-        echo "la classe era già in lista"
+        #echo "la classe era già in lista"
+        echo ""
       else
         benchmark_classes_to_generate+=("$benchmark_class_to_generate")
       fi
@@ -216,7 +219,41 @@ for benchmark_class_to_generate in "${benchmark_classes_to_generate[@]}"; do
   fi
 done
 
+pattern="^([a-z.]*)([A-Z][a-zA-Z]*)"
+
 for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@]}"; do
   echo "benchmark class to generate:"
   echo "$benchmark_class_to_generate"
+
+  if [[ $benchmark_class_to_generate =~ $pattern ]]; then
+    benchmark_class_path="${BASH_REMATCH[1]}"
+    benchmark_class_path="${benchmark_class_path//./\/}"
+    benchmark_class_file_name="${BASH_REMATCH[2]}Test.java"
+
+    source_file="./ju2jmh/src/jmh/java/${benchmark_class_path}${benchmark_class_file_name}"
+    destination_file="./ju2jmh/src/jmh/java/${benchmark_class_path}/older/${benchmark_class_file_name}"
+    destination_dir="./ju2jmh/src/jmh/java/${benchmark_class_path}/older/"
+
+    echo "source file:"
+    echo "$source_file"
+    echo "destination_file:"
+    echo "$destination_file"
+
+    # Check if the source file exists
+    if [ -f "$source_file" ]; then
+      # Create the destination directory if it doesn't exist
+      mkdir -p "$destination_dir"
+
+      # Move the file to the destination directory, overwriting any existing file
+      mv -f "$source_file" "$destination_file"
+
+      echo "File moved successfully."
+    else
+      echo "File does not exist: $source_file"
+    fi
+
+  fi
+
 done
+
+

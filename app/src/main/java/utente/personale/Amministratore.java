@@ -19,17 +19,21 @@ public class Amministratore {
         return department;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String setName(String nome) {
+        this.name = nome;
+        return nome;
     }
 
-    public void setSurname(String surname) {
+    public void setSurnamo(String surname) {
         this.surname = surname;
     }
 
     public void setDepartment(String department) {
+        System.out.println();
         this.department = department;
     }
+
+    public    <T extends Tecnico>  int ciao     (int p) {return p;}
 
     private String name;
     private String surname;

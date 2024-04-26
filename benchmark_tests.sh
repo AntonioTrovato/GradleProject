@@ -8,7 +8,7 @@ existing_benchmarks=()
 
 while IFS= read -r line; do
   benchmark=$(echo "$line" | head -n 1)
-  if [[ ! $string =~ ^Benchmarks: ]]; then
+  if [[ ! $benchmark =~ ^Benchmarks: ]]; then
     existing_benchmarks+=("$benchmark")
     echo "$benchmark"
   fi

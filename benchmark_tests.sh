@@ -1,25 +1,5 @@
 #!/bin/bash
 
-# Run the JAR file and capture the output
-ju2jmh_listing_output=$(java -jar ./ju2jmh-jmh.jar -l)
-
-# make the list of existing benchmarks
-existing_benchmarks=()
-
-while IFS= read -r line; do
-  benchmark=$(echo "$line" | head -n 1)
-  if [[ ! $benchmark =~ ^Benchmarks: ]]; then
-    existing_benchmarks+=("$benchmark")
-    echo "$benchmark"
-  fi
-done <<< "$ju2jmh_listing_output"
-
-# Print each element of the list
-for existing_benchmark in "${existing_benchmarks[@]}"; do
-  echo "benchmark:"
-  echo "$existing_benchmark"
-done
-
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)
 commit_precedente=$(git log --format="%H" -n 2 | tail -n 1)
@@ -120,7 +100,25 @@ for commit_block in "${commit_blocks[@]}"; do
 
 done
 
+# Run the JAR file and capture the output
+ju2jmh_listing_output=$(java -jar ./ju2jmh-jmh.jar -l)
 
+# make the list of existing benchmarks
+existing_benchmarks=()
+
+while IFS= read -r line; do
+  benchmark=$(echo "$line" | head -n 1)
+  if [[ ! $benchmark =~ ^Benchmarks: ]]; then
+    existing_benchmarks+=("$benchmark")
+    echo "$benchmark"
+  fi
+done <<< "$ju2jmh_listing_output"
+
+# Print each element of the list
+for existing_benchmark in "${existing_benchmarks[@]}"; do
+  echo "benchmark:"
+  echo "$existing_benchmark"
+done
 
 # Function to transform method names
 transform_method() {
@@ -138,14 +136,71 @@ transform_method() {
   echo $transformed_method
 }
 
+benchmark_classes_to_generate=()
+pattern="^([a-z.]*)([A-Z][a-zA-Z]*)Test\b(.*)"
+
 for deleted_method in "${deleted_methods[@]}"; do
   transformed_method=$(transform_method "$deleted_method")
   echo "deleted: "
   echo "$deleted_method -> $transformed_method"
+  # Iterate through the list of existing benchmarks
+  for existing_benchmark in "${existing_benchmarks[@]}"; do
+    if [[ "$transformed_method" == "$existing_benchmark" ]]; then
+      if [[ $existing_benchmark =~ $pattern ]]; then
+        benchmark_class_to_generate="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
+        echo "benchmark_class_to_generate:"
+        echo "$benchmark_class_to_generate"
+        found=false
+        for element in "${benchmark_classes_to_generate[@]}"; do
+          if [[ "$element" == "$benchmark_class_to_generate" ]]; then
+            found=true
+            break
+          fi
+        done
+        if [ "$found" = true ]; then
+          echo "la classe era già in lista"
+        else
+          benchmark_classes_to_generate+=("$benchmark_class_to_generate")
+        fi
+      fi
+    fi
+  done
 done
 
 for added_method in "${added_methods[@]}"; do
   transformed_method=$(transform_method "$added_method")
   echo "added: "
   echo "$added_method -> $transformed_method"
+  found=false
+  for existing_benchmark in "${existing_benchmarks[@]}"; do
+    if [[ "$transformed_method" == "$existing_benchmark" ]]; then
+      found=true
+    fi
+  done
+  if [ "$found" = true ]; then
+    echo "il benchmark per il metodo aggiunto già esiste"
+  else
+    if [[ $transformed_method =~ $pattern ]]; then
+      benchmark_class_to_generate="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
+      echo "benchmark_class_to_generate:"
+      echo "$benchmark_class_to_generate"
+      found2=false
+      for element in "${benchmark_classes_to_generate[@]}"; do
+        if [[ "$element" == "$benchmark_class_to_generate" ]]; then
+          found2=true
+          break
+        fi
+      done
+      if [ "$found2" = true ]; then
+        echo "la classe era già in lista"
+      else
+        benchmark_classes_to_generate+=("$benchmark_class_to_generate")
+      fi
+    fi
+  fi
+done
+
+for benchmark_class_to_generate in "${benchmark_classes_to_generate[@]}"; do
+  echo "benchmark class to generate:"
+  echo "$benchmark_class_to_generate"
 done

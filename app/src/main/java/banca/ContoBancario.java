@@ -6,15 +6,13 @@ public class ContoBancario {
         this.saldo = saldo_iniziale;
     }
 
-    public String getId() {
-        return id;
-    }
+    public void prova() {}
 
-    public int getSaldo() {
+    public int getSaldi() {
         return saldo;
     }
 
-    public void setId(String id) {
+    public void setId(String id,String ciao) {
         this.id = id;
     }
 

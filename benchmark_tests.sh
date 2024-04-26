@@ -7,6 +7,8 @@ commit_precedente=$(git log --format="%H" -n 2 | tail -n 1)
 # Esegui la diff tra i due commit
 git_diff=$(git diff $commit_precedente $commit_corrente)
 
+echo "GIT DIFF:"
+
 echo "$git_diff"
 
 echo "=================================================================================="
@@ -54,33 +56,46 @@ for commit_block in "${commit_blocks[@]}"; do
     # Replace slashes with dots and remove .java extension
     class_name="${packages//\//.}.${file_name%.java}"
 
+    echo "COMMIT BLOCK:"
+    echo "$commit_block"
+
     # For each line of the actual block (diff for a class), beginning with deleted methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
       if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
-          method_name=${BASH_REMATCH[2]}
-          deleted_methods+=("$class_name.$method_name")
+        echo "Line:"
+        echo "$string"
+        echo "method name:"
+        method_name=${BASH_REMATCH[2]}
+        echo "$method_name"
+        deleted_methods+=("$class_name.$method_name")
       fi
     done <<< "$commit_block"
 
-    echo "ciaooooooooooooooooooooooooooooooooooooooo"
+    echo "======================================================================0"
+    echo "COMMIT BLOCK COPY:"
     echo "$commit_block_copy"
 
     # For each line of the actual block (diff for a class), ending with added methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
       if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*\ ([a-zA-Z_][a-zA-Z0-9_]*)\( ]]; then
-        echo "sono qui"
-
+        echo "Line:"
+        echo "$string"
         method_name=${BASH_REMATCH[2]}
+        echo "method name:"
+        echo "$method_name"
         #if the method is already in deleted methods, it means it has just been modified
         if [[ " ${deleted_methods[*]} " =~  $class_name.$method_name  ]]; then
+          echo "this method is already in deleted list"
           # Rimuovi la stringa dalla lista
           deleted_methods=( "${deleted_methods[@]/$class_name.$method_name}" )
         fi
         added_methods+=("$class_name.$method_name")
       fi
     done <<< "$commit_block_copy"
+
+    echo "=============================================================="
   fi
 
 done

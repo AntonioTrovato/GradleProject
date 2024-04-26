@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create a new folder named "ciao" in the root directory
-mkdir -p "./new_dir"
+mkdir -p ./new_dir
 
 # Check if the folder was created successfully
 if [ -d "./ciao" ]; then

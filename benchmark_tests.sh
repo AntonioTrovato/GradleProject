@@ -7,6 +7,7 @@ ju2jmh_listing_output=$(java -jar ./ju2jmh-jmh.jar -l)
 existing_benchmarks=()
 
 echo "$ju2jmh_listing_output" | while IFS= read -r line; do
+  echo "$line"
   # skip the first line
   if [[ $line != "Benchmarks:" ]]; then
     existing_benchmarks+=("$line")

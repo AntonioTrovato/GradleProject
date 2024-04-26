@@ -2,14 +2,19 @@
 
 # Run the JAR file and capture the output
 output=$(java -jar ./ju2jmh-jmh.jar -l)
+echo "Output from JAR file:"
+echo "$output"
 
 # Extract the list of benchmarks using grep and sed
 existing_benchmarks=$(echo "$output" | grep -oP 'Benchmarks:\s*\K.*' | sed 's/;$//')
+echo "Extracted benchmarks:"
+echo "$existing_benchmarks"
 
 # Convert the list of benchmarks into an array using awk
 readarray -t existing_benchmarks_array <<< "$(echo "$existing_benchmarks" | awk '{for(i=1;i<=NF;i++) print $i}')"
 
 # Print each benchmark
+echo "Benchmarks in array:"
 for existing_benchmark in "${existing_benchmarks_array[@]}"; do
     echo "$existing_benchmark"
 done

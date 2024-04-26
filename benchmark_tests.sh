@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 # Create a new folder named "ciao" in the root directory
 mkdir -p "./new_dir"
 

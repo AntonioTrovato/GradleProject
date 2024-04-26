@@ -3,7 +3,7 @@ package banca;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ContoBancarioTest {
+public class ContoBancarioTest2 {
 
     @Test
     public void testVersamento() {

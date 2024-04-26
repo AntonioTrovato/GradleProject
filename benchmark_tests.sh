@@ -1,7 +1,8 @@
 #!/bin/bash
 
-find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
-find . -type f
+output=$(java -jar ./ju2jmh-jmh.jar -l)
+
+echo "$output"
 
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)

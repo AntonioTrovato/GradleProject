@@ -200,7 +200,23 @@ for added_method in "${added_methods[@]}"; do
   fi
 done
 
+# Define an associative array to keep track of unique strings
+declare -A seen
+
+# Define the new list without duplicates
+definitive_benchmark_classes_to_generate=()
+
+# Iterate through the original list
 for benchmark_class_to_generate in "${benchmark_classes_to_generate[@]}"; do
+  # Check if the string has been seen before
+  if [[ -z "${seen[$benchmark_class_to_generate]}" ]]; then
+    # If not seen before, add it to the new list and mark it as seen
+    definitive_benchmark_classes_to_generate+=("$benchmark_class_to_generate")
+    seen["$benchmark_class_to_generate"]=1
+  fi
+done
+
+for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@]}"; do
   echo "benchmark class to generate:"
   echo "$benchmark_class_to_generate"
 done

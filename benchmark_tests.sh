@@ -6,15 +6,13 @@ ju2jmh_listing_output=$(java -jar ./ju2jmh-jmh.jar -l)
 # make the list of existing benchmarks
 existing_benchmarks=()
 
-echo "$ju2jmh_listing_output" | while IFS= read -r line; do
-  echo "hey"
-  echo "$line"
-  # skip the first line
-  if [[ $line != "Benchmarks:" ]]; then
-    echo "ciao"
-    existing_benchmarks+=("$line")
+while IFS= read -r line; do
+  benchmark=$(echo "$line" | head -n 1)
+  if [[ ! $string == *"Benchmarks:"* ]]; then
+    existing_benchmarks+=("$benchmark")
+    echo "$benchmark"
   fi
-done
+done <<< "$commit_block"
 
 # Print each element of the list
 for existing_benchmark in "${existing_benchmarks[@]}"; do

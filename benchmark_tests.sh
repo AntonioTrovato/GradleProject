@@ -2,7 +2,7 @@
 
 output=$(java -jar ./ju2jmh-jmh.jar -l)
 
-#echo "$output"
+echo "$output"
 
 # Extract the list of benchmarks using grep and sed
 existing_benchmarks=$(echo "$output" | grep -oP 'Benchmarks:\.\K\S*' | sed 's/;$//')

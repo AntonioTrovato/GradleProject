@@ -8,6 +8,14 @@ echo "Root directory: $root_dir"
 
 # Create a new folder named "ciao" in the root directory
 mkdir -p "$root_dir/new_dir"
+
+# Check if the folder was created successfully
+if [ -d "$root_dir/ciao" ]; then
+    echo "Folder 'ciao' created successfully."
+else
+    echo "Failed to create folder 'ciao'."
+fi
+
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)
 commit_precedente=$(git log --format="%H" -n 2 | tail -n 1)

@@ -23,8 +23,8 @@ public class UtenteTest {
         assertEquals("Doe", utente.getSurname());
     }
 
-    /*@Test
-    public void testGetTelephone() {assertEquals("123", utente.getTelephone());}*/
+    @Test
+    public void testGetTelephone() {assertEquals("123", utente.getTelephone());}
 
     @Test
     public void testGetAddress() {assertEquals("via mazzini", utente.getAddress());}
@@ -40,11 +40,11 @@ public class UtenteTest {
         assertEquals("Smith", utente.getSurname());
     }
 
-    /*@Test
+    @Test
     public void testSetTelephone() {
         utente.setTelephone("123");
         assertEquals("123", utente.getTelephone());
-    }*/
+    }
 
     @Test
     public void testSetContoBancario() {

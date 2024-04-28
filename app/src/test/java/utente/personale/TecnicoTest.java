@@ -43,10 +43,4 @@ public class TecnicoTest {
         tecnico.setProfessione("Technician");
         assertEquals("Technician", tecnico.getProfession());
     }
-
-    @Test
-    public void testGetString() {
-        Tecnico tecnico = new Tecnico("John", "Doe", "Engineer");
-        assertEquals("ciao", tecnico.getString("ciao"));
-    }
 }

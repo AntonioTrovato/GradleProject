@@ -19,7 +19,7 @@ public class UtenteTest {
 
     @Test
     public void testGetSurname() {
-        assertEquals("Doe", utente.getCognome());
+        assertEquals("Doe", utente.getSurname());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class UtenteTest {
     @Test
     public void testSetSurname() {
         utente.setSurname("Smith");
-        assertEquals("Smith", utente.getCognome());
+        assertEquals("Smith", utente.getSurname());
     }
 
     @Test

@@ -19,7 +19,7 @@ public class UtenteTest {
     }
 
     @Test
-    public void testGetNome() {
+    public void testGetName() {
         assertEquals("John", utente.getName());
     }
 
@@ -40,7 +40,7 @@ public class UtenteTest {
     }
 
     @Test
-    public void testSetNome() {
+    public void testSetName() {
         utente.setName("Smith");
         assertEquals("Smith", utente.getName());
     }

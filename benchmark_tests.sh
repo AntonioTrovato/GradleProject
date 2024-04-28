@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#TODO: JU2JMH SVUOTA LE CLASSI DI BENCHMARK NON
+#TODO//: INTERESSATE DAL COMMIT (SE UNA CLASSE
+#TODO: DI BENCHMARK C'ERA LA SVUOTA, SE NON C'ERA
+#TODO: LA CREA (OSSIA CI DEVE ESSERE LA CLASSE DI
+#TODO: TEST DI UNITA') SENZA BENCHMARK
+
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)
 commit_precedente=$(git log --format="%H" -n 2 | tail -n 1)
@@ -101,7 +107,8 @@ for commit_block in "${commit_blocks[@]}"; do
 done
 
 # Run the JAR file and capture the output
-ju2jmh_listing_output=$(java -jar ./ju2jmh-jmh.jar -l)
+gradle jmhJar
+ju2jmh_listing_output=$(java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar -l)
 
 # make the list of existing benchmarks
 existing_benchmarks=()
@@ -230,13 +237,27 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
   echo "Test from which generate the benchmark class"
   echo "$benchmark_class_to_generate"
 
-  java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ "$benchmark_class_to_generate"
+  echo "$benchmark_class_to_generate" >> ./benchmark_classes_to_generate.txt
 done
 
-# Build the benchmark classes
+file="./benchmark_classes_to_generate.txt"
+
+# Check if the file exists
+if [ ! -f "$file" ]; then
+  echo "File not found: $file"
+  exit 1
+fi
+
+# Read the file line by line
+while IFS= read -r line; do
+  echo "$line"
+done < "$file"
+
+# Make and build the benchmark classes
+java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./benchmark_classes_to_generate.txt
 gradle jmhJar
 
-java -jar ./ju2jmh-jmh.jar -l
+java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar -l
 
 # Run the single microbenchmark
 for added_method in "${added_methods[@]}"; do

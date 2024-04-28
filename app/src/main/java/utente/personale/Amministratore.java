@@ -19,22 +19,17 @@ public class Amministratore {
         return department;
     }
 
-    public String setName(String nome) {
+    public void setName(String nome) {
         this.name = nome;
-        return nome;
     }
 
-    public void setSurnamo(String surname) {
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    public String setDepartment(String department) {
-        System.out.println();
+    public void setDepartment(String department) {
         this.department = department;
-        return department;
     }
-
-    public static void added_method () {}
 
     private String name;
     private String surname;

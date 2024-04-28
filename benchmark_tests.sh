@@ -1,14 +1,6 @@
 #!/bin/bash
 
-# Check if the tree command is available
-if command -v tree &> /dev/null; then
-    # Use tree command to print file system structure
-    tree /
-else
-    # Use find and sed commands as an alternative
-    find / -print | sed -e "s;[^/]*/;|____;g;s;____|; |;g"
-fi
-
+echo "Current working directory: $PWD"
 
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)

@@ -35,12 +35,6 @@ public class UtenteTest {
     }
 
     @Test
-    public void testSetName() {
-        utente.setName("Jane");
-        assertEquals("Jane", utente.getName());
-    }
-
-    @Test
     public void testSetSurname() {
         utente.setSurname("Smith");
         assertEquals("Smith", utente.getSurname());

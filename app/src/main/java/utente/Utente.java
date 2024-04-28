@@ -11,10 +11,6 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String getSurname() {
         return surname;
     }
@@ -31,9 +27,7 @@ public class Utente {
         return contoBancario;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
     public void setSurname(String surname) {
         this.surname = surname;

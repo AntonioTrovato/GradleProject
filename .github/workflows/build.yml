@@ -22,11 +22,9 @@ jobs:
           distribution: 'adopt'
           java-version: '17.0.10'  # Specifica la versione di Java da utilizzare
 
-      - name: Download and Setup Gradle
-        uses: actions/setup-java@v2
+      - name: Setup Gradle
+        uses: eskatos/gradle-command-action@v1
         with:
-          distribution: 'gradle'
-          java-version: '17.0.10'
           gradle-version: '7.4.2'  # Specifica la versione di Gradle da utilizzare
 
       - name: Set execute permission for gradlew

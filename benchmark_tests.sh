@@ -254,7 +254,7 @@ while IFS= read -r line; do
 done < "$file"
 
 # Make and build the benchmark classes
-java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./benchmark_classes_to_generate.txt
+java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt
 gradle jmhJar
 
 java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar -l

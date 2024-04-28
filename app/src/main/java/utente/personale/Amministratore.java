@@ -7,7 +7,9 @@ public class Amministratore {
         this.department = department;
     }
 
-
+    public String getName() {
+        return name;
+    }
 
     public String getSurname() {
         return surname;
@@ -17,7 +19,9 @@ public class Amministratore {
         return department;
     }
 
-
+    public void setName(String nome) {
+        this.name = nome;
+    }
 
     public void setSurname(String surname) {
         this.surname = surname;

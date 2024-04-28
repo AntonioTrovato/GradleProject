@@ -20,30 +20,36 @@ public class UtenteTest {
 
     @Test
     public void testGetSurname() {
-        assertEquals("Doe", utente.getSurname("ciao"));
+        assertEquals("Doe", utente.getSurname());
     }
 
-    /*@Test
-    public void testGetTelephone() {assertEquals("123", utente.getTelephone());}*/
+    @Test
+    public void testGetTelephone() {assertEquals("123", utente.getTelephone());}
 
     @Test
     public void testGetAddress() {assertEquals("via mazzini", utente.getAddress());}
 
-    @Test
+    /*@Test
     public void testGetContoBancario() {
         assertNotNull(utente.getContoBancario());
-    }
-
-    /*@Test
-    public void testSetSurname() {
-        utente.setSurname("Smith");
-        assertEquals("Smith", utente.getSurname());
     }*/
 
     @Test
+    public void testSetSurname() {
+        utente.setSurname("Smith");
+        assertEquals("Smith", utente.getSurname());
+    }
+
+    @Test
+    public void testSetTelephone() {
+        utente.setTelephone("123");
+        assertEquals("123", utente.getTelephone());
+    }
+
+    /*@Test
     public void testSetContoBancario() {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
         utente.setContoBancario(nuovoConto);
         assertEquals(nuovoConto, utente.getContoBancario());
-    }
+    }*/
 }

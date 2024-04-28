@@ -15,25 +15,33 @@ public class Utente {
         return name;
     }
 
-    public String getSurname(String prova) {
+    public String getSurname() {
         return surname;
+    }
+
+    public String getTelephone() {
+        return telephone;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public ContoBancario getContoBancario() {
-        return contoBancario;
-    }
+
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setContoBancario(ContoBancario contoBancario) {
-        this.contoBancario = contoBancario;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+
 
     private String name;
     private String surname;

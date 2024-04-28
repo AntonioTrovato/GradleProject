@@ -56,38 +56,38 @@ for commit_block in "${commit_blocks[@]}"; do
     # Replace slashes with dots and remove .java extension
     class_name="${packages//\//.}.${file_name%.java}"
 
-    #echo "COMMIT BLOCK:"
-    #echo "$commit_block"
+    echo "COMMIT BLOCK:"
+    echo "$commit_block"
 
     # For each line of the actual block (diff for a class), beginning with deleted methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
       if [[ $string =~ \-.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]*\ ([a-zA-Z_][a-zA-Z0-9_]*)[[:space:]]*\( ]]; then
-        #echo "Line:"
-        #echo "$string"
+        echo "Line:"
+        echo "$string"
         method_name=${BASH_REMATCH[2]}
-        #echo "method name:"
-        #echo "$method_name"
+        echo "method name:"
+        echo "$method_name"
         deleted_methods+=("$class_name.$method_name")
       fi
     done <<< "$commit_block"
 
-    #echo "======================================================================0"
-    #echo "COMMIT BLOCK COPY:"
-    #echo "$commit_block_copy"
+    echo "======================================================================0"
+    echo "COMMIT BLOCK COPY:"
+    echo "$commit_block_copy"
 
     # For each line of the actual block (diff for a class), ending with added methods
     while IFS= read -r line; do
       string=$(echo "$line" | head -n 1)
       if [[ $string =~ \+.*\ (static\ )?[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]*\ ([a-zA-Z_][a-zA-Z0-9_]*)[[:space:]]*\( ]]; then
-        #echo "Line:"
-        #echo "$string"
+        echo "Line:"
+        echo "$string"
         method_name=${BASH_REMATCH[2]}
-        #echo "method name:"
-        #echo "$method_name"
+        echo "method name:"
+        echo "$method_name"
         #if the method is already in deleted methods, it means it has just been modified
         if [[ " ${deleted_methods[*]} " =~  $class_name.$method_name  ]]; then
-          #echo "this method is already in deleted list"
+          echo "this method is already in deleted list"
           # Rimuovi la stringa dalla lista
           deleted_methods=( "${deleted_methods[@]/$class_name.$method_name}" )
         fi
@@ -115,10 +115,10 @@ while IFS= read -r line; do
 done <<< "$ju2jmh_listing_output"
 
 # Print each element of the list
-#for existing_benchmark in "${existing_benchmarks[@]}"; do
-#  echo "benchmark:"
-#  echo "$existing_benchmark"
-#done
+for existing_benchmark in "${existing_benchmarks[@]}"; do
+  echo "benchmark:"
+  echo "$existing_benchmark"
+done
 
 # Function to transform method names
 transform_method() {
@@ -141,15 +141,15 @@ pattern="^([a-z.]*)([A-Z][a-zA-Z]*)Test\b(.*)"
 
 for deleted_method in "${deleted_methods[@]}"; do
   transformed_method=$(transform_method "$deleted_method")
-  #echo "deleted: "
-  #echo "$deleted_method -> $transformed_method"
+  echo "deleted: "
+  echo "$deleted_method -> $transformed_method"
   # Iterate through the list of existing benchmarks
   for existing_benchmark in "${existing_benchmarks[@]}"; do
     if [[ "$transformed_method" == "$existing_benchmark" ]]; then
       if [[ $existing_benchmark =~ $pattern ]]; then
         benchmark_class_to_generate="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
-        #echo "benchmark_class_to_generate:"
-        #echo "$benchmark_class_to_generate"
+        echo "benchmark_class_to_generate:"
+        echo "$benchmark_class_to_generate"
         found=false
         for element in "${benchmark_classes_to_generate[@]}"; do
           if [[ "$element" == "$benchmark_class_to_generate" ]]; then
@@ -158,7 +158,7 @@ for deleted_method in "${deleted_methods[@]}"; do
           fi
         done
         if [ "$found" = true ]; then
-          #echo "la classe era già in lista"
+          echo "la classe era già in lista"
           echo ""
         else
           benchmark_classes_to_generate+=("$benchmark_class_to_generate")
@@ -170,8 +170,8 @@ done
 
 for added_method in "${added_methods[@]}"; do
   transformed_method=$(transform_method "$added_method")
-  #echo "added: "
-  #echo "$added_method -> $transformed_method"
+  echo "added: "
+  echo "$added_method -> $transformed_method"
   found=false
   for existing_benchmark in "${existing_benchmarks[@]}"; do
     if [[ "$transformed_method" == "$existing_benchmark" ]]; then
@@ -179,13 +179,13 @@ for added_method in "${added_methods[@]}"; do
     fi
   done
   if [ "$found" = true ]; then
-    #echo "il benchmark per il metodo aggiunto già esiste"
+    echo "il benchmark per il metodo aggiunto già esiste"
     echo ""
   else
     if [[ $transformed_method =~ $pattern ]]; then
       benchmark_class_to_generate="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
-      #echo "benchmark_class_to_generate:"
-      #echo "$benchmark_class_to_generate"
+      echo "benchmark_class_to_generate:"
+      echo "$benchmark_class_to_generate"
       found2=false
       for element in "${benchmark_classes_to_generate[@]}"; do
         if [[ "$element" == "$benchmark_class_to_generate" ]]; then
@@ -194,7 +194,7 @@ for added_method in "${added_methods[@]}"; do
         fi
       done
       if [ "$found2" = true ]; then
-        #echo "la classe era già in lista"
+        echo "la classe era già in lista"
         echo ""
       else
         benchmark_classes_to_generate+=("$benchmark_class_to_generate")
@@ -236,12 +236,20 @@ done
 # Build the benchmark classes
 gradle jmhJar
 
+java -jar ./ju2jmh-jmh.jar -l
+
 # Run the single microbenchmark
 for added_method in "${added_methods[@]}"; do
   transformed_method=$(transform_method "$added_method")
 
   echo "Microbenchmark to run:"
   echo "$transformed_method"
+
+  #java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar "$transformed_method"
+done
+
+for added_method in "${added_methods[@]}"; do
+  transformed_method=$(transform_method "$added_method")
 
   java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar "$transformed_method"
 done

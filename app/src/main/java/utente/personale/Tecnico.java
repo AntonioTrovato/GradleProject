@@ -8,29 +8,28 @@ public class Tecnico {
     }
 
     public String getName() {
-        System.out.println();
         return name;
     }
 
-    public void getSurname() {
-        System.out.println(surname);
+    public String getSurname() {
+        return surname;
     }
 
     public String getProfession() {
         return profession;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public void setProfessione(String profession) {
         this.profession = profession;
     }
-
-    public static         void metodo_strano() {}
-
-    public  static   <T>  int   altro_metodo(T prame, T prame2) {
-        return 3;
-    }
-
-    public static void added_method () {}
 
     private String name;
     private String surname;

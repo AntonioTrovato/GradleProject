@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tree "$PWD"
+tree .
 
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)

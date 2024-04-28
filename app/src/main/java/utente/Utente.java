@@ -19,15 +19,15 @@ public class Utente {
         return surname;
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
+
 
     public String getAddress() {
         return address;
     }
 
-
+    public ContoBancario getContoBancario() {
+        return contoBancario;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -37,11 +37,11 @@ public class Utente {
         this.surname = surname;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+
+
+    public void setContoBancario(ContoBancario contoBancario) {
+        this.contoBancario = contoBancario;
     }
-
-
 
     private String name;
     private String surname;

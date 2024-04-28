@@ -23,16 +23,16 @@ public class UtenteTest {
         assertEquals("Doe", utente.getSurname());
     }
 
-    @Test
-    public void testGetTelephone() {assertEquals("123", utente.getTelephone());}
+    /*@Test
+    public void testGetTelephone() {assertEquals("123", utente.getTelephone());}*/
 
     @Test
     public void testGetAddress() {assertEquals("via mazzini", utente.getAddress());}
 
-    /*@Test
+    @Test
     public void testGetContoBancario() {
         assertNotNull(utente.getContoBancario());
-    }*/
+    }
 
     @Test
     public void testSetSurname() {
@@ -40,16 +40,16 @@ public class UtenteTest {
         assertEquals("Smith", utente.getSurname());
     }
 
-    @Test
+    /*@Test
     public void testSetTelephone() {
         utente.setTelephone("123");
         assertEquals("123", utente.getTelephone());
-    }
+    }*/
 
-    /*@Test
+    @Test
     public void testSetContoBancario() {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
         utente.setContoBancario(nuovoConto);
         assertEquals(nuovoConto, utente.getContoBancario());
-    }*/
+    }
 }

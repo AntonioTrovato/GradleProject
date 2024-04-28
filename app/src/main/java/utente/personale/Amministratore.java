@@ -7,12 +7,9 @@ public class Amministratore {
         this.department = department;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
+    public String getName(String name) {
+        System.out.println(name);
+        return this.name;
     }
 
     public String getDepartment() {
@@ -23,12 +20,12 @@ public class Amministratore {
         this.name = nome;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public static      <T> String      added_method(String str) {
+        return str;
     }
 
     private String name;

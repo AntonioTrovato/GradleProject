@@ -248,6 +248,8 @@ if [ ! -f "$file" ]; then
   exit 1
 fi
 
+echo "FILE CONTENT:"
+
 # Read the file line by line
 while IFS= read -r line; do
   echo "$line"

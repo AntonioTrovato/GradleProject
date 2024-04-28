@@ -237,10 +237,10 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
   echo "Test from which generate the benchmark class"
   echo "$benchmark_class_to_generate"
 
-  echo "$benchmark_class_to_generate" >> ./benchmark_classes_to_generate.txt
+  echo "$benchmark_class_to_generate" >> ./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt
 done
 
-file="./benchmark_classes_to_generate.txt"
+file="./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt"
 
 # Check if the file exists
 if [ ! -f "$file" ]; then

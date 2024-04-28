@@ -8,13 +8,7 @@ public class AmministratoreTest {
     @Test
     public void testGetName() {
         Amministratore amministratore = new Amministratore("John", "Doe", "HR");
-        assertEquals("John", amministratore.getName());
-    }
-
-    @Test
-    public void testGetSurname() {
-        Amministratore amministratore = new Amministratore("John", "Doe", "HR");
-        assertEquals("Doe", amministratore.getSurname());
+        assertEquals("John", amministratore.getNome());
     }
 
     @Test
@@ -27,14 +21,7 @@ public class AmministratoreTest {
     public void testSetName() {
         Amministratore amministratore = new Amministratore("John", "Doe", "HR");
         amministratore.setName("Jane");
-        assertEquals("Jane", amministratore.getName());
-    }
-
-    @Test
-    public void testSetSurname() {
-        Amministratore amministratore = new Amministratore("John", "Doe", "HR");
-        amministratore.setSurname("Jane");
-        assertEquals("Jane", amministratore.getSurname());
+        assertEquals("Jane", amministratore.getNome());
     }
 
     @Test

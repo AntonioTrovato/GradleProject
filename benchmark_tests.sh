@@ -228,6 +228,9 @@ done
 
 pattern="^([a-z.]*)([A-Z][a-zA-Z]*)"
 
+# Empty the file
+> ./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt
+
 # Generate all the benchmark class needed
 for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@]}"; do
   echo "benchmark class to generate:"
@@ -237,7 +240,7 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
   echo "Test from which generate the benchmark class"
   echo "$benchmark_class_to_generate"
 
-  echo "$benchmark_class_to_generate" > ./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt
+  echo "$benchmark_class_to_generate" >> ./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt
 done
 
 file="./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt"

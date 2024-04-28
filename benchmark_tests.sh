@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Create a new folder named "ciao" in the root directory
-mv "./file.txt" "./file2.txt"
-
 # Leggi gli hash dei due commit più recenti utilizzando git log
 commit_corrente=$(git log --format="%H" -n 1)
 commit_precedente=$(git log --format="%H" -n 2 | tail -n 1)
@@ -224,34 +221,26 @@ done
 
 pattern="^([a-z.]*)([A-Z][a-zA-Z]*)"
 
+# Generate all the benchmark class needed
 for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@]}"; do
   echo "benchmark class to generate:"
   echo "$benchmark_class_to_generate"
 
-  if [[ $benchmark_class_to_generate =~ $pattern ]]; then
-    benchmark_class_path="${BASH_REMATCH[1]}"
-    benchmark_class_path="${benchmark_class_path//./\/}"
-    benchmark_class_file_name="${BASH_REMATCH[2]}Test.java"
-    benchmark_class_file_new_name="${benchmark_class_file_name/Test.java/TestPrev.java}"
-
-    source_file="./ju2jmh/src/jmh/java/${benchmark_class_path}${benchmark_class_file_name}"
-    destination_file="./ju2jmh/src/jmh/java/${benchmark_class_path}${benchmark_class_file_new_name}"
-
-    echo "source file:"
-    echo "$source_file"
-    echo "destination_file:"
-    echo "$destination_file"
-
-    # Check if the source file exists
-    if [ -f "$source_file" ]; then
-      mv "$source_file" "$destination_file"
-      echo "File renamed successfully."
-    else
-      echo "File does not exist: $source_file"
-    fi
-
-  fi
-
+  java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ $benchmark_class_to_generate
 done
 
+# Build the benchmark classes
+gradle jmhJar
+
+# Run the single microbenchmark
+for added_method in "${added_methods[@]}"; do
+  transformed_method=$(transform_method "$added_method")
+
+  echo "Microbenchmark to run:"
+  echo "$transformed_method"
+
+  java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar $transformed_method
+done
+
+echo "DONE!"
 

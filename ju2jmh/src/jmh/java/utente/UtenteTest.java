@@ -19,11 +19,14 @@ public class UtenteTest {
 
     @Test
     public void testGetSurname() {
-        assertEquals("Doe", utente.getSurname());
+        assertEquals("Doe", utente.getCognome());
     }
 
-    /*@Test
-    public void testGetTelephone() {assertEquals("123", utente.getTelephone());}*/
+    @Test
+    public void testGetTelephone() {
+        assertEquals("123", utente.getTelephone());
+    }
+
     @Test
     public void testGetAddress() {
         assertEquals("via mazzini", utente.getAddress());
@@ -37,14 +40,15 @@ public class UtenteTest {
     @Test
     public void testSetSurname() {
         utente.setSurname("Smith");
-        assertEquals("Smith", utente.getSurname());
+        assertEquals("Smith", utente.getCognome());
     }
 
-    /*@Test
+    @Test
     public void testSetTelephone() {
         utente.setTelephone("123");
         assertEquals("123", utente.getTelephone());
-    }*/
+    }
+
     @Test
     public void testSetContoBancario() {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
@@ -59,6 +63,12 @@ public class UtenteTest {
         public void benchmark_testGetSurname() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testGetSurname, this.description("testGetSurname"));
+        }
+
+        @org.openjdk.jmh.annotations.Benchmark
+        public void benchmark_testGetTelephone() throws java.lang.Throwable {
+            this.createImplementation();
+            this.runBenchmark(this.implementation()::testGetTelephone, this.description("testGetTelephone"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark
@@ -77,6 +87,12 @@ public class UtenteTest {
         public void benchmark_testSetSurname() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testSetSurname, this.description("testSetSurname"));
+        }
+
+        @org.openjdk.jmh.annotations.Benchmark
+        public void benchmark_testSetTelephone() throws java.lang.Throwable {
+            this.createImplementation();
+            this.runBenchmark(this.implementation()::testSetTelephone, this.description("testSetTelephone"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark

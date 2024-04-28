@@ -8,7 +8,7 @@ public class AmministratoreTest {
     @Test
     public void testGetName() {
         Amministratore amministratore = new Amministratore("John", "Doe", "HR");
-        assertEquals("John", amministratore.getName());
+        assertEquals("John", amministratore.getNome());
     }
 
     /*@Test
@@ -27,7 +27,7 @@ public class AmministratoreTest {
     public void testSetName() {
         Amministratore amministratore = new Amministratore("John", "Doe", "HR");
         amministratore.setName("Jane");
-        assertEquals("Jane", amministratore.getName());
+        assertEquals("Jane", amministratore.getNome());
     }
 
     /*@Test

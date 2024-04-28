@@ -31,6 +31,10 @@ public class Tecnico {
         this.profession = profession;
     }
 
+    public String getString(String string){
+        return string;
+    }
+
     private String name;
     private String surname;
     private String profession;

@@ -33,9 +33,6 @@ jobs:
       - name: Build Project
         run: ./gradlew build
 
-      - name: Build Benchmarks
-        run: ./gradlew jmhJar  # Esegui la build dei benchmark
-
       - name: Set execute permission for bash file
         run: chmod +x benchmark_tests.sh
 

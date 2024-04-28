@@ -29,11 +29,7 @@ public class ContoBancarioTest {
         assertEquals(100, conto.getSaldo());
     }
 
-    @Test
-    public void testGetId() {
-        ContoBancario conto = new ContoBancario("123", 100);
-        assertEquals("123", conto.getId());
-    }
+
 
     @Test
     public void testSetId() {

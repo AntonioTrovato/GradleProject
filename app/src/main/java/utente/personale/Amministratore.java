@@ -7,8 +7,12 @@ public class Amministratore {
         this.department = department;
     }
 
-    public String getNome() {
+    public String getName() {
         return this.name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public String getDepartment() {

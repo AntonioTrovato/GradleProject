@@ -19,7 +19,7 @@ public class Utente {
         return surname;
     }
 
-    public String getTelephone(String prova) {
+    public String getTelephone() {
         return telephone;
     }
 
@@ -38,16 +38,6 @@ public class Utente {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
-    public void setTelephone(String telephone) {
-    }
-    public void num3() {System.out.println("2");}
-
-    public void num4() {System.out.println("3");}
-
-    public void hey() {System.out.println("heey");}
-
-    public void num5(int num) {System.out.println("5");}
 
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;

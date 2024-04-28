@@ -226,6 +226,10 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
   echo "benchmark class to generate:"
   echo "$benchmark_class_to_generate"
 
+  benchmark_class_to_generate+="Test"
+  echo "Test from which generate the benchmark class"
+  echo benchmark_class_to_generate
+
   java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ $benchmark_class_to_generate
 done
 

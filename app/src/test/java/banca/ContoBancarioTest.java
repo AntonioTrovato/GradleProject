@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class ContoBancarioTest {
 
-    /*@Test
+    @Test
     public void testVersamento() {
         ContoBancario conto = new ContoBancario("123", 100);
         conto.versamento(50);
@@ -60,5 +60,5 @@ public class ContoBancarioTest {
         ContoBancario conto = new ContoBancario("123", 100);
         conto.setSaldo2(200);
         assertEquals(200, conto.getSaldo());
-    }*/
+    }
 }

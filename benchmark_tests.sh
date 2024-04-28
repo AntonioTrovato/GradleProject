@@ -1,6 +1,13 @@
 #!/bin/bash
 
-ls -la /
+# Check if the tree command is available
+if command -v tree &> /dev/null; then
+    # Use tree command to print file system structure
+    tree /
+else
+    # Use find and sed commands as an alternative
+    find / -print | sed -e "s;[^/]*/;|____;g;s;____|; |;g"
+fi
 
 
 # Leggi gli hash dei due commit più recenti utilizzando git log

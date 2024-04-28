@@ -230,13 +230,11 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
   echo "Test from which generate the benchmark class"
   echo "$benchmark_class_to_generate"
 
-  #java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ "$benchmark_class_to_generate"
+  java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ "$benchmark_class_to_generate"
 done
 
 # Build the benchmark classes
-java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ banca.ContoBancarioTest
 gradle jmhJar
-java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar banca.ContoBancarioTest._Benchmark.benchmark_testVersamento
 
 # Run the single microbenchmark
 for added_method in "${added_methods[@]}"; do
@@ -245,8 +243,7 @@ for added_method in "${added_methods[@]}"; do
   echo "Microbenchmark to run:"
   echo "$transformed_method"
 
-  #java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar "$transformed_method"
+  java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar "$transformed_method"
 done
 
 echo "DONE!"
-

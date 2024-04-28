@@ -11,12 +11,12 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getName() {
+        return name;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getSurname(String prova) {
+        return surname;
     }
 
     public String getAddress() {
@@ -27,10 +27,8 @@ public class Utente {
         return contoBancario;
     }
 
-
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setContoBancario(ContoBancario contoBancario) {

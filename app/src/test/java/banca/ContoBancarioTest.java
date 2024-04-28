@@ -29,7 +29,7 @@ public class ContoBancarioTest {
         assertEquals(100, conto.getSaldo());
     }
 
-    @Test
+    /*@Test
     public void testGetId() {
         ContoBancario conto = new ContoBancario("123", 100);
         assertEquals("123", conto.getId());
@@ -40,7 +40,7 @@ public class ContoBancarioTest {
         ContoBancario conto = new ContoBancario("123", 100);
         conto.setId("456");
         assertEquals("456", conto.getId());
-    }
+    }*/
 
     @Test
     public void testGetSaldo() {

@@ -12,9 +12,7 @@ public class ContoBancario {
         return saldo;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+
 
     public void setSaldo(int saldo) {
         this.saldo = saldo;

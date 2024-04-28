@@ -31,12 +31,7 @@ public class ContoBancarioTest {
 
 
 
-    @Test
-    public void testSetId() {
-        ContoBancario conto = new ContoBancario("123", 100);
-        conto.setId("456");
-        assertEquals("456", conto.getId());
-    }
+
 
     @Test
     public void testGetSaldo() {

@@ -40,7 +40,7 @@ public class TecnicoTest {
     @Test
     public void testSetProfession() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer");
-        tecnico.setProfessione("Technician",5);
+        tecnico.setProfessione("Technician");
         assertEquals("Technician", tecnico.getProfession());
     }
 }

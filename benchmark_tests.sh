@@ -297,6 +297,8 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
   git add "$file_path"
 done
 
+git add "./ju2jmh/src/jmh/java/se/chalmers/ju2jmh/api/JU2JmhBenchmark.java"
+
 # Commit the changes
 git commit -m "Adding the Created Benchmark Classes to the Repository"
 

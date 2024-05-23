@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Configure git
+git config --global user.email "atrovato@unisa.it"
+git config --global user.name "AntonioTrovato"
+
 #TODO: JU2JMH SVUOTA LE CLASSI DI BENCHMARK NON
 #TODO: INTERESSATE DAL COMMIT (SE UNA CLASSE
 #TODO: DI BENCHMARK C'ERA LA SVUOTA, SE NON C'ERA
@@ -278,10 +282,6 @@ for added_method in "${added_methods[@]}"; do
 
   java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar "$transformed_method"
 done
-
-# Configure git
-git config --global user.email "atrovato@unisa.it"
-git config --global user.name "AntonioTrovato"
 
 # Add to git all the benchmark classes generated/regenerated
 for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@]}"; do

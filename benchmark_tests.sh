@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Generate a text file
+echo "This is a generated file" > generated_file.txt
+
+# Configure git
+git config --global user.email "atrovato@unisa.it"
+git config --global user.name "AntonioTrovato"
+
+# Add the new file to git
+git add generated_file.txt
+
+# Commit the changes
+git commit -m "Add generated file"
+
+# Push the changes to the main branch using the token
+git remote set-url origin https://AntonioTrovato:${ACTIONS_TOKEN}@github.com/AntonioTrovato/GradleProject.git
+git push origin main
+
 #TODO: JU2JMH SVUOTA LE CLASSI DI BENCHMARK NON
 #TODO//: INTERESSATE DAL COMMIT (SE UNA CLASSE
 #TODO: DI BENCHMARK C'ERA LA SVUOTA, SE NON C'ERA

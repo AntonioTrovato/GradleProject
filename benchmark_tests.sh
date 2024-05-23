@@ -1,33 +1,16 @@
 #!/bin/bash
 
-# Generate a text file
-echo "This is a generated file" > generated_file.txt
-
-# Configure git
-git config --global user.email "atrovato@unisa.it"
-git config --global user.name "AntonioTrovato"
-
-# Add the new file to git
-git add generated_file.txt
-
-# Commit the changes
-git commit -m "Add generated file"
-
-# Push the changes to the main branch using the token
-git remote set-url origin https://AntonioTrovato:${ACTIONS_TOKEN}@github.com/AntonioTrovato/GradleProject.git
-git push origin main
-
 #TODO: JU2JMH SVUOTA LE CLASSI DI BENCHMARK NON
-#TODO//: INTERESSATE DAL COMMIT (SE UNA CLASSE
+#TODO: INTERESSATE DAL COMMIT (SE UNA CLASSE
 #TODO: DI BENCHMARK C'ERA LA SVUOTA, SE NON C'ERA
 #TODO: LA CREA (OSSIA CI DEVE ESSERE LA CLASSE DI
 #TODO: TEST DI UNITA') SENZA BENCHMARK
 
-# Leggi gli hash dei due commit più recenti utilizzando git log
+# Read the hashes of the last two commits using git log
 commit_corrente=$(git log --format="%H" -n 1)
 commit_precedente=$(git log --format="%H" -n 2 | tail -n 1)
 
-# Esegui la diff tra i due commit
+# Make diff between the two commits
 git_diff=$(git diff $commit_precedente $commit_corrente)
 
 echo "GIT DIFF:"
@@ -106,12 +89,12 @@ for commit_block in "${commit_blocks[@]}"; do
         echo "Line:"
         echo "$string"
         method_name=${BASH_REMATCH[2]}
-        echo "method name:"
+        echo "Method Name:"
         echo "$method_name"
-        #if the method is already in deleted methods, it means it has just been modified
+        # If the method is already in deleted methods, it means it has just been modified
         if [[ " ${deleted_methods[*]} " =~  $class_name.$method_name  ]]; then
-          echo "this method is already in deleted list"
-          # Rimuovi la stringa dalla lista
+          echo "This method is already in deleted list"
+          # Remove the string from the list
           deleted_methods=( "${deleted_methods[@]/$class_name.$method_name}" )
         fi
         added_methods+=("$class_name.$method_name")
@@ -127,7 +110,7 @@ done
 gradle jmhJar
 ju2jmh_listing_output=$(java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar -l)
 
-# make the list of existing benchmarks
+# Make the list of existing benchmarks
 existing_benchmarks=()
 
 while IFS= read -r line; do
@@ -140,7 +123,7 @@ done <<< "$ju2jmh_listing_output"
 
 # Print each element of the list
 for existing_benchmark in "${existing_benchmarks[@]}"; do
-  echo "benchmark:"
+  echo "Benchmark:"
   echo "$existing_benchmark"
 done
 
@@ -165,14 +148,14 @@ pattern="^([a-z.]*)([A-Z][a-zA-Z]*)Test\b(.*)"
 
 for deleted_method in "${deleted_methods[@]}"; do
   transformed_method=$(transform_method "$deleted_method")
-  echo "deleted: "
+  echo "Deleted: "
   echo "$deleted_method -> $transformed_method"
   # Iterate through the list of existing benchmarks
   for existing_benchmark in "${existing_benchmarks[@]}"; do
     if [[ "$transformed_method" == "$existing_benchmark" ]]; then
       if [[ $existing_benchmark =~ $pattern ]]; then
         benchmark_class_to_generate="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
-        echo "benchmark_class_to_generate:"
+        echo "Benchmark Class to Generate:"
         echo "$benchmark_class_to_generate"
         found=false
         for element in "${benchmark_classes_to_generate[@]}"; do
@@ -182,7 +165,7 @@ for deleted_method in "${deleted_methods[@]}"; do
           fi
         done
         if [ "$found" = true ]; then
-          echo "la classe era già in lista"
+          echo "The class is already in the list"
           echo ""
         else
           benchmark_classes_to_generate+=("$benchmark_class_to_generate")
@@ -194,7 +177,7 @@ done
 
 for added_method in "${added_methods[@]}"; do
   transformed_method=$(transform_method "$added_method")
-  echo "added: "
+  echo "Added: "
   echo "$added_method -> $transformed_method"
   found=false
   for existing_benchmark in "${existing_benchmarks[@]}"; do
@@ -203,12 +186,12 @@ for added_method in "${added_methods[@]}"; do
     fi
   done
   if [ "$found" = true ]; then
-    echo "il benchmark per il metodo aggiunto già esiste"
+    echo "The added microbenchmark already exists"
     echo ""
   else
     if [[ $transformed_method =~ $pattern ]]; then
       benchmark_class_to_generate="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
-      echo "benchmark_class_to_generate:"
+      echo "Benchmark Class to Generate:"
       echo "$benchmark_class_to_generate"
       found2=false
       for element in "${benchmark_classes_to_generate[@]}"; do
@@ -218,7 +201,7 @@ for added_method in "${added_methods[@]}"; do
         fi
       done
       if [ "$found2" = true ]; then
-        echo "la classe era già in lista"
+        echo "The class is already in list"
         echo ""
       else
         benchmark_classes_to_generate+=("$benchmark_class_to_generate")
@@ -245,16 +228,16 @@ done
 
 pattern="^([a-z.]*)([A-Z][a-zA-Z]*)"
 
-# Empty the file
-> ./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt
+# Generate an empty text file
+: > ./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt
 
-# Generate all the benchmark class needed
+# Generate all the benchmark classes needed
 for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@]}"; do
-  echo "benchmark class to generate:"
+  echo "Benchmark Class to Generate:"
   echo "$benchmark_class_to_generate"
 
   benchmark_class_to_generate+="Test"
-  echo "Test from which generate the benchmark class"
+  echo "Test from which Generate the Benchmark Class:"
   echo "$benchmark_class_to_generate"
 
   echo "$benchmark_class_to_generate" >> ./ju2jmh/src/jmh/java/benchmark_classes_to_generate.txt
@@ -281,20 +264,40 @@ gradle jmhJar
 
 java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar -l
 
-# Run the single microbenchmark
+# Show the single microbenchmarks to run
 for added_method in "${added_methods[@]}"; do
   transformed_method=$(transform_method "$added_method")
 
-  echo "Microbenchmark to run:"
+  echo "Microbenchmark to Run:"
   echo "$transformed_method"
-
-  #java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar "$transformed_method"
 done
 
+# Run the single microbenchmarks
 for added_method in "${added_methods[@]}"; do
   transformed_method=$(transform_method "$added_method")
 
   java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar "$transformed_method"
 done
+
+# Add to git all the benchmark classes generated/regenerated
+for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@]}"; do
+  benchmark_class_to_generate+="Test"
+
+  # Convert the class name to a file path
+  file_path="./ju2jmh/src/jmh/java/$(echo $benchmark_class_to_generate | tr '.' '/')".java
+
+  echo "Benchmark Class to Push in the Main Branch:"
+  echo "$file_path"
+
+  # Add the file to git
+  git add "$file_path"
+done
+
+# Commit the changes
+git commit -m "Adding the Created Benchmark Classes to the Repository"
+
+# Push the changes to the main branch using the token
+git remote set-url origin https://AntonioTrovato:${ACTIONS_TOKEN}@github.com/AntonioTrovato/GradleProject.git
+git push origin main
 
 echo "DONE!"

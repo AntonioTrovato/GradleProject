@@ -9,7 +9,7 @@ public class ContoBancarioTest {
     @Test
     public void testVersamento() {
         ContoBancario conto = new ContoBancario("123", 100);
-        conto.versamento(50,3);
+        conto.versamento(50);
         assertEquals(150, conto.getSaldo());
     }
 

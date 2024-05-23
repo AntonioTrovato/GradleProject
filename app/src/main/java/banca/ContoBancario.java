@@ -22,7 +22,7 @@ public class ContoBancario {
 
     public void setSaldo2(int saldo) { this.saldo = saldo; }
 
-    public void versamento(int quota, int ciao) {
+    public void versamento(int quota) {
         this.saldo += quota;
     }
 

@@ -7,7 +7,7 @@ public class Amministratore {
         this.department = department;
     }
 
-    public String getName(int i) {
+    public String getName() {
         return this.name;
     }
 

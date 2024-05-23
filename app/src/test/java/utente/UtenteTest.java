@@ -52,12 +52,6 @@ public class UtenteTest {
     }
 
     @Test
-    public void testSetTelephone() {
-        utente.setTelephone("123");
-        assertEquals("123", utente.getTelephone());
-    }
-
-    @Test
     public void testSetContoBancario() {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
         utente.setContoBancario(nuovoConto);

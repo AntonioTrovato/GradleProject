@@ -55,12 +55,6 @@ public class UtenteTest {
     }
 
     @Test
-    public void testSetTelephone() {
-        utente.setTelephone("123");
-        assertEquals("123", utente.getTelephone());
-    }
-
-    @Test
     public void testSetContoBancario() {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
         utente.setContoBancario(nuovoConto);
@@ -110,12 +104,6 @@ public class UtenteTest {
         public void benchmark_testSetSurname() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testSetSurname, this.description("testSetSurname"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testSetTelephone() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testSetTelephone, this.description("testSetTelephone"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark

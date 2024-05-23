@@ -39,10 +39,6 @@ public class Utente {
         this.surname = surname;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
     public void setContoBancario(ContoBancario contoBancario) {
         this.contoBancario = contoBancario;
     }

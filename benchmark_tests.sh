@@ -229,7 +229,7 @@ done
 pattern="^([a-z.]*)([A-Z][a-zA-Z]*)"
 
 # Generate an empty text file
-: > ./ju2jmh/src/jmh/benchmark_classes_to_generate.txt
+: > ./ju2jmh/benchmark_classes_to_generate.txt
 
 # Generate all the benchmark classes needed
 for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@]}"; do
@@ -240,10 +240,10 @@ for benchmark_class_to_generate in "${definitive_benchmark_classes_to_generate[@
   echo "Test from which Generate the Benchmark Class:"
   echo "$benchmark_class_to_generate"
 
-  echo "$benchmark_class_to_generate" >> ./ju2jmh/src/jmh/benchmark_classes_to_generate.txt
+  echo "$benchmark_class_to_generate" >> ./ju2jmh/benchmark_classes_to_generate.txt
 done
 
-file="./ju2jmh/src/jmh/benchmark_classes_to_generate.txt"
+file="./ju2jmh/benchmark_classes_to_generate.txt"
 
 # Check if the file exists
 if [ ! -f "$file" ]; then
@@ -259,7 +259,7 @@ while IFS= read -r line; do
 done < "$file"
 
 # Make and build the benchmark classes
-java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./ju2jmh/src/jmh/benchmark_classes_to_generate.txt
+java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./ju2jmh/benchmark_classes_to_generate.txt
 gradle jmhJar
 
 java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar -l

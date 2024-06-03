@@ -18,6 +18,11 @@ public class UtenteTest {
     }
 
     @Test
+    public void testGetName() {
+        assertEquals("John", utente.getName());
+    }
+
+    @Test
     public void testGetSurname() {
         assertEquals("Doe", utente.getSurname());
     }
@@ -28,8 +33,19 @@ public class UtenteTest {
     }
 
     @Test
+    public void testGetAddress() {
+        assertEquals("via mazzini", utente.getAddress(1));
+    }
+
+    @Test
     public void testGetContoBancario() {
         assertNotNull(utente.getContoBancario());
+    }
+
+    @Test
+    public void testSetName() {
+        utente.setName("Smith");
+        assertEquals("Smith", utente.getName());
     }
 
     @Test
@@ -49,6 +65,12 @@ public class UtenteTest {
     public static class _Benchmark extends se.chalmers.ju2jmh.api.JU2JmhBenchmark {
 
         @org.openjdk.jmh.annotations.Benchmark
+        public void benchmark_testGetName() throws java.lang.Throwable {
+            this.createImplementation();
+            this.runBenchmark(this.implementation()::testGetName, this.description("testGetName"));
+        }
+
+        @org.openjdk.jmh.annotations.Benchmark
         public void benchmark_testGetSurname() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testGetSurname, this.description("testGetSurname"));
@@ -61,9 +83,21 @@ public class UtenteTest {
         }
 
         @org.openjdk.jmh.annotations.Benchmark
+        public void benchmark_testGetAddress() throws java.lang.Throwable {
+            this.createImplementation();
+            this.runBenchmark(this.implementation()::testGetAddress, this.description("testGetAddress"));
+        }
+
+        @org.openjdk.jmh.annotations.Benchmark
         public void benchmark_testGetContoBancario() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testGetContoBancario, this.description("testGetContoBancario"));
+        }
+
+        @org.openjdk.jmh.annotations.Benchmark
+        public void benchmark_testSetName() throws java.lang.Throwable {
+            this.createImplementation();
+            this.runBenchmark(this.implementation()::testSetName, this.description("testSetName"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark

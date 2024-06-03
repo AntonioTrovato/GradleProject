@@ -12,12 +12,6 @@ public class TecnicoTest {
     }
 
     @Test
-    public void testCiao() {
-        Tecnico tecnico = new Tecnico("John", "Doe", "Engineer",1);
-        assertEquals("John", tecnico.getName());
-    }
-
-    @Test
     public void testGetSurname() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer",1);
         assertEquals("Doe", tecnico.getSurname());

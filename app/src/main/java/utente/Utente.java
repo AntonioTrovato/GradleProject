@@ -19,8 +19,6 @@ public class Utente {
         return surname;
     }
 
-    public void ciao() {}
-
     public String getTelephone() {
         return telephone;
     }

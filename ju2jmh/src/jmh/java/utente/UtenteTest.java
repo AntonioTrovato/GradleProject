@@ -28,11 +28,6 @@ public class UtenteTest {
     }
 
     @Test
-    public void testCiao() {
-        assertEquals("Doe", utente.getSurname());
-    }
-
-    @Test
     public void testGetTelephone() {
         assertEquals("123", utente.getTelephone());
     }
@@ -79,12 +74,6 @@ public class UtenteTest {
         public void benchmark_testGetSurname() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testGetSurname, this.description("testGetSurname"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testCiao() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testCiao, this.description("testCiao"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark

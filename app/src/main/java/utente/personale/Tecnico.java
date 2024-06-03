@@ -12,8 +12,6 @@ public class Tecnico {
         return name;
     }
 
-    public void ciao() {}
-
     public String getSurname() {
         return surname;
     }

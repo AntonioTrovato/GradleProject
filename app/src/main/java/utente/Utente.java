@@ -15,6 +15,12 @@ public class Utente {
         return name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void ciao() {}
+
     public String getTelephone() {
         return telephone;
     }

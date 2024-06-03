@@ -6,15 +6,15 @@ import static org.junit.Assert.assertEquals;
 public class TecnicoTest {
 
     @Test
-    public void testGetNome() {
+    public void testGetName() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer", 1);
-        assertEquals("John", tecnico.getNome("ciao"));
+        assertEquals("John", tecnico.getName());
     }
 
     @Test
     public void testGetString() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer", 1);
-        assertEquals("John", tecnico.getString("John"));
+        assertEquals("John", tecnico.getName());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class TecnicoTest {
     public void testSetName() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer", 1);
         tecnico.setName("Jane");
-        assertEquals("Jane", tecnico.getNome("ciao"));
+        assertEquals("Jane", tecnico.getName());
     }
 
     @Test
@@ -67,9 +67,9 @@ public class TecnicoTest {
     public static class _Benchmark extends se.chalmers.ju2jmh.api.JU2JmhBenchmark {
 
         @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetNome() throws java.lang.Throwable {
+        public void benchmark_testGetName() throws java.lang.Throwable {
             this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetNome, this.description("testGetNome"));
+            this.runBenchmark(this.implementation()::testGetName, this.description("testGetName"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark

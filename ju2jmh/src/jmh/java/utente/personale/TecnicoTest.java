@@ -12,7 +12,7 @@ public class TecnicoTest {
     }
 
     @Test
-    public void testGetString() {
+    public void testCiao() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer", 1);
         assertEquals("John", tecnico.getName());
     }
@@ -73,9 +73,9 @@ public class TecnicoTest {
         }
 
         @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetString() throws java.lang.Throwable {
+        public void benchmark_testCiao() throws java.lang.Throwable {
             this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetString, this.description("testGetString"));
+            this.runBenchmark(this.implementation()::testCiao, this.description("testCiao"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark

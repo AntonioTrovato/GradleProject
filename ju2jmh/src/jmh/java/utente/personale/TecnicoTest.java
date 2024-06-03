@@ -6,12 +6,6 @@ import static org.junit.Assert.assertEquals;
 public class TecnicoTest {
 
     @Test
-    public void testGetName() {
-        Tecnico tecnico = new Tecnico("John", "Doe", "Engineer", 1);
-        assertEquals("John", tecnico.getName());
-    }
-
-    @Test
     public void testGetSurname() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer", 1);
         assertEquals("Doe", tecnico.getSurname());
@@ -27,13 +21,6 @@ public class TecnicoTest {
     public void testGetCode() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer", 1);
         assertEquals(1, tecnico.getCode());
-    }
-
-    @Test
-    public void testSetName() {
-        Tecnico tecnico = new Tecnico("John", "Doe", "Engineer", 1);
-        tecnico.setName("Jane");
-        assertEquals("Jane", tecnico.getName());
     }
 
     @Test
@@ -61,12 +48,6 @@ public class TecnicoTest {
     public static class _Benchmark extends se.chalmers.ju2jmh.api.JU2JmhBenchmark {
 
         @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetName() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetName, this.description("testGetName"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
         public void benchmark_testGetSurname() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testGetSurname, this.description("testGetSurname"));
@@ -82,12 +63,6 @@ public class TecnicoTest {
         public void benchmark_testGetCode() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testGetCode, this.description("testGetCode"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testSetName() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testSetName, this.description("testSetName"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark

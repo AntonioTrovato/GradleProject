@@ -11,12 +11,20 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getSurname() {
         return surname;
     }
 
     public String getTelephone() {
         return telephone;
+    }
+
+    public String getAddress(int a) {
+        return address;
     }
 
     public ContoBancario getContoBancario() {

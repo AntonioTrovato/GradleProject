@@ -19,6 +19,11 @@ public class UtenteTest {
     }
 
     @Test
+    public void testGetName() {
+        assertEquals("John", utente.getName());
+    }
+
+    @Test
     public void testGetSurname() {
         assertEquals("Doe", utente.getSurname());
     }
@@ -27,8 +32,17 @@ public class UtenteTest {
     public void testGetTelephone() {assertEquals("123", utente.getTelephone());}
 
     @Test
+    public void testGetAddress() {assertEquals("via mazzini", utente.getAddress(1));}
+
+    @Test
     public void testGetContoBancario() {
         assertNotNull(utente.getContoBancario());
+    }
+
+    @Test
+    public void testSetName() {
+        utente.setName("Smith");
+        assertEquals("Smith", utente.getName());
     }
 
     @Test

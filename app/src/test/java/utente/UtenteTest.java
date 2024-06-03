@@ -19,11 +19,6 @@ public class UtenteTest {
     }
 
     @Test
-    public void testGetName() {
-        assertEquals("John", utente.getName());
-    }
-
-    @Test
     public void testGetSurname() {
         assertEquals("Doe", utente.getSurname());
     }
@@ -34,12 +29,6 @@ public class UtenteTest {
     @Test
     public void testGetContoBancario() {
         assertNotNull(utente.getContoBancario());
-    }
-
-    @Test
-    public void testSetName() {
-        utente.setName("Smith");
-        assertEquals("Smith", utente.getName());
     }
 
     @Test

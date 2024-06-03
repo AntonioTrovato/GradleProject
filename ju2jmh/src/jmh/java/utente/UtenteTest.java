@@ -33,11 +33,6 @@ public class UtenteTest {
     }
 
     @Test
-    public void testGetAddress() {
-        assertEquals("via mazzini", utente.getAddress(1));
-    }
-
-    @Test
     public void testGetContoBancario() {
         assertNotNull(utente.getContoBancario());
     }
@@ -80,12 +75,6 @@ public class UtenteTest {
         public void benchmark_testGetTelephone() throws java.lang.Throwable {
             this.createImplementation();
             this.runBenchmark(this.implementation()::testGetTelephone, this.description("testGetTelephone"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetAddress() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetAddress, this.description("testGetAddress"));
         }
 
         @org.openjdk.jmh.annotations.Benchmark

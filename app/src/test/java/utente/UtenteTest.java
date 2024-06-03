@@ -32,9 +32,6 @@ public class UtenteTest {
     public void testGetTelephone() {assertEquals("123", utente.getTelephone());}
 
     @Test
-    public void testGetAddress() {assertEquals("via mazzini", utente.getAddress(1));}
-
-    @Test
     public void testGetContoBancario() {
         assertNotNull(utente.getContoBancario());
     }

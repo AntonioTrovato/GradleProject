@@ -23,10 +23,6 @@ public class Utente {
         return telephone;
     }
 
-    public String getAddress(int a) {
-        return address;
-    }
-
     public ContoBancario getContoBancario() {
         return contoBancario;
     }

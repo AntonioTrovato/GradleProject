@@ -6,9 +6,15 @@ import static org.junit.Assert.assertEquals;
 public class TecnicoTest {
 
     @Test
-    public void testGetName() {
+    public void testGetNome() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer",1);
-        assertEquals("John", tecnico.getName());
+        assertEquals("John", tecnico.getNome("ciao"));
+    }
+
+    @Test
+    public void testGetString() {
+        Tecnico tecnico = new Tecnico("John", "Doe", "Engineer",1);
+        assertEquals("John", tecnico.getString("John"));
     }
 
     @Test
@@ -33,7 +39,7 @@ public class TecnicoTest {
     public void testSetName() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer",1);
         tecnico.setName("Jane");
-        assertEquals("Jane", tecnico.getName());
+        assertEquals("Jane", tecnico.getNome("ciao"));
     }
 
     @Test

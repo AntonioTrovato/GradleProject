@@ -15,10 +15,6 @@ public class Utente {
         return name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
     public String getTelephone() {
         return telephone;
     }

@@ -8,8 +8,12 @@ public class Tecnico {
         this.code = code;
     }
 
-    public String getName() {
+    public String getNome(String nome) {
         return name;
+    }
+
+    public String getString(String string) {
+        return string;
     }
 
     public String getSurname() {

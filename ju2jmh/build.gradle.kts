@@ -1,6 +1,7 @@
 plugins {
     java
     id("me.champeau.jmh") version "0.6.6"
+    id("jacoco")
 }
 
 dependencies {
@@ -11,4 +12,16 @@ dependencies {
     jmh("junit", "junit", jUnit4Version)
     implementation(project(":app"))
     testImplementation("org.mockito:mockito-core:3.10.0")
+}
+
+tasks.jmh {
+    finalizedBy(tasks.jacocoTestReport)  // Genera il report dopo aver eseguito i benchmark
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.jmh)  // Assicurati che i benchmark siano eseguiti prima di generare il report
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
 }

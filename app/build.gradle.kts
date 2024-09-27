@@ -1,5 +1,6 @@
 plugins {
     java
+    id("jacoco")
 }
 
 dependencies {
@@ -9,4 +10,12 @@ dependencies {
 
 tasks.named<Test>("test") {
     useJUnit()
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
 }

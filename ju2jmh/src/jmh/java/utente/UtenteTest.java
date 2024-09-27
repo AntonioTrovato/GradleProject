@@ -70,48 +70,6 @@ public class UtenteTest {
             this.runBenchmark(this.implementation()::testGetName, this.description("testGetName"));
         }
 
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetSurname() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetSurname, this.description("testGetSurname"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetTelephone() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetTelephone, this.description("testGetTelephone"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetAddress() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetAddress, this.description("testGetAddress"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetContoBancario() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetContoBancario, this.description("testGetContoBancario"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testSetName() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testSetName, this.description("testSetName"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testSetSurname() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testSetSurname, this.description("testSetSurname"));
-        }
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testSetContoBancario() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testSetContoBancario, this.description("testSetContoBancario"));
-        }
-
         @java.lang.Override
         public void before() throws java.lang.Throwable {
             super.before();

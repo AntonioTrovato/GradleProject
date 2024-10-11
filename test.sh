@@ -30,27 +30,11 @@ modified_classes=()
 while IFS= read -r line; do
   # Check if the line starts with "diff --git"
   if [[ $line =~ ^\+++\ .*\/main\/java\/(.*\/)?([^\/]+)\.java$ ]]; then
-    echo "hey"
     packages="${BASH_REMATCH[1]}"
-    echo "$packages"
-    file_name=""
-    class_name=""
-    #if packages do not contains / it is a class name (the path was java/ClassName.java)
-    if [[ "$packages" != */* ]]; then
-      echo "sono qui 1"
-      class_name="${packages%.java}"
-    fi
-    #otherwise it is all ok and the path was java/.../ClassName.java
-    if [[ "$packages" == */* ]]; then
-      echo "sono qui 2"
-      file_name="${BASH_REMATCH[2]}"
-      echo "$file_name"
-      class_name="${packages//\//.}.${file_name%.java}"
-      echo "$class_name"
-    fi
+    file_name="${BASH_REMATCH[2]}"
 
-    echo "sono qui 3"
-    echo "$class_name"
+    # Replace slashes with dots and remove .java extension
+    class_name="${packages//\//.}.${file_name%.java}"
 
     modified_classes+=("$class_name")
   fi

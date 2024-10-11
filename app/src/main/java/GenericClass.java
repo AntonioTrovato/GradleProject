@@ -115,6 +115,8 @@ public class GenericClass {
         boolean isGreater = a > b;
         System.out.println("a è maggiore di b: " + isGreater);
 
+        System.out.println("hey");
+
         boolean isEqual = a == b;
         System.out.println("a è uguale a b: " + isEqual);
     }

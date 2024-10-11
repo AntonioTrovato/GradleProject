@@ -15,8 +15,12 @@ public class GenericClass {
         return string2;
     }
 
-    public int getInt1() {
+    private final int getInt1(int x) {
         return int1;
+    }
+
+    public int getInt2() {
+        return int2;
     }
 
     public void setString1(String string1) {
@@ -39,7 +43,7 @@ public class GenericClass {
     private int sum() {
         if (this.int1 > this.int2) {
             return this.int1 - this.int2;
-        }while (this.int1 == this.int2) {
+        }else {
             this.int1--;
         }
 

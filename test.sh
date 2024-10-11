@@ -31,16 +31,10 @@ block=""
 
 # Read the diff string line by line
 while IFS= read -r line; do
-  echo "sono qui 1"
-  echo "$line"
   # Check if the line starts with "diff --git"
   if [[ $line == "diff --git"* ]]; then
-    echo "sono qui 2"
-    echo "$line"
       # If yes, add the current block to commit_blocks and reset the block
       if [ -n "$block" ]; then
-        echo "sono qui 3"
-        echo "$block"
         commit_blocks+=("$block")
         block=""
       fi
@@ -54,11 +48,6 @@ if [ -n "$block" ]; then
     commit_blocks+=("$block")
 fi
 
-for commit_block in "${commit_blocks[@]}"; do
-  echo "Block:"
-  echo "$commit_block"
-done
-
 # Initialize empty arrays to store deleted and added methods
 line_numbers=()
 
@@ -66,6 +55,10 @@ line_numbers=()
 for commit_block in "${commit_blocks[@]}"; do
   # Extract the first line of the string
   first_line=$(echo "$commit_block" | head -n 1)
+
+  echo "sono qui 1"
+  echo "$first_line"
+  echo "$commit_block"
 
   # Check if the first line matches the pattern "diff --git path_1 path_2"
   if [[ $first_line =~ ^diff\ --git\ .*\main/java\/(.*)\/([^\/]+)\.java\ .*$ ]]; then

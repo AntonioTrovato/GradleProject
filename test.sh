@@ -23,59 +23,29 @@ echo "$git_diff"
 
 echo "=================================================================================="
 
-# Initialize an empty commit_blocks list
-declare -a commit_blocks
-
-# Initialize an empty block
-block=""
+# Initialize empty arrays to store deleted and added methods
+modified_classes=()
 
 # Read the diff string line by line
 while IFS= read -r line; do
   # Check if the line starts with "diff --git"
-  if [[ $line == "+++"* ]]; then
-      # If yes, add the current block to commit_blocks and reset the block
-      if [ -n "$block" ]; then
-        commit_blocks+=("$block")
-        block=""
+  if [[ $line =~ ^\+++\ .*\/main\/java\/(.*\/)?([^\/]+)\.java$ ]]; then
+      packages="${BASH_REMATCH[1]}"
+      file_name=""
+      class_name=""
+      #if packages do not contains / it is a class name (the path was java/ClassName.java)
+      if [[ "$packages" != */* ]]; then
+        class_name="${packages%.java}"
       fi
+      #otherwise it is all ok and the path was java/.../ClassName.java
+      if [[ "$packages" == */* ]]; then
+        file_name="${BASH_REMATCH[2]}"
+        class_name="${packages//\//.}.${file_name%.java}"
+      fi
+
+      modified_classes+=("$class_name")
   fi
-  # Add the current line to the block
-  block+="$line"$'\n'
 done <<< "$git_diff"
-
-# Add the last block to commit_blocks
-if [ -n "$block" ]; then
-    commit_blocks+=("$block")
-fi
-
-# Initialize empty arrays to store deleted and added methods
-modified_classes=()
-
-# Print the commit_blocks
-for commit_block in "${commit_blocks[@]}"; do
-  # Extract the first line of the string
-  first_line=$(echo "$commit_block" | head -n 1)
-  echo "$first_line"
-
-  # Check if the first line matches the pattern "diff --git path_1 path_2"
-  if [[ $first_line =~ ^\+++\ .*\/main\/java\/(.*\/)?([^\/]+)\.java$ ]]; then
-    packages="${BASH_REMATCH[1]}"
-    file_name=""
-    class_name=""
-    #if packages do not contains / it is a class name (the path was java/ClassName.java)
-    if [[ "$packages" != */* ]]; then
-      class_name="${packages%.java}"
-    fi
-    #otherwise it is all ok and the path was java/.../ClassName.java
-    if [[ "$packages" == */* ]]; then
-      file_name="${BASH_REMATCH[2]}"
-      class_name="${packages//\//.}.${file_name%.java}"
-    fi
-
-    modified_classes+=("$class_name")
-  fi
-
-done
 
 # Print each element of the list
 for modified_class in "${modified_classes[@]}"; do

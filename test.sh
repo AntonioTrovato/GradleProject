@@ -30,6 +30,7 @@ modified_classes=()
 while IFS= read -r line; do
   # Check if the line starts with "diff --git"
   if [[ $line =~ ^\+++\ .*\/main\/java\/(.*\/)?([^\/]+)\.java$ ]]; then
+    echo "hey"
     packages="${BASH_REMATCH[1]}"
     echo "$packages"
     file_name=""

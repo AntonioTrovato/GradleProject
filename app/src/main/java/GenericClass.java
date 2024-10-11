@@ -7,19 +7,24 @@ public class GenericClass {
         this.int2 = int2;
     }
 
-    public String getString1() {
+    public String getString1()
+    {
         return string1;
     }
 
     public String getString2() {
+
         return string2;
     }
 
-    public int getInt1() {
+    private final int getInt1(int x) {
         return int1;
     }
 
     public int getInt2() {
+        if (this.int1>this.int2) {
+            this.int2 = this.int1;
+        }
         return int2;
     }
 
@@ -42,15 +47,16 @@ public class GenericClass {
     private int sum() {
         if (this.int1 > this.int2) {
             return this.int1 - this.int2;
-        }else if (this.int1 < this.int2) {
-            return this.int2 - this.int1;
+        }while (this.int1 > this.int2) {
+            this.int1--;
         }
 
-        while (this.int1 != 0) {
+        while (this.int1 != 0) { if (this.int2 != 0) { this.int1--; }
             System.out.println(this.string1);
 
             if (this.string1.equals(this.string2)) {
                 System.out.println(this.string2);
+
             }
         }
 

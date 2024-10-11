@@ -63,6 +63,62 @@ public class GenericClass {
         return 0;
     }
 
+    public static void performOperations() {
+        int a = 10;
+        int b = 5;
+
+        // Somma
+        int sum = a + b;
+        System.out.println("Somma: " + sum);
+
+        // Sottrazione
+        int diff = a - b;
+        System.out.println("Sottrazione: " + diff);
+
+        // Moltiplicazione
+        int product = a * b;
+        System.out.println("Moltiplicazione: " + product);
+
+        // Divisione
+        if (b != 0) {
+            int quotient = a / b;
+            System.out.println("Divisione: " + quotient);
+        } else {
+            System.out.println("Impossibile dividere per zero");
+        }
+
+        // Modulo
+        int remainder = a % b;
+        System.out.println("Resto: " + remainder);
+
+        // Incremento
+        a++;
+        System.out.println("Incremento di a: " + a);
+
+        // Decremento
+        b--;
+        System.out.println("Decremento di b: " + b);
+
+        // Operazioni con float
+        float x = 2.5f;
+        float y = 1.5f;
+
+        // Somma
+        float floatSum = x + y;
+        System.out.println("Somma float: " + floatSum);
+
+        // Sottrazione
+        float floatDiff = x - y;
+        System.out.println("Sottrazione float: " + floatDiff);
+
+        // Verifica booleani
+        boolean isGreater = a > b;
+        System.out.println("a è maggiore di b: " + isGreater);
+
+        boolean isEqual = a == b;
+        System.out.println("a è uguale a b: " + isEqual);
+    }
+
     private String string1;
     private String string2;
     private int int1;

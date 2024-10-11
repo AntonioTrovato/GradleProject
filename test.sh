@@ -33,7 +33,9 @@ while IFS= read -r line; do
     packages="${BASH_REMATCH[1]}"
     file_name="${BASH_REMATCH[2]}"
 
-    packages="${packages}."
+    if [[ -n "$packages" ]]; then
+      packages="${packages}."  # add . if packages is not empty to obtain a correct path
+    fi
 
     # Replace slashes with dots and remove .java extension
     class_name="${packages//\//.}${file_name%.java}"

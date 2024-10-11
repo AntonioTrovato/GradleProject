@@ -56,12 +56,8 @@ for commit_block in "${commit_blocks[@]}"; do
   # Extract the first line of the string
   first_line=$(echo "$commit_block" | head -n 1)
 
-  echo "sono qui 1"
-  echo "$first_line"
-  echo "$commit_block"
-
   # Check if the first line matches the pattern "diff --git path_1 path_2"
-  if [[ $first_line =~ ^diff\ --git\ .*\main/java\/(.*)\/([^\/]+)\.java\ .*$ ]]; then
+  if [[ $first_line =~ ^diff\ --git\ *\/main\/java\/(.*\/)?([^\/]+)\.java\ .*$ ]]; then
     packages="${BASH_REMATCH[1]}"
     file_name="${BASH_REMATCH[2]}"
 
@@ -71,7 +67,7 @@ for commit_block in "${commit_blocks[@]}"; do
     echo "COMMIT BLOCK:"
     echo "$commit_block"
 
-    # Extract the diff hunk information (lines that match @@ -number,number +number,number @@)
+    # Extract the diff hunk information
     while IFS= read -r line; do
         if [[ $line =~ ^@@\ -([0-9]+) ]]; then
             line_number="${BASH_REMATCH[1]}"

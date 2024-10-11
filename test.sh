@@ -58,12 +58,23 @@ for commit_block in "${commit_blocks[@]}"; do
   echo "$first_line"
 
   # Check if the first line matches the pattern "diff --git path_1 path_2"
-  if [[ $first_line =~ ^diff\ --git\ *\/main\/java\/(.*\/)?([^\/]+)\.java\ .*$ ]]; then
+  if [[ $first_line =~ ^diff\ --git\ .*\/main\/java\/(.*\/)?([^\/]+)\.java\ .*$ ]]; then
     packages="${BASH_REMATCH[1]}"
-    file_name="${BASH_REMATCH[2]}"
+    file_name=""
+    class_name=""
+    #if packages do not contains / it is a class name (the path was java/ClassName.java)
+    if [[ "$packages" != */* ]]; then
+      file_name=packages
+      class_name="${file_name}.java"
+    fi
+    #otherwise it is all ok and the path was java/.../ClassName.java
+    if [[ "$packages" == */* ]]; then
+      file_name="${BASH_REMATCH[2]}"
+      class_name="${packages//\//.}.${file_name%.java}"
+    fi
 
-    # Replace slashes with dots and remove .java extension
-    class_name="${packages//\//.}.${file_name%.java}"
+    echo "Class Fully Qualified Name"
+    echo "$class_name"
 
     echo "COMMIT BLOCK:"
     echo "$commit_block"

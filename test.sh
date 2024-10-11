@@ -32,7 +32,7 @@ block=""
 # Read the diff string line by line
 while IFS= read -r line; do
   # Check if the line starts with "diff --git"
-  if [[ $line == "diff --git"* ]]; then
+  if [[ $line == "+++"* ]]; then
       # If yes, add the current block to commit_blocks and reset the block
       if [ -n "$block" ]; then
         commit_blocks+=("$block")

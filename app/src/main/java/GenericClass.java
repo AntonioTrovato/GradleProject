@@ -15,7 +15,7 @@ public class GenericClass {
         return string2;
     }
 
-    private int getInt1() {
+    public int getInt1() {
         return int1;
     }
 
@@ -54,8 +54,6 @@ public class GenericClass {
 
         return 0;
     }
-
-    public void print() {}
 
     private String string1;
     private String string2;

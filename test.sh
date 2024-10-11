@@ -49,7 +49,7 @@ if [ -n "$block" ]; then
 fi
 
 # Initialize empty arrays to store deleted and added methods
-line_numbers=()
+modified_classes=()
 
 # Print the commit_blocks
 for commit_block in "${commit_blocks[@]}"; do
@@ -58,14 +58,13 @@ for commit_block in "${commit_blocks[@]}"; do
   echo "$first_line"
 
   # Check if the first line matches the pattern "diff --git path_1 path_2"
-  if [[ $first_line =~ ^diff\ --git\ .*\/main\/java\/(.*\/)?([^\/]+)\.java\ .*$ ]]; then
+  if [[ $first_line =~ ^\+++\ .*\/main\/java\/(.*\/)?([^\/]+)\.java$ ]]; then
     packages="${BASH_REMATCH[1]}"
     file_name=""
     class_name=""
     #if packages do not contains / it is a class name (the path was java/ClassName.java)
     if [[ "$packages" != */* ]]; then
-      file_name=packages
-      class_name="${file_name%.java}"
+      class_name="${packages%.java}"
     fi
     #otherwise it is all ok and the path was java/.../ClassName.java
     if [[ "$packages" == */* ]]; then
@@ -73,26 +72,13 @@ for commit_block in "${commit_blocks[@]}"; do
       class_name="${packages//\//.}.${file_name%.java}"
     fi
 
-    echo "Class Fully Qualified Name"
-    echo "$class_name"
-
-    echo "COMMIT BLOCK:"
-    echo "$commit_block"
-
-    # Extract the diff hunk information
-    while IFS= read -r line; do
-        if [[ $line =~ ^@@\ -([0-9]+) ]]; then
-            line_number="${BASH_REMATCH[1]}"
-            # Add the line number (without the minus sign) to the array
-            line_numbers+=("$line_number")
-        fi
-    done <<< "$commit_block"
-
-    # Print the line numbers where the changes occurred
-    echo "Line numbers with changes in $class_name: ${line_numbers[*]}"
-
-    # Reset the line_numbers array for the next block
-    line_numbers=()
+    modified_classes+=("$class_name")
   fi
 
+done
+
+# Print each element of the list
+for modified_class in "${modified_classes[@]}"; do
+  echo "Modified class:"
+  echo "$modified_class"
 done

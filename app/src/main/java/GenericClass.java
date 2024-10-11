@@ -15,7 +15,7 @@ public class GenericClass {
         return string2;
     }
 
-    public int getInt1() {
+    private int getInt1() {
         return int1;
     }
 

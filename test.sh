@@ -54,6 +54,11 @@ if [ -n "$block" ]; then
     commit_blocks+=("$block")
 fi
 
+for commit_block in "${commit_blocks[@]}"; do
+  echo "Block:"
+  echo "$commit_block"
+done
+
 # Initialize empty arrays to store deleted and added methods
 line_numbers=()
 

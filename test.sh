@@ -34,6 +34,7 @@ while IFS= read -r line; do
     file_name="${BASH_REMATCH[2]}"
 
     if [[ -n "$packages" ]]; then
+      packages="${packages%/}"
       packages="${packages}."  # add . if packages is not empty to obtain a correct path
     fi
 

@@ -43,8 +43,6 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    public void setTelephone(String telephone) {}
-
     private String name;
     private String surname;
     private String telephone;

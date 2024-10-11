@@ -34,9 +34,9 @@ jobs:
         run: ./gradlew build
 
       - name: Set execute permission for bash file
-        run: chmod +x test.sh
+        run: chmod +x modified_classes_detector.sh
 
-      - name: Run Benchmark Tests
-        run: ./test.sh  # Esegui lo script benchmark_tests.sh
+      - name: Run Modified Classes Detector
+        run: ./modified_classes_detector.sh  # Esegui lo script benchmark_tests.sh
         env:
           ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}

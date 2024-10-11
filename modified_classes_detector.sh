@@ -56,7 +56,7 @@ temp_file="modified_classes.txt"
 printf "%s\n" "${modified_classes[@]}" > "$temp_file"
 
 # Esegui lo script Java passando il file delle classi modificate
-java -cp path/to/your/java/classes ASTGenerator "$temp_file"
+java -cp ./app/buil/classes/java/main/ ASTGenerator "$temp_file"
 
 # Rimuovi il file temporaneo
 rm "$temp_file"

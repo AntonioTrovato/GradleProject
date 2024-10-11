@@ -6,6 +6,7 @@ plugins {
 dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:3.10.0")
+    implementation("com.github.javaparser:javaparser-core:3.24.4")
 }
 
 tasks.named<Test>("test") {

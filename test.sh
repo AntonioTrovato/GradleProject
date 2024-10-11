@@ -29,6 +29,7 @@ modified_classes=()
 # Read the diff string line by line
 while IFS= read -r line; do
   echo "sono qui 1"
+  echo "$line"
   # Check if the line starts with "diff --git"
   if [[ $line =~ ^\+++\ .*\/main\/java\/(.*\/)?([^\/]+)\.java$ ]]; then
     echo "sono qui 2"

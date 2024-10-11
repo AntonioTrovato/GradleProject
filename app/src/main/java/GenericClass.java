@@ -15,8 +15,12 @@ public class GenericClass {
         return string2;
     }
 
-    private static int getInt1(int x) {
-        return x;
+    public int getInt1() {
+        return int1;
+    }
+
+    public void setString1(String string1) {
+        this.string1 = string1;
     }
 
     public void setString2(String string2) {
@@ -35,7 +39,7 @@ public class GenericClass {
     private int sum() {
         if (this.int1 > this.int2) {
             return this.int1 - this.int2;
-        }else if (this.int1 == this.int2) {
+        }while (this.int1 == this.int2) {
             this.int1--;
         }
 
@@ -50,6 +54,8 @@ public class GenericClass {
 
         return 0;
     }
+
+    public void print() {}
 
     private String string1;
     private String string2;

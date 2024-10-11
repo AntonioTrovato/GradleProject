@@ -65,7 +65,7 @@ for commit_block in "${commit_blocks[@]}"; do
     #if packages do not contains / it is a class name (the path was java/ClassName.java)
     if [[ "$packages" != */* ]]; then
       file_name=packages
-      class_name="${file_name}.java"
+      class_name="${file_name%.java}"
     fi
     #otherwise it is all ok and the path was java/.../ClassName.java
     if [[ "$packages" == */* ]]; then

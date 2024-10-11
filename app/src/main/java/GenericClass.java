@@ -7,7 +7,7 @@ public class GenericClass {
         this.int2 = int2;
     }
 
-    public String getString1(){
+    private String getString1(){
         return string1;
     }
 

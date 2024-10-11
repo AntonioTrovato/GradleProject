@@ -33,8 +33,10 @@ while IFS= read -r line; do
     packages="${BASH_REMATCH[1]}"
     file_name="${BASH_REMATCH[2]}"
 
+    packages="${packages}."
+
     # Replace slashes with dots and remove .java extension
-    class_name="${packages//\//.}.${file_name%.java}"
+    class_name="${packages//\//.}${file_name%.java}"
 
     modified_classes+=("$class_name")
   fi

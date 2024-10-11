@@ -34,6 +34,8 @@ while IFS= read -r line; do
         # If yes, add the current block to commit_blocks and reset the block
         if [ -n "$block" ]; then
             commit_blocks+=("$block")
+            echo "ECCOLO"
+            echo "$commit_block"
             block=""
         fi
     fi

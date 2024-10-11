@@ -37,6 +37,6 @@ jobs:
         run: chmod +x test.sh
 
       - name: Run Benchmark Tests
-        run: ./benchmark_tests.sh  # Esegui lo script benchmark_tests.sh
+        run: ./test.sh  # Esegui lo script benchmark_tests.sh
         env:
           ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}

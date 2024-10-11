@@ -20,3 +20,65 @@ git_diff=$(git diff -U0 --minimal $previous_commit $current_commit)
 echo "GIT DIFF:"
 
 echo "$git_diff"
+
+# Initialize an empty commit_blocks list
+declare -a commit_blocks
+
+# Initialize an empty block
+block=""
+
+# Read the diff string line by line
+while IFS= read -r line; do
+    # Check if the line starts with "diff --git"
+    if [[ $line == "diff --git"* ]]; then
+        # If yes, add the current block to commit_blocks and reset the block
+        if [ -n "$block" ]; then
+            commit_blocks+=("$block")
+            block=""
+        fi
+    fi
+    # Add the current line to the block
+    block+="$line"$'\n'
+done <<< "$git_diff"
+
+# Add the last block to commit_blocks
+if [ -n "$block" ]; then
+    commit_blocks+=("$block")
+fi
+
+# Initialize empty arrays to store deleted and added methods
+line_numbers=()
+
+# Print the commit_blocks
+for commit_block in "${commit_blocks[@]}"; do
+  # Extract the first line of the string
+  first_line=$(echo "$commit_block" | head -n 1)
+
+  # Check if the first line matches the pattern "diff --git path_1 path_2"
+  if [[ $first_line =~ ^diff\ --git\ .*\main/java\/(.*)\/([^\/]+)\.java\ .*$ ]]; then
+    packages="${BASH_REMATCH[1]}"
+    file_name="${BASH_REMATCH[2]}"
+
+    # Replace slashes with dots and remove .java extension
+    class_name="${packages//\//.}.${file_name%.java}"
+
+    echo "COMMIT BLOCK:"
+    echo "$commit_block"
+
+    # Extract the diff hunk information (lines that match @@ -number,number +number,number @@)
+    while IFS= read -r line; do
+        if [[ $line =~ ^@@\ -([0-9]+) ]]; then
+            line_number="${BASH_REMATCH[1]}"
+            # Add the line number (without the minus sign) to the array
+            line_numbers+=("$line_number")
+        fi
+    done <<< "$commit_block"
+
+    # Print the line numbers where the changes occurred
+    echo "Line numbers with changes in $class_name: ${line_numbers[*]}"
+
+    # Reset the line_numbers array for the next block
+    line_numbers=()
+  fi
+
+done

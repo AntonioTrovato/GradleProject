@@ -21,6 +21,8 @@ echo "GIT DIFF:"
 
 echo "$git_diff"
 
+echo "=================================================================================="
+
 # Initialize an empty commit_blocks list
 declare -a commit_blocks
 
@@ -29,18 +31,22 @@ block=""
 
 # Read the diff string line by line
 while IFS= read -r line; do
-    # Check if the line starts with "diff --git"
-    if [[ $line == "diff --git"* ]]; then
-        # If yes, add the current block to commit_blocks and reset the block
-        if [ -n "$block" ]; then
-            commit_blocks+=("$block")
-            echo "ECCOLO"
-            echo "$commit_block"
-            block=""
-        fi
-    fi
-    # Add the current line to the block
-    block+="$line"$'\n'
+  echo "sono qui 1"
+  echo "$line"
+  # Check if the line starts with "diff --git"
+  if [[ $line == "diff --git"* ]]; then
+    echo "sono qui 2"
+    echo "$line"
+      # If yes, add the current block to commit_blocks and reset the block
+      if [ -n "$block" ]; then
+        echo "sono qui 3"
+        echo "$block"
+        commit_blocks+=("$block")
+        block=""
+      fi
+  fi
+  # Add the current line to the block
+  block+="$line"$'\n'
 done <<< "$git_diff"
 
 # Add the last block to commit_blocks

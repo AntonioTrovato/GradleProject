@@ -15,7 +15,7 @@ current_commit=$(git log --format="%H" -n 1)
 previous_commit=$(git log --format="%H" -n 2 | tail -n 1)
 
 # Make diff between the two commits
-git_diff=$(git diff $previous_commit $current_commit)
+git_diff=$(git diff -U0 --minimal $previous_commit $current_commit)
 
 echo "GIT DIFF:"
 

@@ -56,7 +56,7 @@ temp_file="modified_classes.txt"
 printf "%s\n" "${modified_classes[@]}" > "$temp_file"
 
 # run the java script
-java -cp ./app/build/classes/java/main/ ASTGenerator "$temp_file"
+java -jar app/build/libs/app-all.jar "$temp_file"
 
 # delete the file
 rm "$temp_file"

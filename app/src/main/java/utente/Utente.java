@@ -11,7 +11,7 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    public String string() {
+    private String string() {
         return "string";
     }
 

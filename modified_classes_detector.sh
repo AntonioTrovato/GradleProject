@@ -58,5 +58,7 @@ printf "%s\n" "${modified_classes[@]}" > "$temp_file"
 # run the java script
 java -jar app/build/libs/app-all.jar "$temp_file"
 
+echo "ciao"
+
 # delete the file
 rm "$temp_file"

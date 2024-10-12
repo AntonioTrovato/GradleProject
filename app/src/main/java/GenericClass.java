@@ -10,7 +10,6 @@ public class GenericClass {
     }
 
     private static <X> List<X> print(List<X> list) {
-        System.out.println(list);
         return list;
     }
 

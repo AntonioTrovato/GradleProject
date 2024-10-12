@@ -14,8 +14,12 @@ public class GenericClass {
         return "ciao3";
     }
 
-    private String getString1(int a){
+    public String getString1(int a){
         return string1;
+    }
+
+    public String getString2() {
+        return string2;
     }
 
     public int getInt1() {

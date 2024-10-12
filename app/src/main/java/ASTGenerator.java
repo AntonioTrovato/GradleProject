@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ASTGenerator {
     public static void main(String[] args) {
@@ -22,6 +24,7 @@ public class ASTGenerator {
         try {
             List<String> modifiedClasses = Files.readAllLines(Paths.get(filePath));
             JavaParser javaParser = new JavaParser();
+            ArrayList<String> all_modified_methods = new ArrayList<>();
 
             for (String className : modifiedClasses) {
                 String filePathJava = className.replace('.', '/') + ".java";
@@ -35,11 +38,14 @@ public class ASTGenerator {
                 if (previousContent != null) {
                     List<MethodDeclaration> previousMethods = createASTFromContent(javaParser, previousContent, "Previous", className);
                     // Confronta i metodi
-                    compareMethods(currentMethods, previousMethods);
+                    all_modified_methods.addAll(compareMethods(className,currentMethods, previousMethods));
                 } else {
                     System.out.println("No previous version found for class: " + className);
                 }
             }
+
+            System.out.println("All the modified methods: ");
+            System.out.println(all_modified_methods);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,7 +89,7 @@ public class ASTGenerator {
     }
 
     // Metodo per confrontare i metodi tra le due versioni
-    private static void compareMethods(List<MethodDeclaration> currentMethods, List<MethodDeclaration> previousMethods) {
+    private static ArrayList<String> compareMethods(String className, List<MethodDeclaration> currentMethods, List<MethodDeclaration> previousMethods) {
         Set<String> currentMethodSignatures = new HashSet<>();
         Set<String> previousMethodSignatures = new HashSet<>();
 
@@ -116,6 +122,23 @@ public class ASTGenerator {
         // Stampa i risultati
         System.out.println("New Methods: " + newMethods);
         System.out.println("Modified Methods: " + modifiedMethods);
+
+        ArrayList<String> modified_methods = new ArrayList<>();
+        for (String new_method : newMethods) {
+            String new_method_fully_qualified_name = className + "." + extractMethodNameAndParameters(new_method);
+            if (!modified_methods.contains(new_method_fully_qualified_name)) {
+                modified_methods.add(new_method_fully_qualified_name);
+            }
+        }
+        for (String modified_method : modifiedMethods) {
+            String modified_method_fully_qualified_name = className + "." + extractMethodNameAndParameters(modified_method);
+            if (!modified_methods.contains(modified_method_fully_qualified_name)) {
+                modified_methods.add(modified_method_fully_qualified_name);
+            }
+        }
+
+        System.out.println("Modified Methods: " + modified_methods);
+        return modified_methods;
     }
 
     // Metodo per ottenere la firma del metodo (nome e parametri)
@@ -158,6 +181,22 @@ public class ASTGenerator {
         }
 
         return typeString.toString();
+    }
+
+    // Metodo per estrarre nome metodo e parametri
+    private static String extractMethodNameAndParameters(String methodSignature) {
+        // Definisci la regex
+        String regex = "(\\w+)\\s*\\((.*?)\\)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(methodSignature);
+
+        if (matcher.find()) {
+            String methodName = matcher.group(1); // Nome del metodo
+            String parameters = matcher.group(2); // Parametri del metodo
+            return methodName + "(" + parameters + ")";
+        }
+
+        return null; // Restituisci null se non viene trovata alcuna corrispondenza
     }
 
     // Metodo per verificare se un metodo è stato modificato

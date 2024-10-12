@@ -9,7 +9,7 @@ public class GenericClass {
         this.int2 = int2;
     }
 
-    private static <E> List<E> print(List<E> list) {
+    private static <X> List<X> print(List<X> list) {
         return list;
     }
 

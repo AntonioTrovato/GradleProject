@@ -11,7 +11,7 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    private String string() {
+    private String string1() {
         if(this.address != null) {
             return this.address;
         }
@@ -19,11 +19,11 @@ public class Utente {
     }
 
     public String getName() {
-        System.out.println("ciao");
+        System.out.println("ciao2");
         return name;
     }
 
-    private String getSurname() {
+    public String getSurname() {
         return surname;
     }
 

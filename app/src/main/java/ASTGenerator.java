@@ -46,6 +46,16 @@ public class ASTGenerator {
 
             System.out.println("All the modified methods: ");
             System.out.println(all_modified_methods);
+
+            // Scrivi i metodi modificati in un file
+            String outputPath = "modified_methods.txt";
+            try {
+                // Sovrascrivi il file se esiste già
+                Files.write(Paths.get(outputPath), all_modified_methods);
+                System.out.println("Modified methods have been written to " + outputPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

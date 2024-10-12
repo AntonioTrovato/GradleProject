@@ -58,7 +58,10 @@ printf "%s\n" "${modified_classes[@]}" > "$temp_file"
 # run the java script
 java -jar app/build/libs/app-all.jar "$temp_file"
 
-echo "ciao"
-
 # delete the file
 rm "$temp_file"
+
+# read and print the contents of modified_methods.txt
+while IFS= read -r line; do
+    echo "$line"
+done < "modified_methods.txt"

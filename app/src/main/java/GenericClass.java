@@ -9,20 +9,20 @@ public class GenericClass {
         this.int2 = int2;
     }
 
-    public String a(int a, int b) {
+    public String a(int a, int c) {
         return "";
     }
 
-    public String a(float a, int b) {
+    public String a(float a, int d) {
         return "";
     }
 
-    private static <E> List<E> print(List<E> list) {
+    private static <X> List<X> print(List<X> list) {
         return list;
     }
 
     public String ciao() {
-        if (this.string1 != null) {
+        if (this.string1 == null) {
             this.string1 = "";
         }
         return "ciao3";

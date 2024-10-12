@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class GenericClass {
 
     public GenericClass(String string1,String string2,int int1,int int2) {
@@ -7,11 +9,11 @@ public class GenericClass {
         this.int2 = int2;
     }
 
-    public static <E> void print() {
-        System.out.println("Print");
+    public static <E> List<E> print(List<E> list) {
+        return list;
     }
 
-    public String ciao() {
+    public String ciao(int x) {
         while (this.int1 != 0) {
             this.int1++;
         }
@@ -26,7 +28,7 @@ public class GenericClass {
         return int1;
     }
 
-    public void setString1(String string1) {
+    private void setString1(String string1) {
         this.string1 = string1;
     }
 

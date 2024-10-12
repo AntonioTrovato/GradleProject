@@ -1,6 +1,8 @@
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.type.Type;
 
 import java.io.File;
 import java.io.IOException;
@@ -122,16 +124,40 @@ public class ASTGenerator {
 
         // Aggiungi modificatori di accesso e tipo di ritorno
         method.getModifiers().forEach(modifier -> signature.append(modifier.getKeyword().asString()).append(" "));
-        signature.append(method.getType().asString()).append(" ");
+        signature.append(getTypeAsString(method.getType())).append(" ");
         signature.append(method.getNameAsString()).append("(");
 
-        method.getParameters().forEach(param -> signature.append(param.getType().asString()).append(", "));
+        method.getParameters().forEach(param -> signature.append(getTypeAsString(param.getType())).append(", "));
         if (method.getParameters().size() > 0) {
             signature.setLength(signature.length() - 2); // Rimuovi l'ultima virgola e spazio
         }
         signature.append(")");
 
         return signature.toString();
+    }
+
+    // Metodo per ottenere la rappresentazione del tipo (gestendo tipi generici)
+    private static String getTypeAsString(com.github.javaparser.ast.type.Type type) {
+        StringBuilder typeString = new StringBuilder();
+
+        if (type.isClassOrInterfaceType()) {
+            ClassOrInterfaceType classOrInterfaceType = type.asClassOrInterfaceType();
+            typeString.append(classOrInterfaceType.getNameAsString());
+
+            // Controlla se ci sono argomenti di tipo
+            classOrInterfaceType.getTypeArguments().ifPresent(typeArgs -> {
+                typeString.append("<");
+                typeArgs.forEach(arg -> typeString.append(getTypeAsString(arg)).append(", "));
+                if (typeArgs.size() > 0) {
+                    typeString.setLength(typeString.length() - 2); // Rimuovi l'ultima virgola e spazio
+                }
+                typeString.append(">");
+            });
+        } else {
+            typeString.append(type.asString());
+        }
+
+        return typeString.toString();
     }
 
     // Metodo per verificare se un metodo è stato modificato

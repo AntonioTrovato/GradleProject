@@ -6,7 +6,9 @@ public class ContoBancario {
         this.saldo = saldo_iniziale;
     }
 
-
+    public String getId() {
+        return id;
+    }
 
     public int getSaldo() {
         return saldo;
@@ -20,7 +22,9 @@ public class ContoBancario {
         this.saldo = saldo;
     }
 
-    public void setSaldo2(int saldo) { this.saldo = saldo; }
+    public void setSaldo2(int saldo) {
+        this.saldo = saldo;
+    }
 
     public void versamento(int quota) {
         this.saldo += quota;

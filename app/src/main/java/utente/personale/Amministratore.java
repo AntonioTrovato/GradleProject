@@ -7,10 +7,12 @@ public class Amministratore {
         this.department = department;
     }
 
-    public void ciao() {}
-
     public String getName() {
         return this.name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public String getDepartment() {
@@ -19,6 +21,10 @@ public class Amministratore {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public void setDepartment(String department) {

@@ -137,7 +137,7 @@ public class ASTGenerator {
         for (MethodDeclaration method : currentMethods) {
             String signature = getMethodSignature(method);
             if (previousMethodSignatures.contains(signature)) {
-                // Se il metodo esiste nella versione precedente, verifica se ci sono modifiche
+                // If method exists in the previous version, verify the modifications
                 if (hasMethodChanged(method, previousMethods)) {
                     modifiedMethods.add(signature);
                 }
@@ -177,7 +177,7 @@ public class ASTGenerator {
         // Add parameters
         method.getParameters().forEach(param -> signature.append(getTypeAsString(param.getType())).append(", "));
         if (method.getParameters().size() > 0) {
-            signature.setLength(signature.length() - 2); // Rimuovi l'ultima virgola e spazio
+            signature.setLength(signature.length() - 2); // Remove last comma and space
         }
         signature.append(")");
 
@@ -196,7 +196,7 @@ public class ASTGenerator {
                 typeString.append("<");
                 typeArgs.forEach(arg -> typeString.append(getTypeAsString(arg)).append(", "));
                 if (typeArgs.size() > 0) {
-                    typeString.setLength(typeString.length() - 2); // Rimuovi l'ultima virgola e spazio
+                    typeString.setLength(typeString.length() - 2); // Remove last comma and space
                 }
                 typeString.append(">");
             });

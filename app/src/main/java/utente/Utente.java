@@ -11,12 +11,7 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    public String ciao2() {
-        return "ciao2";
-    }
-
     public String getName() {
-        System.out.println("ciao23");
         return name;
     }
 

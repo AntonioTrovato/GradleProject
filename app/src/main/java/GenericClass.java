@@ -8,15 +8,14 @@ public class GenericClass {
     }
 
     public String ciao() {
+        if (this.int1 == 0) {
+            return this.string1;
+        }
         return "ciao3";
     }
 
     private String getString1(int a){
         return string1;
-    }
-
-    public String getString2() {
-        return string2;
     }
 
     public int getInt1() {

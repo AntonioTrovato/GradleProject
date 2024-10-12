@@ -119,12 +119,18 @@ public class ASTGenerator {
     // Metodo per ottenere la firma del metodo (nome e parametri)
     private static String getMethodSignature(MethodDeclaration method) {
         StringBuilder signature = new StringBuilder();
+
+        // Aggiungi modificatori di accesso e tipo di ritorno
+        method.getModifiers().forEach(modifier -> signature.append(modifier.getKeyword().asString()).append(" "));
+        signature.append(method.getType().asString()).append(" ");
         signature.append(method.getNameAsString()).append("(");
+
         method.getParameters().forEach(param -> signature.append(param.getType().asString()).append(", "));
         if (method.getParameters().size() > 0) {
             signature.setLength(signature.length() - 2); // Rimuovi l'ultima virgola e spazio
         }
         signature.append(")");
+
         return signature.toString();
     }
 

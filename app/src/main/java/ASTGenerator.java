@@ -2,7 +2,6 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.ast.type.Type;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +49,6 @@ public class ASTGenerator {
                     }
 
                     Set<String> newMethods = new HashSet<>(currentMethodSignatures);
-                    System.out.println("New Methods: " + newMethods);
 
                     for (String new_method : newMethods) {
                         String new_method_fully_qualified_name = className + "." + extractMethodNameAndParameters(new_method);
@@ -125,14 +123,10 @@ public class ASTGenerator {
             currentMethodSignatures.add(getMethodSignature(method));
         }
 
-        System.out.println("Current method signatures: " + currentMethodSignatures);
-
         // Aggiungi i metodi della versione precedente
         for (MethodDeclaration method : previousMethods) {
             previousMethodSignatures.add(getMethodSignature(method));
         }
-
-        System.out.println("Previous method signatures: " + previousMethodSignatures);
 
         // Trova metodi nuovi
         Set<String> newMethods = new HashSet<>(currentMethodSignatures);
@@ -168,7 +162,6 @@ public class ASTGenerator {
             }
         }
 
-        System.out.println("Modified Methods: " + modified_methods);
         return modified_methods;
     }
 

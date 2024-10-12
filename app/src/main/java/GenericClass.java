@@ -9,19 +9,11 @@ public class GenericClass {
         this.int2 = int2;
     }
 
-    public String a(int a, int c) {
-        return "";
-    }
-
-    public String a(float a, int d) {
-        return "";
-    }
-
     private static <E> List<E> print(List<E> list) {
         return list;
     }
 
-    public String ciao() {
+    public String ciao2() {
         if (this.string1 != null) {
             this.string1 = "";
         }
@@ -33,6 +25,7 @@ public class GenericClass {
     }
 
     public int getInt1() {
+        System.out.println("hey");
         return int1;
     }
 
@@ -56,17 +49,8 @@ public class GenericClass {
     private int sum() {
         if (this.int1 > this.int2) {
             return this.int1 - this.int2;
-        }while (this.int1 == this.int2) {
+        }else if (this.int1 == this.int2) {
             this.int1--;
-        }
-
-        while (this.int1 != 0) { if (this.int2 != 0) { this.int1--; }
-            System.out.println(this.string1);
-
-            if (this.string1.equals(this.string2)) {
-                System.out.println(this.string2);
-
-            }
         }
 
         return 0;

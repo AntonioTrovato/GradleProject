@@ -11,15 +11,12 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
-    private String string1() {
-        if(this.address != null) {
-            return this.address;
-        }
-        return "string";
+    public String ciao2() {
+        return "ciao2";
     }
 
     public String getName() {
-        System.out.println("ciao2");
+        System.out.println("ciao23");
         return name;
     }
 

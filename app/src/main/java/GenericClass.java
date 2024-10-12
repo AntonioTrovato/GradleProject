@@ -9,18 +9,15 @@ public class GenericClass {
         this.int2 = int2;
     }
 
-    public static <E> List<E> print(List<E> list) {
+    private static <X> List<X> print(List<X> list) {
         return list;
     }
 
-    public String ciao(int x) {
-        while (this.int1 != 0) {
-            this.int1++;
-        }
+    public String ciao() {
         return "ciao3";
     }
 
-    private final String getString1(int a){
+    public final String getString1(){
         return string1;
     }
 
@@ -28,7 +25,7 @@ public class GenericClass {
         return int1;
     }
 
-    private void setString1(String string1) {
+    public void setString1(String string1, int a) {
         this.string1 = string1;
     }
 

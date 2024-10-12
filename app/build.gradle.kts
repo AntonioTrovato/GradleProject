@@ -20,3 +20,20 @@ tasks.jacocoTestReport {
         html.required.set(true)
     }
 }
+
+// Task per creare un JAR "fat" con tutte le dipendenze
+tasks.register<Jar>("fatJar") {
+    group = "build"
+    archiveClassifier.set("all")
+
+    from(sourceSets.main.get().output)
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
+
+    manifest {
+        attributes["Main-Class"] = "ASTGenerator" // Assicurati che il nome completo della classe sia corretto
+    }
+}

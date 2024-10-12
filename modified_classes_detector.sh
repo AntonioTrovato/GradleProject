@@ -51,12 +51,12 @@ for modified_class in "${modified_classes[@]}"; do
   echo "$modified_class"
 done
 
-# Scrivi le classi modificate in un file temporaneo
+# write in a temporary file the fully qualified names of the modified classes
 temp_file="modified_classes.txt"
 printf "%s\n" "${modified_classes[@]}" > "$temp_file"
 
-# Esegui lo script Java passando il file delle classi modificate
-java -cp ./app/build/classes/java/main/:app/build/libs/* ASTGenerator "$temp_file"
+# run the java script
+java -cp ./app/build/classes/java/main/ ASTGenerator "$temp_file"
 
-# Rimuovi il file temporaneo
+# delete the file
 rm "$temp_file"

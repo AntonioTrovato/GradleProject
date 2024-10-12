@@ -11,6 +11,10 @@ public class Utente {
         this.contoBancario = contoBancario;
     }
 
+    public String string() {
+        return "string";
+    }
+
     public String getName() {
         return name;
     }

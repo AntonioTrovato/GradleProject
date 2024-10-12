@@ -33,6 +33,9 @@ jobs:
       - name: Build Project
         run: ./gradlew build
 
+      - name: Create the Fat Jar
+        run: ./gradlew fatJar
+
       - name: Set execute permission for bash file
         run: chmod +x modified_classes_detector.sh
 

@@ -29,21 +29,21 @@ public class ASTGenerator {
                 String filePathJava = className.replace('.', '/') + ".java";
                 String currentFullPath = "./app/src/main/java/" + filePathJava;
 
-                // Crea l'AST della versione attuale
+                // Make the current version AST
                 List<MethodDeclaration> currentMethods = createASTFromFile(javaParser, currentFullPath, "Current", className);
 
-                // Crea l'AST della versione al commit precedente
+                // Make the previous version AST
                 String previousContent = getPreviousCommitContent(filePathJava);
                 if (previousContent != null) {
                     List<MethodDeclaration> previousMethods = createASTFromContent(javaParser, previousContent, "Previous", className);
-                    // Confronta i metodi
+                    // Compare methods
                     all_modified_methods.addAll(compareMethods(className,currentMethods, previousMethods));
                 } else {
                     System.out.println("No previous version found for class: " + className);
 
                     Set<String> currentMethodSignatures = new HashSet<>();
 
-                    // Aggiungi i metodi della versione attuale
+                    // Add methods of the current version
                     for (MethodDeclaration method : currentMethods) {
                         currentMethodSignatures.add(getMethodSignature(method));
                     }
@@ -62,10 +62,10 @@ public class ASTGenerator {
             System.out.println("All the modified methods: ");
             System.out.println(all_modified_methods);
 
-            // Scrivi i metodi modificati in un file
+            // write in file the final modified methods
             String outputPath = "modified_methods.txt";
             try {
-                // Sovrascrivi il file se esiste già
+                // rewrite the file if it already exists
                 Files.write(Paths.get(outputPath), all_modified_methods);
                 System.out.println("Modified methods have been written to " + outputPath);
             } catch (IOException e) {
@@ -76,7 +76,7 @@ public class ASTGenerator {
         }
     }
 
-    // Metodo per creare l'AST da un file attuale e restituire i metodi
+    // Method to create the current AST and return the methods
     private static List<MethodDeclaration> createASTFromFile(JavaParser javaParser, String filePath, String version, String className) {
         File file = new File(filePath);
         List<MethodDeclaration> methods = new ArrayList<>();
@@ -99,7 +99,7 @@ public class ASTGenerator {
         return methods;
     }
 
-    // Metodo per creare l'AST dal contenuto di un commit precedente e restituire i metodi
+    // Method to create the previous AST and return methods
     private static List<MethodDeclaration> createASTFromContent(JavaParser javaParser, String content, String version, String className) {
         List<MethodDeclaration> methods = new ArrayList<>();
         CompilationUnit cu = javaParser.parse(content).getResult().orElse(null);
@@ -113,26 +113,26 @@ public class ASTGenerator {
         return methods;
     }
 
-    // Metodo per confrontare i metodi tra le due versioni
+    // Method to compare the two versions
     private static ArrayList<String> compareMethods(String className, List<MethodDeclaration> currentMethods, List<MethodDeclaration> previousMethods) {
         Set<String> currentMethodSignatures = new HashSet<>();
         Set<String> previousMethodSignatures = new HashSet<>();
 
-        // Aggiungi i metodi della versione attuale
+        // Add methods of the current version
         for (MethodDeclaration method : currentMethods) {
             currentMethodSignatures.add(getMethodSignature(method));
         }
 
-        // Aggiungi i metodi della versione precedente
+        // Add methods of the previous version
         for (MethodDeclaration method : previousMethods) {
             previousMethodSignatures.add(getMethodSignature(method));
         }
 
-        // Trova metodi nuovi
+        // Find added methods
         Set<String> newMethods = new HashSet<>(currentMethodSignatures);
         newMethods.removeAll(previousMethodSignatures);
 
-        // Trova metodi modificati
+        // Find modified methods
         Set<String> modifiedMethods = new HashSet<>();
         for (MethodDeclaration method : currentMethods) {
             String signature = getMethodSignature(method);
@@ -144,7 +144,7 @@ public class ASTGenerator {
             }
         }
 
-        // Stampa i risultati
+        // Print results
         System.out.println("New Methods: " + newMethods);
         System.out.println("Modified Methods: " + modifiedMethods);
 
@@ -165,15 +165,16 @@ public class ASTGenerator {
         return modified_methods;
     }
 
-    // Metodo per ottenere la firma del metodo (nome e parametri)
+    // Method to obtain the signature
     private static String getMethodSignature(MethodDeclaration method) {
         StringBuilder signature = new StringBuilder();
 
-        // Aggiungi modificatori di accesso e tipo di ritorno
+        // Add access modifiers, type and name
         method.getModifiers().forEach(modifier -> signature.append(modifier.getKeyword().asString()).append(" "));
         signature.append(getTypeAsString(method.getType())).append(" ");
         signature.append(method.getNameAsString()).append("(");
 
+        // Add parameters
         method.getParameters().forEach(param -> signature.append(getTypeAsString(param.getType())).append(", "));
         if (method.getParameters().size() > 0) {
             signature.setLength(signature.length() - 2); // Rimuovi l'ultima virgola e spazio
@@ -183,7 +184,7 @@ public class ASTGenerator {
         return signature.toString();
     }
 
-    // Metodo per ottenere la rappresentazione del tipo (gestendo tipi generici)
+    // Handle generic types
     private static String getTypeAsString(com.github.javaparser.ast.type.Type type) {
         StringBuilder typeString = new StringBuilder();
 
@@ -191,7 +192,6 @@ public class ASTGenerator {
             ClassOrInterfaceType classOrInterfaceType = type.asClassOrInterfaceType();
             typeString.append(classOrInterfaceType.getNameAsString());
 
-            // Controlla se ci sono argomenti di tipo
             classOrInterfaceType.getTypeArguments().ifPresent(typeArgs -> {
                 typeString.append("<");
                 typeArgs.forEach(arg -> typeString.append(getTypeAsString(arg)).append(", "));
@@ -207,35 +207,35 @@ public class ASTGenerator {
         return typeString.toString();
     }
 
-    // Metodo per estrarre nome metodo e parametri
+    // Extract method name and parameters to obtain the final signature
     private static String extractMethodNameAndParameters(String methodSignature) {
-        // Definisci la regex
+        // Define the regexes
         String regex = "(\\w+)\\s*\\((.*?)\\)";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(methodSignature);
 
         if (matcher.find()) {
-            String methodName = matcher.group(1); // Nome del metodo
-            String parameters = matcher.group(2); // Parametri del metodo
+            String methodName = matcher.group(1); // Method name
+            String parameters = matcher.group(2); // Method parameters
             return methodName + "(" + parameters + ")";
         }
 
-        return null; // Restituisci null se non viene trovata alcuna corrispondenza
+        return null; // Null if no match
     }
 
-    // Metodo per verificare se un metodo è stato modificato
+    // Method to verify if a method has been modified
     private static boolean hasMethodChanged(MethodDeclaration currentMethod, List<MethodDeclaration> previousMethods) {
         String currentSignature = getMethodSignature(currentMethod);
         for (MethodDeclaration previousMethod : previousMethods) {
             if (currentSignature.equals(getMethodSignature(previousMethod))) {
-                // Confronta la logica del metodo, puoi aggiungere altre condizioni per il confronto
+                // Here's were the body is compared
                 return !currentMethod.getBody().equals(previousMethod.getBody());
             }
         }
-        return false; // Se non troviamo corrispondenze, consideriamo non modificato
+        return false; // If no match, return false
     }
 
-    // Metodo per ottenere il contenuto della versione precedente di un file da Git
+    // Method to get the content of a previous version file on Git
     private static String getPreviousCommitContent(String filePathJava) {
         try {
             Process process = new ProcessBuilder("git", "show", "HEAD^:" + "app/src/main/java/" + filePathJava).start();

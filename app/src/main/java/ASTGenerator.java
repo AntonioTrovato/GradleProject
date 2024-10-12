@@ -108,10 +108,14 @@ public class ASTGenerator {
             currentMethodSignatures.add(getMethodSignature(method));
         }
 
+        System.out.println("Current method signatures: " + currentMethodSignatures);
+
         // Aggiungi i metodi della versione precedente
         for (MethodDeclaration method : previousMethods) {
             previousMethodSignatures.add(getMethodSignature(method));
         }
+
+        System.out.println("Previous method signatures: " + previousMethodSignatures);
 
         // Trova metodi nuovi
         Set<String> newMethods = new HashSet<>(currentMethodSignatures);

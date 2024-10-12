@@ -9,11 +9,11 @@ public class GenericClass {
         this.int2 = int2;
     }
 
-    public String a(float a, int c) {
+    public String a(int a, int c) {
         return "";
     }
 
-    public String a(float a, float d) {
+    public String a(float a, int d) {
         return "";
     }
 

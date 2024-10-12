@@ -7,19 +7,19 @@ public class GenericClass {
         this.int2 = int2;
     }
 
+    public static <E> void print() {
+        System.out.println("Print");
+    }
+
     public String ciao() {
-        if (this.int1 == 0) {
-            return this.string1;
+        while (this.int1 != 0) {
+            this.int1++;
         }
         return "ciao3";
     }
 
-    public String getString1(int a){
+    private final String getString1(int a){
         return string1;
-    }
-
-    public String getString2() {
-        return string2;
     }
 
     public int getInt1() {

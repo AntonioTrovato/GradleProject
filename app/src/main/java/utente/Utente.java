@@ -12,6 +12,9 @@ public class Utente {
     }
 
     private String string() {
+        if(this.address != null) {
+            return this.address;
+        }
         return "string";
     }
 

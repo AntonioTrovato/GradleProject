@@ -9,16 +9,13 @@ public class Admin {
         this.email = email;
     }
 
-    public String getNome() {
+    public String getNome(int x) {
         return nome;
     }
 
     public String getEmail() {
+        System.out.println("");
         return email;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public void setEmail(String email) {

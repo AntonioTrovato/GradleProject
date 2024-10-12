@@ -41,6 +41,23 @@ public class ASTGenerator {
                     all_modified_methods.addAll(compareMethods(className,currentMethods, previousMethods));
                 } else {
                     System.out.println("No previous version found for class: " + className);
+
+                    Set<String> currentMethodSignatures = new HashSet<>();
+
+                    // Aggiungi i metodi della versione attuale
+                    for (MethodDeclaration method : currentMethods) {
+                        currentMethodSignatures.add(getMethodSignature(method));
+                    }
+
+                    Set<String> newMethods = new HashSet<>(currentMethodSignatures);
+                    System.out.println("New Methods: " + newMethods);
+
+                    for (String new_method : newMethods) {
+                        String new_method_fully_qualified_name = className + "." + extractMethodNameAndParameters(new_method);
+                        if (!all_modified_methods.contains(new_method_fully_qualified_name)) {
+                            all_modified_methods.add(new_method_fully_qualified_name);
+                        }
+                    }
                 }
             }
 

@@ -7,6 +7,8 @@ public class Amministratore {
         this.department = department;
     }
 
+    public void ciao() {}
+
     public String getName() {
         return this.name;
     }

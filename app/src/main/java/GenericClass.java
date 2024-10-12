@@ -8,10 +8,10 @@ public class GenericClass {
     }
 
     public String ciao() {
-        return "ciao";
+        return "ciao3";
     }
 
-    public String getString1(int a){
+    private String getString1(int a){
         return string1;
     }
 

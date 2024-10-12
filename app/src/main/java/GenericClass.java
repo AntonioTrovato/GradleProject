@@ -10,14 +10,18 @@ public class GenericClass {
     }
 
     private static <X> List<X> print(List<X> list) {
+        System.out.println(list);
         return list;
     }
 
     public String ciao() {
+        if (this.string1 == null) {
+            this.string1 = "";
+        }
         return "ciao3";
     }
 
-    public final String getString1(){
+    public String getString1(){
         return string1;
     }
 
@@ -25,7 +29,7 @@ public class GenericClass {
         return int1;
     }
 
-    public void setString1(String string1, int a) {
+    public void setString1(String string1) {
         this.string1 = string1;
     }
 

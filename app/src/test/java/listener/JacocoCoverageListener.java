@@ -94,12 +94,42 @@ public class JacocoCoverageListener extends TestWatcher {
             if (classCoverage.getName().equals(className)) {
                 for (IMethodCoverage methodCoverage : classCoverage.getMethods()) {
                     if (methodCoverage.getInstructionCounter().getCoveredCount() > 0) {
-                        coveredMethods.add(methodCoverage.getName());
+                        String methodName = methodCoverage.getName(); // Get method name
+                        String methodDescriptor = methodCoverage.getDesc(); // Get method descriptor
+
+                        // Extract parameter types
+                        String paramTypes = extractParameterTypes(methodDescriptor);
+                        coveredMethods.add(methodName + "(" + paramTypes + ")"); // Add formatted method name to the set
                     }
                 }
             }
         }
         return coveredMethods;
+    }
+
+    // Method to extract parameter types from the method descriptor
+    private String extractParameterTypes(String descriptor) {
+        StringBuilder paramTypes = new StringBuilder();
+
+        // The descriptor starts with '(' and ends with ')'
+        if (descriptor.startsWith("(") && descriptor.contains(")")) {
+            // Extract the substring between '(' and ')'
+            String params = descriptor.substring(descriptor.indexOf('(') + 1, descriptor.indexOf(')'));
+            String[] paramArray = params.split(","); // Split by ',' to get individual parameter types
+
+            for (String param : paramArray) {
+                // Clean up the parameter type and add it to the StringBuilder
+                param = param.replaceAll("^L", "").replaceAll(";$", ""); // Remove 'L' prefix and ';' suffix
+                paramTypes.append(param).append(", ");
+            }
+
+            // Remove trailing comma and space if there are any parameters
+            if (paramTypes.length() > 0) {
+                paramTypes.setLength(paramTypes.length() - 2); // Remove last ", "
+            }
+        }
+
+        return paramTypes.toString();
     }
 }
 

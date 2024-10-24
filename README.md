@@ -29,11 +29,11 @@ Build the ju2jmh tool (In the Tool Root):
 gradle build
 
 run generation
-gradle converter:run --args="/Users/antoniotrovato/Documents/GitHub/GradleProject/app/src/test/java/ C:/Users/anton/Documents/GitHub/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/GitHub/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancarioTest"
+gradle converter:run --args="/Users/antoniotrovato/Documents/GitHub/GradleProject/app/src/test/java/ /Users/antoniotrovato/Documents/GitHub/GradleProject/app/build/classes/java/test/ /Users/antoniotrovato/Documents/GitHub/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancarioTest"
 or
-gradle converter:run --args="/Users/antoniotrovato/Documents/GitHub/GradleProject/app/src/test/java/ C:/Users/anton/Documents/GitHub/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/GitHub/GradleProject/ju2jmh/src/jmh/java/ --class-names-file=C:/Users/anton/Documents/GitHub/GradleProject/app/build/classes/java/test/test-classes.txt"
+gradle converter:run --args="/Users/antoniotrovato/Documents/GitHub/GradleProject/app/src/test/java/ /Users/antoniotrovato/Documents/GitHub/GradleProject/app/build/classes/java/test/ /Users/antoniotrovato/Documents/GitHub/GradleProject/ju2jmh/src/jmh/java/ --class-names-file=/Users/antoniotrovato/Documents/GitHub/GradleProject/app/build/classes/java/test/test-classes.txt"
 run generator by jar
-java -jar /Users/antoniotrovato/Documents/GitHub/GradleProject/ju-to-jmh/converter-all.jar C:/Users/anton/Documents/GitHub/GradleProject/app/src/test/java/ C:/Users/anton/Documents/GitHub/GradleProject/app/build/classes/java/test/ C:/Users/anton/Documents/GitHub/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancarioTest
+java -jar /Users/antoniotrovato/Documents/GitHub/GradleProject/ju-to-jmh/converter-all.jar /Users/antoniotrovato/Documents/GitHub/GradleProject/app/src/test/java/ /Users/antoniotrovato/Documents/GitHub/GradleProject/app/build/classes/java/test/ /Users/antoniotrovato/Documents/GitHub/GradleProject/ju2jmh/src/jmh/java/ banca.ContoBancarioTest
 
 build benchmarks (In the Target Project Root):
 gradle jmhJar

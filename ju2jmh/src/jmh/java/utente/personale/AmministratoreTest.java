@@ -1,17 +1,9 @@
 package utente.personale;
 
-import listener.JacocoCoverageListener;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import static org.junit.Assert.assertEquals;
 
 public class AmministratoreTest {
-
-    /*@Rule
-    public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
 
     @Test
     public void testGetName() {
@@ -50,5 +42,5 @@ public class AmministratoreTest {
         Amministratore amministratore = new Amministratore("John", "Doe", "HR");
         amministratore.setDepartment("IT");
         assertEquals("IT", amministratore.getDepartment());
-    }*/
+    }
 }

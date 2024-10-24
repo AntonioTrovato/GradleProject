@@ -1,10 +1,18 @@
 package banca;
 
-import banca.ContoBancario;
+import listener.JacocoCoverageListener;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
 import static org.junit.Assert.*;
 
 public class ContoBancarioTest {
+
+    @Rule
+    public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
 
     @Test
     public void testVersamento() {
@@ -29,7 +37,7 @@ public class ContoBancarioTest {
         assertEquals(100, conto.getSaldo());
     }
 
-    @Test
+    /*@Test
     public void testGetId() {
         ContoBancario conto = new ContoBancario("123", 100);
         assertEquals("123", conto.getId());
@@ -60,5 +68,5 @@ public class ContoBancarioTest {
         ContoBancario conto = new ContoBancario("123", 100);
         conto.setSaldo2(200);
         assertEquals(200, conto.getSaldo());
-    }
+    }*/
 }

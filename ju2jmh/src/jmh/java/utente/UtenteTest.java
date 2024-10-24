@@ -60,32 +60,4 @@ public class UtenteTest {
         utente.setContoBancario(nuovoConto);
         assertEquals(nuovoConto, utente.getContoBancario());
     }
-
-    @org.openjdk.jmh.annotations.State(org.openjdk.jmh.annotations.Scope.Thread)
-    public static class _Benchmark extends se.chalmers.ju2jmh.api.JU2JmhBenchmark {
-
-        @org.openjdk.jmh.annotations.Benchmark
-        public void benchmark_testGetName() throws java.lang.Throwable {
-            this.createImplementation();
-            this.runBenchmark(this.implementation()::testGetName, this.description("testGetName"));
-        }
-
-        @java.lang.Override
-        public void before() throws java.lang.Throwable {
-            super.before();
-            this.implementation().setUp();
-        }
-
-        private UtenteTest implementation;
-
-        @java.lang.Override
-        public void createImplementation() throws java.lang.Throwable {
-            this.implementation = new UtenteTest();
-        }
-
-        @java.lang.Override
-        public UtenteTest implementation() {
-            return this.implementation;
-        }
-    }
 }

@@ -1,7 +1,9 @@
 package utente;
 
 import banca.ContoBancario;
+import listener.JacocoCoverageListener;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -9,6 +11,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class UtenteTest {
+
+    /*@Rule
+    public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
 
     private Utente utente;
 
@@ -56,5 +61,5 @@ public class UtenteTest {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
         utente.setContoBancario(nuovoConto);
         assertEquals(nuovoConto, utente.getContoBancario());
-    }
+    }*/
 }

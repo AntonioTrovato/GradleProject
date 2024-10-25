@@ -131,7 +131,7 @@ java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes
 gradle jmhJar
 
 # List available benchmarks
-java -jar /Users/antoniotrovato/Documents/GitHub/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar -l
+java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar -l
 
 # Initialize an empty list for benchmark methods to run
 declare -a benchmarks_to_run

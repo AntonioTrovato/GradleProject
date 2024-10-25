@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TecnicoTest {
 
-    /*@Rule
+    @Rule
     public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
 
     @Test
@@ -61,5 +61,5 @@ public class TecnicoTest {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer",1);
         tecnico.setCode(2);
         assertEquals(2, tecnico.getCode());
-    }*/
+    }
 }

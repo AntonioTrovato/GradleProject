@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class UtenteTest {
 
-    /*@Rule
+    @Rule
     public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
 
     private Utente utente;
@@ -61,5 +61,5 @@ public class UtenteTest {
         ContoBancario nuovoConto = Mockito.mock(ContoBancario.class);
         utente.setContoBancario(nuovoConto);
         assertEquals(nuovoConto, utente.getContoBancario());
-    }*/
+    }
 }

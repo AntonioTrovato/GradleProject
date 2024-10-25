@@ -15,6 +15,7 @@ dependencies {
     implementation("com.github.javaparser:javaparser-core:3.24.4")
     testImplementation("org.jacoco:org.jacoco.core:0.8.8")
     testImplementation("org.jacoco:org.jacoco.agent:0.8.8")
+    testImplementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
 }
 
 tasks.named<Test>("test") {

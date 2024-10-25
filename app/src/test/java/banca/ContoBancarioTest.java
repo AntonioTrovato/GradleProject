@@ -6,6 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import utente.Utente;
 
 import static org.junit.Assert.*;
 
@@ -37,7 +38,7 @@ public class ContoBancarioTest {
         assertEquals(100, conto.getSaldo());
     }
 
-    /*@Test
+    @Test
     public void testGetId() {
         ContoBancario conto = new ContoBancario("123", 100);
         assertEquals("123", conto.getId());
@@ -68,5 +69,5 @@ public class ContoBancarioTest {
         ContoBancario conto = new ContoBancario("123", 100);
         conto.setSaldo2(200);
         assertEquals(200, conto.getSaldo());
-    }*/
+    }
 }

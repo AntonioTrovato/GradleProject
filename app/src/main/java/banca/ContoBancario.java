@@ -1,5 +1,7 @@
 package banca;
 
+import utente.Utente;
+
 public class ContoBancario {
     public ContoBancario(String idz, int saldo_iniziale) {
         this.id = idz;
@@ -28,6 +30,10 @@ public class ContoBancario {
 
     public void versamento(int quota) {
         this.saldo += quota;//commento
+    }
+
+    public void ciao() {
+        System.out.println("Ciao");
     }
 
     public int prelievo(int quota) {

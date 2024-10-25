@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class AmministratoreTest {
 
-    /*@Rule
+    @Rule
     public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
 
     @Test
@@ -50,5 +50,5 @@ public class AmministratoreTest {
         Amministratore amministratore = new Amministratore("John", "Doe", "HR");
         amministratore.setDepartment("IT");
         assertEquals("IT", amministratore.getDepartment());
-    }*/
+    }
 }

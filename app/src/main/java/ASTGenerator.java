@@ -209,6 +209,8 @@ public class ASTGenerator {
 
     // Extract method name and parameters to obtain the final signature
     private static String extractMethodNameAndParameters(String methodSignature) {
+        //TODO: ADD PARAMETERS
+
         // Define the regexes
         String regex = "(\\w+)\\s*\\((.*?)\\)";
         Pattern pattern = Pattern.compile(regex);
@@ -226,6 +228,7 @@ public class ASTGenerator {
 
     // Method to verify if a method has been modified
     private static boolean hasMethodChanged(MethodDeclaration currentMethod, List<MethodDeclaration> previousMethods) {
+        //TODO: COMMENTS ADDED ARE RECOGNIZED AS MODIFICATIONS, INVESTIGATE FOR OTHERS AND RESOLVE
         String currentSignature = getMethodSignature(currentMethod);
         for (MethodDeclaration previousMethod : previousMethods) {
             if (currentSignature.equals(getMethodSignature(previousMethod))) {

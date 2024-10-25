@@ -27,10 +27,11 @@ public class ContoBancario {
     }
 
     public void versamento(int quota) {
-        this.saldo += quota;
+        this.saldo += quota;//commento
     }
 
     public int prelievo(int quota) {
+
         if (this.saldo < quota)
             return 0;
         else

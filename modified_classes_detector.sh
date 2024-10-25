@@ -61,6 +61,11 @@ java -jar app/build/libs/app-all.jar "$temp_file"
 # delete the file
 rm "$temp_file"
 
+# read and print the contents of modified_methods.txt
+while IFS= read -r line; do
+    echo "$line"
+done < "modified_methods.txt"
+
 # Initialize an empty list for test methods
 declare -a test_methods
 
@@ -86,7 +91,14 @@ done
 echo "Test methods covering modified methods:"
 printf '%s\n' "${test_methods[@]}"
 
-# read and print the contents of modified_methods.txt
-while IFS= read -r line; do
-    echo "$line"
-done < "modified_methods.txt"
+# Extract fully qualified class names from test methods
+declare -a class_names
+for test_method in "${test_methods[@]}"; do
+    # Extract the class name by removing the last part after the last dot
+    class_name="${test_method%.*}"
+    class_names+=("$class_name")
+done
+
+# Print the list of fully qualified class names
+echo "Fully qualified class names:"
+printf '%s\n' "${class_names[@]}"

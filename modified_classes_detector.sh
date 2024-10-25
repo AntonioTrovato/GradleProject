@@ -96,7 +96,19 @@ declare -a class_names
 for test_method in "${test_methods[@]}"; do
     # Extract the class name by removing the last part after the last dot
     class_name="${test_method%.*}"
-    class_names+=("$class_name")
+    # Check if the class name is already in the class_names array
+    already_present=false
+    for existing_class in "${class_names[@]}"; do
+        if [[ "$existing_class" == "$class_name" ]]; then
+            already_present=true
+            break
+        fi
+    done
+
+    # Add class name if not already present
+    if ! $already_present; then
+        class_names+=("$class_name")
+    fi
 done
 
 # Print the list of fully qualified class names

@@ -8,7 +8,7 @@ git config --global user.name "AntonioTrovato"
 
 # File paths
 MODIFIED_METHODS_FILE="modified_methods.txt"
-COVERAGE_MATRIX_FILE="app/src/coverage-matrix.json"
+COVERAGE_MATRIX_FILE="app/coverage-matrix.json"
 
 # Read the hashes of the last two commits using git log
 current_commit=$(git log --format="%H" -n 1)

@@ -126,11 +126,49 @@ mkdir -p "ju2jmh"  # Create directory if it doesn't exist
 
 echo "Class names written to $OUTPUT_FILE"
 
-#TODO: CHECK IF BENCHMARKS METHODS (SO THEIR BENCHMARK CLASSES TOO) ALREADY EXIST
-#TODO: CREATE THE NEEDED BENCHMARK CLASSES
-#TODO: RUN ALL THE BENCHMARK CLASSES
-#TODO: PUSH THE NEW BENCHMARK CLASSES
-
 # Make and build the benchmark classes
 java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./ju2jmh/benchmark_classes_to_generate.txt
 ./gradlew jmhJar
+
+# Initialize an empty list for benchmark methods to run
+declare -a benchmarks_to_run
+
+for method in "${test_method[@]}"; do
+    # Extract the method name (last part after the last dot)
+    method_name="${method##*.}"
+
+    # Replace the method name with "_Benchmark._benchmark_" + method name
+    benchmark="${method%.*}._Benchmark.benchmark_${method_name}"
+
+    # Add the new benchmark name to the list
+    benchmarks_to_run+=("$benchmark")
+done
+
+# Loop through benchmarks_to_run and run the java command for each
+for benchmark in "${benchmarks_to_run[@]}"; do
+    echo "Running benchmark: $benchmark"
+    java -jar /ju2jmh/build/libs/ju2jmh-jmh.jar "$benchmark"
+done
+
+# Add to git all the benchmark classes generated/regenerated
+for class_name in "${class_names[@]}"; do
+  # Convert the class name to a file path
+  file_path="./ju2jmh/src/jmh/java/$(echo class_name | tr '.' '/')".java
+
+  echo "Benchmark Class to Push in the Main Branch:"
+  echo "$file_path"
+
+  # Add the file to git
+  git add "$file_path"
+done
+
+git add "./ju2jmh/src/jmh/java/se/chalmers/ju2jmh/api/JU2JmhBenchmark.java"
+
+# Commit the changes
+git commit -m "Adding the Created Benchmark Classes to the Repository"
+
+# Push the changes to the main branch using the token
+git remote set-url origin https://AntonioTrovato:${ACTIONS_TOKEN}@github.com/AntonioTrovato/GradleProject.git
+git push origin main
+
+echo "DONE!"

@@ -130,6 +130,9 @@ echo "Class names written to $OUTPUT_FILE"
 java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./ju2jmh/benchmark_classes_to_generate.txt
 ./gradlew jmhJar
 
+# List available benchmarks
+java -jar /Users/antoniotrovato/Documents/GitHub/GradleProject/ju2jmh/build/libs/ju2jmh-jmh.jar -l
+
 # Initialize an empty list for benchmark methods to run
 declare -a benchmarks_to_run
 

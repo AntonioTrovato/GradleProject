@@ -126,6 +126,11 @@ mkdir -p "ju2jmh"  # Create directory if it doesn't exist
 
 echo "Class names written to $OUTPUT_FILE"
 
+#TODO: CHECK IF BENCHMARKS METHODS (SO THEIR BENCHMARK CLASSES TOO) ALREADY EXIST
+#TODO: CREATE THE NEEDED BENCHMARK CLASSES
+#TODO: RUN ALL THE BENCHMARK CLASSES
+#TODO: PUSH THE NEW BENCHMARK CLASSES
+
 # Make and build the benchmark classes
 java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./ju2jmh/benchmark_classes_to_generate.txt
 ./gradlew jmhJar

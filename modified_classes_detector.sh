@@ -9,6 +9,7 @@ git config --global user.name "AntonioTrovato"
 # File paths
 MODIFIED_METHODS_FILE="modified_methods.txt"
 COVERAGE_MATRIX_FILE="app/coverage-matrix.json"
+OUTPUT_FILE="ju2jmh/benchmark_classes_to_generate.txt"
 
 # Read the hashes of the last two commits using git log
 current_commit=$(git log --format="%H" -n 1)
@@ -114,3 +115,17 @@ done
 # Print the list of fully qualified class names
 echo "Fully qualified class names:"
 printf '%s\n' "${class_names[@]}"
+
+# Write class names to the output file, create if it doesn't exist
+mkdir -p "ju2jmh"  # Create directory if it doesn't exist
+{
+    for class_name in "${class_names[@]}"; do
+        echo "$class_name"  # Write each class name on a new line
+    done
+} > "$OUTPUT_FILE"
+
+echo "Class names written to $OUTPUT_FILE"
+
+# Make and build the benchmark classes
+java -jar ./ju-to-jmh/converter-all.jar ./app/src/test/java/ ./app/build/classes/java/test/ ./ju2jmh/src/jmh/java/ --class-names-file=./ju2jmh/benchmark_classes_to_generate.txt
+gradle jmhJar

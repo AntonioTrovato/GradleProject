@@ -95,11 +95,13 @@ public class JacocoCoverageListener extends TestWatcher {
                 for (IMethodCoverage methodCoverage : classCoverage.getMethods()) {
                     if (methodCoverage.getInstructionCounter().getCoveredCount() > 0) {
                         String methodName = methodCoverage.getName(); // Get method name
-                        String methodDescriptor = methodCoverage.getDesc(); // Get method descriptor
+                        /*String methodDescriptor = methodCoverage.getDesc(); // Get method descriptor
 
                         // Extract parameter types
                         String paramTypes = extractParameterTypes(methodDescriptor);
-                        coveredMethods.add(methodName + "(" + paramTypes + ")"); // Add formatted method name to the set
+                        coveredMethods.add(methodName + "(" + paramTypes + ")"); // Add formatted method name to the set*/
+
+                        coveredMethods.add(methodName);
                     }
                 }
             }

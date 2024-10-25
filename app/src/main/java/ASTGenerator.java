@@ -217,7 +217,8 @@ public class ASTGenerator {
         if (matcher.find()) {
             String methodName = matcher.group(1); // Method name
             String parameters = matcher.group(2); // Method parameters
-            return methodName + "(" + parameters + ")";
+            //return methodName + "(" + parameters + ")";
+            return methodName;
         }
 
         return null; // Null if no match

@@ -30,17 +30,7 @@ public class ContoBancario {
         this.saldo += quota;
     }
 
-    public <T> Object c(T d) {
-        return d;
-    }
-
-    public void x(ContoBancario c) {
-        System.out.println(c);
-    }
-
     public int prelievo(int quota) {
-        c(quota);
-        x(this);
         if (this.saldo < quota)
             return 0;
         else

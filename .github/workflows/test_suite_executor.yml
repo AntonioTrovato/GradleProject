@@ -42,7 +42,7 @@ jobs:
 
       - name: Commit coverage matrix changes
         run: |
-          git add app/src/coverage-matrix.json  # Updated path to the coverage matrix
+          git add app/coverage-matrix.json  # Updated path to the coverage matrix
           git commit -m "Update coverage matrix" || echo "No changes to commit"
 
       - name: Push changes

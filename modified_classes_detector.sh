@@ -6,6 +6,10 @@ git config --global user.name "AntonioTrovato"
 
 #TODO: IL CONFRONTO TRA I BODY DEI METODI DEVE ESSERE PIU' "FUNZIONALE"??
 
+# File paths
+MODIFIED_METHODS_FILE="modified_methods.txt"
+COVERAGE_MATRIX_FILE="app/src/coverage-matrix.json"
+
 # Read the hashes of the last two commits using git log
 current_commit=$(git log --format="%H" -n 1)
 previous_commit=$(git log --format="%H" -n 2 | tail -n 1)
@@ -56,6 +60,31 @@ java -jar app/build/libs/app-all.jar "$temp_file"
 
 # delete the file
 rm "$temp_file"
+
+# Initialize an empty list for test methods
+declare -a test_methods
+
+# Read modified methods from the file into an array
+mapfile -t modified_methods < "$MODIFIED_METHODS_FILE"
+
+# Read the coverage-matrix.json and extract test methods
+# Assuming jq is installed for JSON parsing
+for method in "${modified_methods[@]}"; do
+    echo "Processing method: $method"
+    # Use jq to find test cases that cover the current method
+    test_cases=$(jq -r --arg method "$method" '
+        to_entries | map(select(.value | index($method))) | .[].key
+    ' "$COVERAGE_MATRIX_FILE")
+
+    # Append found test cases to the test_methods array
+    while IFS= read -r test_case; do
+        test_methods+=("$test_case")
+    done <<< "$test_cases"
+done
+
+# Print the list of test methods
+echo "Test methods covering modified methods:"
+printf '%s\n' "${test_methods[@]}"
 
 # read and print the contents of modified_methods.txt
 while IFS= read -r line; do

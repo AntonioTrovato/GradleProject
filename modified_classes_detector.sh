@@ -139,7 +139,7 @@ java -jar ./ju2jmh/build/libs/ju2jmh-jmh.jar -l
 # Initialize an empty list for benchmark methods to run
 declare -a benchmarks_to_run
 
-for method in "${test_method[@]}"; do
+for method in "${test_methods[@]}"; do
     # Extract the method name (last part after the last dot)
     method_name="${method##*.}"
 

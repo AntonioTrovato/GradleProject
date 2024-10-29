@@ -1,11 +1,11 @@
 {
-  "banca.ContoBancarioTest.testPrelievo_InsufficienteSaldo" : [ "banca.ContoBancario.prelievo", "banca.ContoBancario.getSaldo", "banca.ContoBancario.ciao", "banca.ContoBancario.ContoBancario" ],
+  "banca.ContoBancarioTest.testPrelievo_InsufficienteSaldo" : [ "banca.ContoBancario.prelievo", "banca.ContoBancario.setSaldo", "banca.ContoBancario.setSaldo2", "banca.ContoBancario.getSaldo", "banca.ContoBancario.setId", "banca.ContoBancario.versamento", "banca.ContoBancario.getId", "banca.ContoBancario.ContoBancario" ],
   "banca.ContoBancarioTest.testVersamento" : [ "banca.ContoBancario.getSaldo", "banca.ContoBancario.versamento", "banca.ContoBancario.ContoBancario" ],
   "banca.ContoBancarioTest.testGetSaldo" : [ "banca.ContoBancario.getSaldo", "banca.ContoBancario.ContoBancario" ],
   "banca.ContoBancarioTest.testGetId" : [ "banca.ContoBancario.getId", "banca.ContoBancario.ContoBancario" ],
   "banca.ContoBancarioTest.testSetId" : [ "banca.ContoBancario.setId", "banca.ContoBancario.getId", "banca.ContoBancario.ContoBancario" ],
   "banca.ContoBancarioTest.testSetSaldo2" : [ "banca.ContoBancario.setSaldo2", "banca.ContoBancario.getSaldo", "banca.ContoBancario.ContoBancario" ],
-  "banca.ContoBancarioTest.testPrelievo_SufficienteSaldo" : [ "banca.ContoBancario.prelievo", "banca.ContoBancario.getSaldo", "banca.ContoBancario.ciao", "banca.ContoBancario.ContoBancario" ],
+  "banca.ContoBancarioTest.testPrelievo_SufficienteSaldo" : [ "banca.ContoBancario.prelievo", "banca.ContoBancario.getSaldo", "banca.ContoBancario.ContoBancario" ],
   "banca.ContoBancarioTest.testSetSaldo" : [ "banca.ContoBancario.setSaldo", "banca.ContoBancario.getSaldo", "banca.ContoBancario.ContoBancario" ],
   "utente.UtenteTest.testGetContoBancario" : [ "utente.Utente.Utente", "utente.Utente.getContoBancario" ],
   "utente.UtenteTest.testGetSurname" : [ "utente.Utente.Utente", "utente.Utente.getSurname" ],

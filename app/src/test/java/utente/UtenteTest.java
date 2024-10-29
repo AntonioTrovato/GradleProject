@@ -12,9 +12,6 @@ import static org.junit.Assert.assertNotNull;
 
 public class UtenteTest {
 
-    @Rule
-    public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
-
     private Utente utente;
 
     @Before

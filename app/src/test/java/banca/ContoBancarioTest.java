@@ -12,9 +12,6 @@ import static org.junit.Assert.*;
 
 public class ContoBancarioTest {
 
-    @Rule
-    public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
-
     @Test
     public void testVersamento() {
         ContoBancario conto = new ContoBancario("123", 100);

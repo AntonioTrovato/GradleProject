@@ -8,9 +8,6 @@ import static org.junit.Assert.assertEquals;
 
 public class TecnicoTest {
 
-    @Rule
-    public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
-
     @Test
     public void testGetName() {
         Tecnico tecnico = new Tecnico("John", "Doe", "Engineer",1);

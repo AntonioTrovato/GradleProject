@@ -10,9 +10,6 @@ import static org.junit.Assert.assertEquals;
 
 public class AmministratoreTest {
 
-    @Rule
-    public JacocoCoverageListener jacocoCoverageListener = new JacocoCoverageListener();
-
     @Test
     public void testGetName() {
         Amministratore amministratore = new Amministratore("John", "Doe", "HR");

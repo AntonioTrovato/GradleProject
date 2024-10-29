@@ -118,6 +118,9 @@ printf '%s\n' "${class_names[@]}"
 
 # Write class names to the output file, create if it doesn't exist
 mkdir -p "ju2jmh"  # Create directory if it doesn't exist
+mkdir -p "ju2jmh/src"
+mkdir -p "ju2jmh/src/java"
+
 {
     for class_name in "${class_names[@]}"; do
         echo "$class_name"  # Write each class name on a new line

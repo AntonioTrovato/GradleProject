@@ -5,7 +5,7 @@ import banca.ContoBancario;
 public class Utente {
     public Utente(String name, String surname, String telephone, String address, ContoBancario contoBancario) {
         this.name = name;//aggiungo commento
-        this.surname = surname;
+        this.surname = surname;//aggiunto altro commento
         this.telephone = telephone;
         this.address = address;
         this.contoBancario = contoBancario;
@@ -13,10 +13,12 @@ public class Utente {
 
     public String getName() {
         System.out.println("cambio");
+        System.out.println("name");
         return name;
     }
 
     public String getSurname() {
+
 
         return surname;
     }
@@ -26,6 +28,7 @@ public class Utente {
     }
 
     public String getAddress(int a) {
+
         return address;
     }
 

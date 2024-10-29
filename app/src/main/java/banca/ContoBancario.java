@@ -38,6 +38,7 @@ public class ContoBancario {
     public void ciao() {
         System.out.println("Ciao");
         System.out.println("Saldo: " + this.saldo);
+        System.out.println("Ciao");
     }
 
     public int prelievo(int quota) {

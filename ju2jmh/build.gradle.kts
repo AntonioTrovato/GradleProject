@@ -11,6 +11,7 @@ dependencies {
     jmh("junit", "junit", jUnit4Version)
     implementation(project(":app"))
     testImplementation("org.mockito:mockito-core:3.10.0")
+    testImplementation("org.jacoco:org.jacoco.core:0.8.8")
 }
 
 /*tasks.jmh {

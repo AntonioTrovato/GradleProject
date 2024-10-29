@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":app"))
     testImplementation("org.mockito:mockito-core:3.10.0")
     testImplementation("org.jacoco:org.jacoco.core:0.8.8")
+    testImplementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
 }
 
 /*tasks.jmh {

@@ -13,6 +13,7 @@ public class ContoBancario {
     }
 
     public int getSaldo() {
+        //commenti
         return saldo;
     }
 
@@ -21,6 +22,9 @@ public class ContoBancario {
     }
 
     public void setSaldo(int saldo) {
+        /*commenti
+        bwlli
+        */
         this.saldo = saldo;
     }
 
@@ -28,16 +32,17 @@ public class ContoBancario {
         ciao();
         Utente utente = new Utente("name","surname","telephone","address",this);
         utente.getName();
-        this.saldo = saldo;
+        this.saldo = saldo;//commento
     }
 
     public void versamento(int quota) {
-        this.saldo += quota;//commento
+        this.saldo += quota;
     }
 
     public void ciao() {
         System.out.println("Ciao");
         System.out.println("Saldo: " + this.saldo);
+
         System.out.println("Ciao");
     }
 

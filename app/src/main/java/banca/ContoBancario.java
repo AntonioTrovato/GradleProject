@@ -13,7 +13,6 @@ public class ContoBancario {
     }
 
     public int getSaldo() {
-        //commenti
         return saldo;
     }
 
@@ -22,35 +21,18 @@ public class ContoBancario {
     }
 
     public void setSaldo(int saldo) {
-        /*commenti
-        bwlli
-        */
         this.saldo = saldo;
     }
 
     public void setSaldo2(int saldo) {
-        ciao();
-        Utente utente = new Utente("name","surname","telephone","address",this);
-        utente.getName();
-        this.saldo = saldo;//commento
+        this.saldo = saldo;
     }
 
     public void versamento(int quota) {
         this.saldo += quota;
     }
 
-    public void ciao() {
-        System.out.println("Ciao");
-        System.out.println("Saldo: " + this.saldo);
-
-        System.out.println("Ciao");
-    }
-
     public int prelievo(int quota) {
-        ciao();
-        Utente utente = new Utente("name","surname","telephone","address",this);
-        utente.getName();
-        //e commento
         if (this.saldo < quota)
             return 0;
         else
